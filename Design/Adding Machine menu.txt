@@ -1,0 +1,23 @@
+Adding Machine menu
+===================
+
+File
+    New tape        Ctrl+N
+    Open tape...    Ctrl+O
+    Save tape...    Ctrl+S
+    -
+    Print...
+    -
+    Exit
+Edit
+    Copy            Ctrl+C
+    Paste           Ctrl+V
+
+View
+    [/] Keyboard
+    [/] Tape
+    -
+    Reset to default
+
+Help
+    About Adding Machine
