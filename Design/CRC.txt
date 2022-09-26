@@ -4,38 +4,50 @@ Classes, Responsibilities, Collaborators
 
 MainForm
 --------
-
-
+Responsibilities
+Collaborators
 
 
 Tape
 ----
-
-
+Responsibilities
+Collaborators
 
 
 SevenSegmentDigit
 -----------------
-
-
+Responsibilities
+Collaborators
 
 
 SevenSegmentContainer
 ---------------------
+Responsibilities
+Collaborators
 
 
+Keypad
+------
+Responsibilities
+Collaborators
 
 
+DecimalOptionButtons
+--------------------
+Responsibilities
+Collaborators
 
 
+Accumulator
+-----------
+Responsibilities
+Collaborators
 
 
-
-
-
-
-
-
+ExternalOperations
+------------------
+Responsibilities
+Collaborators
 
 
 
