@@ -5,23 +5,42 @@ Classes, Responsibilities, Collaborators
 MainForm
 --------
 Responsibilities
+    Hide/show tape
+    Hide/show keypad
+    Save tape
+    Load tape
+    Handle resize
+    Handle/delegate key events
 Collaborators
+    Keypad
+    NumericDisplay
+    Tape
+    Accumulator
 
 
 Tape
 ----
 Responsibilities
+    Display tape contents in scrollable area
+    Receive new value from accumulator
+    Resize
+    Yield tape value when double-clicked
+    Provide tape contents to persistence
+    Accept tape contents from persistence
 Collaborators
+    Persistence
+    Accumulator
 
 
 SevenSegmentDigit
 -----------------
 Responsibilities
+    LEFT OFF HERE
 Collaborators
 
 
-SevenSegmentContainer
----------------------
+NumericDisplay
+--------------
 Responsibilities
 Collaborators
 
@@ -44,8 +63,8 @@ Responsibilities
 Collaborators
 
 
-ExternalOperations
-------------------
+Persistence
+-----------
 Responsibilities
 Collaborators
 
