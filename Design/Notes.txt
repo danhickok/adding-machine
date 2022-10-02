@@ -1,0 +1,14 @@
+Development Notes
+=================
+
+
+
+10/02/2022
+----------
+
+Yay, High DPI support is available for WinForms in .NET 6.  However I'm not sure
+whether I want to bother with that right now.  Let's get it working first and
+then worry about whether it looks right on 4K monitors later.
+
+
+

@@ -35,30 +35,55 @@ Collaborators
 SevenSegmentDigit
 -----------------
 Responsibilities
-    LEFT OFF HERE
+    Has a size (one of two options)
+    Has a color option that can be set
+    Display a digit, optionally with decimal or comma
+    Get or set numeric value
+    Get or set decimal existence flag
+    Get or set comma existence flag
+    Able to clear (blank)
 Collaborators
+    NumericDisplay
 
 
 NumericDisplay
 --------------
 Responsibilities
+    Contains a series of SevenSegmentDigit
+    Tells th SSDs to display a given value or error condition
+    Can clear the display
+    Get or set numeric value
+    Get or set error flag
+    Get or set decimal setting
 Collaborators
-
+    Tape
+    Accumulator
 
 Keypad
 ------
 Responsibilities
+    Should be obvious - 0-9, / * - + =, Enter, Esc - see pic
 Collaborators
+    Accumulator
 
 
 DecimalOptionButtons
 --------------------
 Responsibilities
+    Let user select decimal setting
 Collaborators
+    NumericDisplay
 
 
 Accumulator
 -----------
+Responsibilities
+    Perform numeric calculations based on keystroke sequence
+Collaborators
+
+
+Config
+------
 Responsibilities
 Collaborators
 
@@ -66,6 +91,8 @@ Collaborators
 Persistence
 -----------
 Responsibilities
+    Retain tape for recall at startup
+    Update stored tape
 Collaborators
 
 
