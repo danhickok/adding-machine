@@ -78,14 +78,16 @@ Collaborators
 Accumulator
 -----------
 Responsibilities
-    Perform numeric calculations based on keystroke sequence
+    Perform numeric calculations based on received keystroke sequence
 Collaborators
 
 
 Config
 ------
 Responsibilities
+    Maintains application settings
 Collaborators
+    Anywhere needed
 
 
 Persistence
@@ -94,6 +96,11 @@ Responsibilities
     Retain tape for recall at startup
     Update stored tape
 Collaborators
+    Tape
+
+
+Is that enough to get started?
+
 
 
 
