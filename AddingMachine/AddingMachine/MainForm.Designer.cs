@@ -201,6 +201,7 @@
             // KeyCCE
             // 
             this.KeyCCE.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.KeyCCE.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.KeyCCE.Location = new System.Drawing.Point(4, 304);
             this.KeyCCE.Name = "KeyCCE";
             this.KeyCCE.Size = new System.Drawing.Size(64, 40);
@@ -234,6 +235,7 @@
             // KeyMinus
             // 
             this.KeyMinus.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.KeyMinus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.KeyMinus.Location = new System.Drawing.Point(199, 304);
             this.KeyMinus.Name = "KeyMinus";
             this.KeyMinus.Size = new System.Drawing.Size(64, 40);
@@ -245,6 +247,7 @@
             // KeyPlusEquals
             // 
             this.KeyPlusEquals.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.KeyPlusEquals.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.KeyPlusEquals.Location = new System.Drawing.Point(199, 346);
             this.KeyPlusEquals.Name = "KeyPlusEquals";
             this.KeyPlusEquals.Size = new System.Drawing.Size(64, 82);
@@ -256,6 +259,7 @@
             // Key9
             // 
             this.Key9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key9.Location = new System.Drawing.Point(134, 346);
             this.Key9.Name = "Key9";
             this.Key9.Size = new System.Drawing.Size(64, 40);
@@ -267,6 +271,7 @@
             // Key8
             // 
             this.Key8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key8.Location = new System.Drawing.Point(69, 346);
             this.Key8.Name = "Key8";
             this.Key8.Size = new System.Drawing.Size(64, 40);
@@ -278,6 +283,7 @@
             // Key7
             // 
             this.Key7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key7.Location = new System.Drawing.Point(4, 346);
             this.Key7.Name = "Key7";
             this.Key7.Size = new System.Drawing.Size(64, 40);
@@ -289,6 +295,7 @@
             // Key6
             // 
             this.Key6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key6.Location = new System.Drawing.Point(134, 388);
             this.Key6.Name = "Key6";
             this.Key6.Size = new System.Drawing.Size(64, 40);
@@ -300,6 +307,7 @@
             // Key5
             // 
             this.Key5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key5.Location = new System.Drawing.Point(69, 388);
             this.Key5.Name = "Key5";
             this.Key5.Size = new System.Drawing.Size(64, 40);
@@ -311,6 +319,7 @@
             // Key4
             // 
             this.Key4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key4.Location = new System.Drawing.Point(4, 388);
             this.Key4.Name = "Key4";
             this.Key4.Size = new System.Drawing.Size(64, 40);
@@ -322,6 +331,7 @@
             // Key3
             // 
             this.Key3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key3.Location = new System.Drawing.Point(134, 430);
             this.Key3.Name = "Key3";
             this.Key3.Size = new System.Drawing.Size(64, 40);
@@ -333,6 +343,7 @@
             // Key2
             // 
             this.Key2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key2.Location = new System.Drawing.Point(69, 430);
             this.Key2.Name = "Key2";
             this.Key2.Size = new System.Drawing.Size(64, 40);
@@ -344,6 +355,7 @@
             // Key1
             // 
             this.Key1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key1.Location = new System.Drawing.Point(4, 430);
             this.Key1.Name = "Key1";
             this.Key1.Size = new System.Drawing.Size(64, 40);
@@ -355,6 +367,7 @@
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(199, 430);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 82);
@@ -377,6 +390,7 @@
             // Key0
             // 
             this.Key0.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Key0.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Key0.Location = new System.Drawing.Point(4, 472);
             this.Key0.Name = "Key0";
             this.Key0.Size = new System.Drawing.Size(129, 40);
@@ -412,6 +426,8 @@
             this.Controls.Add(this.TapeDisplay);
             this.Controls.Add(this.MainMenuStrip);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(286, 900);
+            this.MinimumSize = new System.Drawing.Size(286, 400);
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
