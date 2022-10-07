@@ -42,6 +42,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAddingMachineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NumericDisplay = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.DecimalOptionsPanel = new System.Windows.Forms.Panel();
             this.DecimalOptionF = new System.Windows.Forms.RadioButton();
             this.DecimalOption0 = new System.Windows.Forms.RadioButton();
@@ -66,6 +67,8 @@
             this.KeyDecimal = new System.Windows.Forms.Button();
             this.Key0 = new System.Windows.Forms.Button();
             this.MainMenuStrip.SuspendLayout();
+            this.NumericDisplay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.DecimalOptionsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,14 +155,14 @@
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
             // 
             // helpToolStripMenuItem
@@ -182,10 +185,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NumericDisplay.BackColor = System.Drawing.Color.Black;
             this.NumericDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.NumericDisplay.Controls.Add(this.pictureBox1);
             this.NumericDisplay.Location = new System.Drawing.Point(4, 223);
             this.NumericDisplay.Name = "NumericDisplay";
             this.NumericDisplay.Size = new System.Drawing.Size(260, 40);
             this.NumericDisplay.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AddingMachine.Properties.Resources.SevenSeg;
+            this.pictureBox1.Location = new System.Drawing.Point(1, 3);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(608, 33);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // DecimalOptionsPanel
             // 
@@ -513,6 +528,9 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
+            this.NumericDisplay.ResumeLayout(false);
+            this.NumericDisplay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.DecimalOptionsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -558,5 +576,6 @@
         private ToolStripMenuItem pasteToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutAddingMachineToolStripMenuItem;
+        private PictureBox pictureBox1;
     }
 }
