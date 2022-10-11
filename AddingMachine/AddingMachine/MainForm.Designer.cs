@@ -654,7 +654,7 @@
             this.TapeText0.Name = "TapeText0";
             this.TapeText0.Size = new System.Drawing.Size(226, 20);
             this.TapeText0.TabIndex = 1;
-            this.TapeText0.Text = "0.00";
+            this.TapeText0.Text = "0.00 GT";
             this.TapeText0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TapeScrollBar
