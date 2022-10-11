@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TapeDisplay = new System.Windows.Forms.TextBox();
-            this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.MainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,19 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAddingMachineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NumericDisplay = new System.Windows.Forms.Panel();
+            this.DigitBox12 = new System.Windows.Forms.PictureBox();
+            this.DigitBox11 = new System.Windows.Forms.PictureBox();
+            this.DigitBox10 = new System.Windows.Forms.PictureBox();
+            this.DigitBox9 = new System.Windows.Forms.PictureBox();
+            this.DigitBox8 = new System.Windows.Forms.PictureBox();
+            this.DigitBox7 = new System.Windows.Forms.PictureBox();
+            this.DigitBox6 = new System.Windows.Forms.PictureBox();
+            this.DigitBox5 = new System.Windows.Forms.PictureBox();
+            this.DigitBox4 = new System.Windows.Forms.PictureBox();
+            this.DigitBox3 = new System.Windows.Forms.PictureBox();
+            this.DigitBox2 = new System.Windows.Forms.PictureBox();
+            this.DigitBox1 = new System.Windows.Forms.PictureBox();
+            this.DigitBox0 = new System.Windows.Forms.PictureBox();
             this.DecimalOptionsPanel = new System.Windows.Forms.Panel();
             this.DecimalOptionF = new System.Windows.Forms.RadioButton();
             this.DecimalOption0 = new System.Windows.Forms.RadioButton();
@@ -66,36 +80,41 @@
             this.KeyMultiply = new System.Windows.Forms.Button();
             this.KeyDivide = new System.Windows.Forms.Button();
             this.KeyCCE = new System.Windows.Forms.Button();
-            this.MainMenuStrip.SuspendLayout();
+            this.TapeContainer = new System.Windows.Forms.Panel();
+            this.TapeText0 = new System.Windows.Forms.Label();
+            this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
+            this.DigitImages = new System.Windows.Forms.ImageList(this.components);
+            this.MainFormMenuStrip.SuspendLayout();
+            this.NumericDisplay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).BeginInit();
             this.DecimalOptionsPanel.SuspendLayout();
             this.KeyPanel.SuspendLayout();
+            this.TapeContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TapeDisplay
+            // MainFormMenuStrip
             // 
-            this.TapeDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TapeDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TapeDisplay.Location = new System.Drawing.Point(4, 27);
-            this.TapeDisplay.Multiline = true;
-            this.TapeDisplay.Name = "TapeDisplay";
-            this.TapeDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TapeDisplay.Size = new System.Drawing.Size(255, 187);
-            this.TapeDisplay.TabIndex = 0;
-            this.TapeDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // MainMenuStrip
-            // 
-            this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainFormMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(262, 24);
-            this.MainMenuStrip.TabIndex = 1;
-            this.MainMenuStrip.Text = "menuStrip1";
+            this.MainFormMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MainFormMenuStrip.Name = "MainFormMenuStrip";
+            this.MainFormMenuStrip.Size = new System.Drawing.Size(262, 24);
+            this.MainFormMenuStrip.TabIndex = 1;
+            this.MainFormMenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -180,19 +199,147 @@
             // 
             // NumericDisplay
             // 
-            this.NumericDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumericDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NumericDisplay.BackColor = System.Drawing.Color.Black;
             this.NumericDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.NumericDisplay.Controls.Add(this.DigitBox12);
+            this.NumericDisplay.Controls.Add(this.DigitBox11);
+            this.NumericDisplay.Controls.Add(this.DigitBox10);
+            this.NumericDisplay.Controls.Add(this.DigitBox9);
+            this.NumericDisplay.Controls.Add(this.DigitBox8);
+            this.NumericDisplay.Controls.Add(this.DigitBox7);
+            this.NumericDisplay.Controls.Add(this.DigitBox6);
+            this.NumericDisplay.Controls.Add(this.DigitBox5);
+            this.NumericDisplay.Controls.Add(this.DigitBox4);
+            this.NumericDisplay.Controls.Add(this.DigitBox3);
+            this.NumericDisplay.Controls.Add(this.DigitBox2);
+            this.NumericDisplay.Controls.Add(this.DigitBox1);
+            this.NumericDisplay.Controls.Add(this.DigitBox0);
             this.NumericDisplay.Location = new System.Drawing.Point(4, 220);
             this.NumericDisplay.Name = "NumericDisplay";
             this.NumericDisplay.Size = new System.Drawing.Size(255, 40);
             this.NumericDisplay.TabIndex = 2;
             // 
+            // DigitBox12
+            // 
+            this.DigitBox12.BackColor = System.Drawing.Color.Black;
+            this.DigitBox12.Location = new System.Drawing.Point(228, 1);
+            this.DigitBox12.Name = "DigitBox12";
+            this.DigitBox12.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox12.TabIndex = 12;
+            this.DigitBox12.TabStop = false;
+            // 
+            // DigitBox11
+            // 
+            this.DigitBox11.BackColor = System.Drawing.Color.Black;
+            this.DigitBox11.Location = new System.Drawing.Point(209, 1);
+            this.DigitBox11.Name = "DigitBox11";
+            this.DigitBox11.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox11.TabIndex = 11;
+            this.DigitBox11.TabStop = false;
+            // 
+            // DigitBox10
+            // 
+            this.DigitBox10.BackColor = System.Drawing.Color.Black;
+            this.DigitBox10.Location = new System.Drawing.Point(190, 1);
+            this.DigitBox10.Name = "DigitBox10";
+            this.DigitBox10.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox10.TabIndex = 10;
+            this.DigitBox10.TabStop = false;
+            // 
+            // DigitBox9
+            // 
+            this.DigitBox9.BackColor = System.Drawing.Color.Black;
+            this.DigitBox9.Location = new System.Drawing.Point(171, 1);
+            this.DigitBox9.Name = "DigitBox9";
+            this.DigitBox9.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox9.TabIndex = 9;
+            this.DigitBox9.TabStop = false;
+            // 
+            // DigitBox8
+            // 
+            this.DigitBox8.BackColor = System.Drawing.Color.Black;
+            this.DigitBox8.Location = new System.Drawing.Point(152, 1);
+            this.DigitBox8.Name = "DigitBox8";
+            this.DigitBox8.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox8.TabIndex = 8;
+            this.DigitBox8.TabStop = false;
+            // 
+            // DigitBox7
+            // 
+            this.DigitBox7.BackColor = System.Drawing.Color.Black;
+            this.DigitBox7.Location = new System.Drawing.Point(133, 1);
+            this.DigitBox7.Name = "DigitBox7";
+            this.DigitBox7.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox7.TabIndex = 7;
+            this.DigitBox7.TabStop = false;
+            // 
+            // DigitBox6
+            // 
+            this.DigitBox6.BackColor = System.Drawing.Color.Black;
+            this.DigitBox6.Location = new System.Drawing.Point(114, 1);
+            this.DigitBox6.Name = "DigitBox6";
+            this.DigitBox6.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox6.TabIndex = 6;
+            this.DigitBox6.TabStop = false;
+            // 
+            // DigitBox5
+            // 
+            this.DigitBox5.BackColor = System.Drawing.Color.Black;
+            this.DigitBox5.Location = new System.Drawing.Point(95, 1);
+            this.DigitBox5.Name = "DigitBox5";
+            this.DigitBox5.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox5.TabIndex = 5;
+            this.DigitBox5.TabStop = false;
+            // 
+            // DigitBox4
+            // 
+            this.DigitBox4.BackColor = System.Drawing.Color.Black;
+            this.DigitBox4.Location = new System.Drawing.Point(76, 1);
+            this.DigitBox4.Name = "DigitBox4";
+            this.DigitBox4.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox4.TabIndex = 4;
+            this.DigitBox4.TabStop = false;
+            // 
+            // DigitBox3
+            // 
+            this.DigitBox3.BackColor = System.Drawing.Color.Black;
+            this.DigitBox3.Location = new System.Drawing.Point(57, 1);
+            this.DigitBox3.Name = "DigitBox3";
+            this.DigitBox3.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox3.TabIndex = 3;
+            this.DigitBox3.TabStop = false;
+            // 
+            // DigitBox2
+            // 
+            this.DigitBox2.BackColor = System.Drawing.Color.Black;
+            this.DigitBox2.Location = new System.Drawing.Point(38, 1);
+            this.DigitBox2.Name = "DigitBox2";
+            this.DigitBox2.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox2.TabIndex = 2;
+            this.DigitBox2.TabStop = false;
+            // 
+            // DigitBox1
+            // 
+            this.DigitBox1.BackColor = System.Drawing.Color.Black;
+            this.DigitBox1.Location = new System.Drawing.Point(19, 1);
+            this.DigitBox1.Name = "DigitBox1";
+            this.DigitBox1.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox1.TabIndex = 1;
+            this.DigitBox1.TabStop = false;
+            // 
+            // DigitBox0
+            // 
+            this.DigitBox0.BackColor = System.Drawing.Color.Black;
+            this.DigitBox0.Location = new System.Drawing.Point(0, 1);
+            this.DigitBox0.Name = "DigitBox0";
+            this.DigitBox0.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox0.TabIndex = 0;
+            this.DigitBox0.TabStop = false;
+            // 
             // DecimalOptionsPanel
             // 
-            this.DecimalOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DecimalOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DecimalOptionsPanel.Controls.Add(this.DecimalOptionF);
             this.DecimalOptionsPanel.Controls.Add(this.DecimalOption0);
             this.DecimalOptionsPanel.Controls.Add(this.DecimalOption2);
@@ -487,16 +634,87 @@
             this.KeyCCE.Text = "CE/C";
             this.KeyCCE.UseVisualStyleBackColor = true;
             // 
+            // TapeContainer
+            // 
+            this.TapeContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.TapeContainer.BackColor = System.Drawing.SystemColors.Window;
+            this.TapeContainer.Controls.Add(this.TapeText0);
+            this.TapeContainer.Controls.Add(this.TapeScrollBar);
+            this.TapeContainer.Location = new System.Drawing.Point(3, 27);
+            this.TapeContainer.Name = "TapeContainer";
+            this.TapeContainer.Size = new System.Drawing.Size(256, 187);
+            this.TapeContainer.TabIndex = 5;
+            // 
+            // TapeText0
+            // 
+            this.TapeText0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TapeText0.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TapeText0.Location = new System.Drawing.Point(7, 166);
+            this.TapeText0.Name = "TapeText0";
+            this.TapeText0.Size = new System.Drawing.Size(226, 20);
+            this.TapeText0.TabIndex = 1;
+            this.TapeText0.Text = "0.00";
+            this.TapeText0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TapeScrollBar
+            // 
+            this.TapeScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TapeScrollBar.Location = new System.Drawing.Point(238, 0);
+            this.TapeScrollBar.Name = "TapeScrollBar";
+            this.TapeScrollBar.Size = new System.Drawing.Size(19, 187);
+            this.TapeScrollBar.TabIndex = 0;
+            // 
+            // DigitImages
+            // 
+            this.DigitImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.DigitImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("DigitImages.ImageStream")));
+            this.DigitImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.DigitImages.Images.SetKeyName(0, "Digit0");
+            this.DigitImages.Images.SetKeyName(1, "Digit1");
+            this.DigitImages.Images.SetKeyName(2, "Digit2");
+            this.DigitImages.Images.SetKeyName(3, "Digit3");
+            this.DigitImages.Images.SetKeyName(4, "Digit4");
+            this.DigitImages.Images.SetKeyName(5, "Digit5");
+            this.DigitImages.Images.SetKeyName(6, "Digit6");
+            this.DigitImages.Images.SetKeyName(7, "Digit7");
+            this.DigitImages.Images.SetKeyName(8, "Digit8");
+            this.DigitImages.Images.SetKeyName(9, "Digit9");
+            this.DigitImages.Images.SetKeyName(10, "Digit0d");
+            this.DigitImages.Images.SetKeyName(11, "Digit1d");
+            this.DigitImages.Images.SetKeyName(12, "Digit2d");
+            this.DigitImages.Images.SetKeyName(13, "Digit3d");
+            this.DigitImages.Images.SetKeyName(14, "Digit4d");
+            this.DigitImages.Images.SetKeyName(15, "Digit5d");
+            this.DigitImages.Images.SetKeyName(16, "Digit6d");
+            this.DigitImages.Images.SetKeyName(17, "Digit7d");
+            this.DigitImages.Images.SetKeyName(18, "Digit8d");
+            this.DigitImages.Images.SetKeyName(19, "Digit9d");
+            this.DigitImages.Images.SetKeyName(20, "Digit0c");
+            this.DigitImages.Images.SetKeyName(21, "Digit1c");
+            this.DigitImages.Images.SetKeyName(22, "Digit2c");
+            this.DigitImages.Images.SetKeyName(23, "Digit3c");
+            this.DigitImages.Images.SetKeyName(24, "Digit4c");
+            this.DigitImages.Images.SetKeyName(25, "Digit5c");
+            this.DigitImages.Images.SetKeyName(26, "Digit6c");
+            this.DigitImages.Images.SetKeyName(27, "Digit7c");
+            this.DigitImages.Images.SetKeyName(28, "Digit8c");
+            this.DigitImages.Images.SetKeyName(29, "Digit9c");
+            this.DigitImages.Images.SetKeyName(30, "DigitBlank");
+            this.DigitImages.Images.SetKeyName(31, "DigitE");
+            this.DigitImages.Images.SetKeyName(32, "DigitMinus");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(262, 505);
+            this.Controls.Add(this.TapeContainer);
             this.Controls.Add(this.KeyPanel);
             this.Controls.Add(this.DecimalOptionsPanel);
             this.Controls.Add(this.NumericDisplay);
-            this.Controls.Add(this.TapeDisplay);
-            this.Controls.Add(this.MainMenuStrip);
+            this.Controls.Add(this.MainFormMenuStrip);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(278, 900);
             this.MinimumSize = new System.Drawing.Size(278, 400);
@@ -505,19 +723,32 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Adding Machine";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.MainMenuStrip.ResumeLayout(false);
-            this.MainMenuStrip.PerformLayout();
+            this.MainFormMenuStrip.ResumeLayout(false);
+            this.MainFormMenuStrip.PerformLayout();
+            this.NumericDisplay.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).EndInit();
             this.DecimalOptionsPanel.ResumeLayout(false);
             this.KeyPanel.ResumeLayout(false);
+            this.TapeContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private TextBox TapeDisplay;
-        private MenuStrip MainMenuStrip;
+        private MenuStrip MainFormMenuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private Panel NumericDisplay;
@@ -554,5 +785,22 @@
         private Button KeyMultiply;
         private Button KeyDivide;
         private Button KeyCCE;
+        private Panel TapeContainer;
+        private VScrollBar TapeScrollBar;
+        private Label TapeText0;
+        private PictureBox DigitBox12;
+        private PictureBox DigitBox11;
+        private PictureBox DigitBox10;
+        private PictureBox DigitBox9;
+        private PictureBox DigitBox8;
+        private PictureBox DigitBox7;
+        private PictureBox DigitBox6;
+        private PictureBox DigitBox5;
+        private PictureBox DigitBox4;
+        private PictureBox DigitBox3;
+        private PictureBox DigitBox2;
+        private PictureBox DigitBox1;
+        private PictureBox DigitBox0;
+        private ImageList DigitImages;
     }
 }
