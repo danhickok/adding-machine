@@ -81,6 +81,7 @@
             this.KeyDivide = new System.Windows.Forms.Button();
             this.KeyCCE = new System.Windows.Forms.Button();
             this.TapeContainer = new System.Windows.Forms.Panel();
+            this.TapeShade = new System.Windows.Forms.PictureBox();
             this.TapeText0 = new System.Windows.Forms.Label();
             this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
             this.DigitImages = new System.Windows.Forms.ImageList(this.components);
@@ -102,6 +103,7 @@
             this.DecimalOptionsPanel.SuspendLayout();
             this.KeyPanel.SuspendLayout();
             this.TapeContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TapeShade)).BeginInit();
             this.SuspendLayout();
             // 
             // MainFormMenuStrip
@@ -639,12 +641,24 @@
             this.TapeContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.TapeContainer.BackColor = System.Drawing.SystemColors.Window;
+            this.TapeContainer.Controls.Add(this.TapeShade);
             this.TapeContainer.Controls.Add(this.TapeText0);
             this.TapeContainer.Controls.Add(this.TapeScrollBar);
             this.TapeContainer.Location = new System.Drawing.Point(3, 27);
             this.TapeContainer.Name = "TapeContainer";
             this.TapeContainer.Size = new System.Drawing.Size(256, 187);
             this.TapeContainer.TabIndex = 5;
+            // 
+            // TapeShade
+            // 
+            this.TapeShade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TapeShade.BackColor = System.Drawing.SystemColors.Window;
+            this.TapeShade.Image = ((System.Drawing.Image)(resources.GetObject("TapeShade.Image")));
+            this.TapeShade.Location = new System.Drawing.Point(0, -741);
+            this.TapeShade.Name = "TapeShade";
+            this.TapeShade.Size = new System.Drawing.Size(237, 900);
+            this.TapeShade.TabIndex = 2;
+            this.TapeShade.TabStop = false;
             // 
             // TapeText0
             // 
@@ -742,6 +756,7 @@
             this.DecimalOptionsPanel.ResumeLayout(false);
             this.KeyPanel.ResumeLayout(false);
             this.TapeContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TapeShade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -802,5 +817,6 @@
         private PictureBox DigitBox1;
         private PictureBox DigitBox0;
         private ImageList DigitImages;
+        private PictureBox TapeShade;
     }
 }
