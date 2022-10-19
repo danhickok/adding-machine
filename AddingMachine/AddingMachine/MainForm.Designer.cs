@@ -43,18 +43,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAddingMachineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NumericDisplay = new System.Windows.Forms.Panel();
-            this.DigitBox12 = new System.Windows.Forms.PictureBox();
-            this.DigitBox11 = new System.Windows.Forms.PictureBox();
-            this.DigitBox10 = new System.Windows.Forms.PictureBox();
-            this.DigitBox9 = new System.Windows.Forms.PictureBox();
-            this.DigitBox8 = new System.Windows.Forms.PictureBox();
-            this.DigitBox7 = new System.Windows.Forms.PictureBox();
-            this.DigitBox6 = new System.Windows.Forms.PictureBox();
-            this.DigitBox5 = new System.Windows.Forms.PictureBox();
-            this.DigitBox4 = new System.Windows.Forms.PictureBox();
-            this.DigitBox3 = new System.Windows.Forms.PictureBox();
-            this.DigitBox2 = new System.Windows.Forms.PictureBox();
-            this.DigitBox1 = new System.Windows.Forms.PictureBox();
             this.DigitBox0 = new System.Windows.Forms.PictureBox();
             this.DecimalOptionsPanel = new System.Windows.Forms.Panel();
             this.DecimalOptionF = new System.Windows.Forms.RadioButton();
@@ -81,29 +69,15 @@
             this.KeyDivide = new System.Windows.Forms.Button();
             this.KeyCCE = new System.Windows.Forms.Button();
             this.TapeContainer = new System.Windows.Forms.Panel();
-            this.TapeShade = new System.Windows.Forms.PictureBox();
             this.TapeText0 = new System.Windows.Forms.Label();
             this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
             this.DigitImages = new System.Windows.Forms.ImageList(this.components);
             this.MainFormMenuStrip.SuspendLayout();
             this.NumericDisplay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).BeginInit();
             this.DecimalOptionsPanel.SuspendLayout();
             this.KeyPanel.SuspendLayout();
             this.TapeContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TapeShade)).BeginInit();
             this.SuspendLayout();
             // 
             // MainFormMenuStrip
@@ -204,131 +178,11 @@
             this.NumericDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NumericDisplay.BackColor = System.Drawing.Color.Black;
             this.NumericDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.NumericDisplay.Controls.Add(this.DigitBox12);
-            this.NumericDisplay.Controls.Add(this.DigitBox11);
-            this.NumericDisplay.Controls.Add(this.DigitBox10);
-            this.NumericDisplay.Controls.Add(this.DigitBox9);
-            this.NumericDisplay.Controls.Add(this.DigitBox8);
-            this.NumericDisplay.Controls.Add(this.DigitBox7);
-            this.NumericDisplay.Controls.Add(this.DigitBox6);
-            this.NumericDisplay.Controls.Add(this.DigitBox5);
-            this.NumericDisplay.Controls.Add(this.DigitBox4);
-            this.NumericDisplay.Controls.Add(this.DigitBox3);
-            this.NumericDisplay.Controls.Add(this.DigitBox2);
-            this.NumericDisplay.Controls.Add(this.DigitBox1);
             this.NumericDisplay.Controls.Add(this.DigitBox0);
             this.NumericDisplay.Location = new System.Drawing.Point(4, 220);
             this.NumericDisplay.Name = "NumericDisplay";
             this.NumericDisplay.Size = new System.Drawing.Size(255, 40);
             this.NumericDisplay.TabIndex = 2;
-            // 
-            // DigitBox12
-            // 
-            this.DigitBox12.BackColor = System.Drawing.Color.Black;
-            this.DigitBox12.Location = new System.Drawing.Point(228, 1);
-            this.DigitBox12.Name = "DigitBox12";
-            this.DigitBox12.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox12.TabIndex = 12;
-            this.DigitBox12.TabStop = false;
-            // 
-            // DigitBox11
-            // 
-            this.DigitBox11.BackColor = System.Drawing.Color.Black;
-            this.DigitBox11.Location = new System.Drawing.Point(209, 1);
-            this.DigitBox11.Name = "DigitBox11";
-            this.DigitBox11.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox11.TabIndex = 11;
-            this.DigitBox11.TabStop = false;
-            // 
-            // DigitBox10
-            // 
-            this.DigitBox10.BackColor = System.Drawing.Color.Black;
-            this.DigitBox10.Location = new System.Drawing.Point(190, 1);
-            this.DigitBox10.Name = "DigitBox10";
-            this.DigitBox10.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox10.TabIndex = 10;
-            this.DigitBox10.TabStop = false;
-            // 
-            // DigitBox9
-            // 
-            this.DigitBox9.BackColor = System.Drawing.Color.Black;
-            this.DigitBox9.Location = new System.Drawing.Point(171, 1);
-            this.DigitBox9.Name = "DigitBox9";
-            this.DigitBox9.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox9.TabIndex = 9;
-            this.DigitBox9.TabStop = false;
-            // 
-            // DigitBox8
-            // 
-            this.DigitBox8.BackColor = System.Drawing.Color.Black;
-            this.DigitBox8.Location = new System.Drawing.Point(152, 1);
-            this.DigitBox8.Name = "DigitBox8";
-            this.DigitBox8.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox8.TabIndex = 8;
-            this.DigitBox8.TabStop = false;
-            // 
-            // DigitBox7
-            // 
-            this.DigitBox7.BackColor = System.Drawing.Color.Black;
-            this.DigitBox7.Location = new System.Drawing.Point(133, 1);
-            this.DigitBox7.Name = "DigitBox7";
-            this.DigitBox7.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox7.TabIndex = 7;
-            this.DigitBox7.TabStop = false;
-            // 
-            // DigitBox6
-            // 
-            this.DigitBox6.BackColor = System.Drawing.Color.Black;
-            this.DigitBox6.Location = new System.Drawing.Point(114, 1);
-            this.DigitBox6.Name = "DigitBox6";
-            this.DigitBox6.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox6.TabIndex = 6;
-            this.DigitBox6.TabStop = false;
-            // 
-            // DigitBox5
-            // 
-            this.DigitBox5.BackColor = System.Drawing.Color.Black;
-            this.DigitBox5.Location = new System.Drawing.Point(95, 1);
-            this.DigitBox5.Name = "DigitBox5";
-            this.DigitBox5.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox5.TabIndex = 5;
-            this.DigitBox5.TabStop = false;
-            // 
-            // DigitBox4
-            // 
-            this.DigitBox4.BackColor = System.Drawing.Color.Black;
-            this.DigitBox4.Location = new System.Drawing.Point(76, 1);
-            this.DigitBox4.Name = "DigitBox4";
-            this.DigitBox4.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox4.TabIndex = 4;
-            this.DigitBox4.TabStop = false;
-            // 
-            // DigitBox3
-            // 
-            this.DigitBox3.BackColor = System.Drawing.Color.Black;
-            this.DigitBox3.Location = new System.Drawing.Point(57, 1);
-            this.DigitBox3.Name = "DigitBox3";
-            this.DigitBox3.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox3.TabIndex = 3;
-            this.DigitBox3.TabStop = false;
-            // 
-            // DigitBox2
-            // 
-            this.DigitBox2.BackColor = System.Drawing.Color.Black;
-            this.DigitBox2.Location = new System.Drawing.Point(38, 1);
-            this.DigitBox2.Name = "DigitBox2";
-            this.DigitBox2.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox2.TabIndex = 2;
-            this.DigitBox2.TabStop = false;
-            // 
-            // DigitBox1
-            // 
-            this.DigitBox1.BackColor = System.Drawing.Color.Black;
-            this.DigitBox1.Location = new System.Drawing.Point(19, 1);
-            this.DigitBox1.Name = "DigitBox1";
-            this.DigitBox1.Size = new System.Drawing.Size(19, 33);
-            this.DigitBox1.TabIndex = 1;
-            this.DigitBox1.TabStop = false;
             // 
             // DigitBox0
             // 
@@ -640,8 +494,8 @@
             // 
             this.TapeContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.TapeContainer.BackColor = System.Drawing.SystemColors.Window;
-            this.TapeContainer.Controls.Add(this.TapeShade);
+            this.TapeContainer.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.TapeContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.TapeContainer.Controls.Add(this.TapeText0);
             this.TapeContainer.Controls.Add(this.TapeScrollBar);
             this.TapeContainer.Location = new System.Drawing.Point(3, 27);
@@ -649,24 +503,14 @@
             this.TapeContainer.Size = new System.Drawing.Size(256, 187);
             this.TapeContainer.TabIndex = 5;
             // 
-            // TapeShade
-            // 
-            this.TapeShade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TapeShade.BackColor = System.Drawing.SystemColors.Window;
-            this.TapeShade.Image = ((System.Drawing.Image)(resources.GetObject("TapeShade.Image")));
-            this.TapeShade.Location = new System.Drawing.Point(0, -741);
-            this.TapeShade.Name = "TapeShade";
-            this.TapeShade.Size = new System.Drawing.Size(237, 900);
-            this.TapeShade.TabIndex = 2;
-            this.TapeShade.TabStop = false;
-            // 
             // TapeText0
             // 
             this.TapeText0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TapeText0.BackColor = System.Drawing.SystemColors.Window;
             this.TapeText0.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TapeText0.Location = new System.Drawing.Point(7, 166);
+            this.TapeText0.Location = new System.Drawing.Point(0, 162);
             this.TapeText0.Name = "TapeText0";
-            this.TapeText0.Size = new System.Drawing.Size(226, 20);
+            this.TapeText0.Size = new System.Drawing.Size(233, 20);
             this.TapeText0.TabIndex = 1;
             this.TapeText0.Text = "0.00 GT";
             this.TapeText0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -675,9 +519,9 @@
             // 
             this.TapeScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TapeScrollBar.Location = new System.Drawing.Point(238, 0);
+            this.TapeScrollBar.Location = new System.Drawing.Point(234, 0);
             this.TapeScrollBar.Name = "TapeScrollBar";
-            this.TapeScrollBar.Size = new System.Drawing.Size(19, 187);
+            this.TapeScrollBar.Size = new System.Drawing.Size(19, 183);
             this.TapeScrollBar.TabIndex = 0;
             // 
             // DigitImages
@@ -740,23 +584,10 @@
             this.MainFormMenuStrip.ResumeLayout(false);
             this.MainFormMenuStrip.PerformLayout();
             this.NumericDisplay.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DigitBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).EndInit();
             this.DecimalOptionsPanel.ResumeLayout(false);
             this.KeyPanel.ResumeLayout(false);
             this.TapeContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TapeShade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -803,20 +634,7 @@
         private Panel TapeContainer;
         private VScrollBar TapeScrollBar;
         private Label TapeText0;
-        private PictureBox DigitBox12;
-        private PictureBox DigitBox11;
-        private PictureBox DigitBox10;
-        private PictureBox DigitBox9;
-        private PictureBox DigitBox8;
-        private PictureBox DigitBox7;
-        private PictureBox DigitBox6;
-        private PictureBox DigitBox5;
-        private PictureBox DigitBox4;
-        private PictureBox DigitBox3;
-        private PictureBox DigitBox2;
-        private PictureBox DigitBox1;
         private PictureBox DigitBox0;
         private ImageList DigitImages;
-        private PictureBox TapeShade;
     }
 }
