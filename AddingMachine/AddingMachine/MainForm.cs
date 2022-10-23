@@ -29,7 +29,7 @@ namespace AddingMachine
                     Location = new Point(TapeText0.Location.X, TapeText0.Location.Y - 20 * i),
                     Size = TapeText0.Size,
                     TextAlign = TapeText0.TextAlign,
-                    Visible = true, // will eventually be controlled by tape scroll I think
+                    Visible = false,
                 };
 
                 TapeContainer.Controls.Add(label);
@@ -61,7 +61,32 @@ namespace AddingMachine
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            //TODO: restore position, size, and screen
         }
+
+        private Accumulator _accumulator;
+        internal void SetAccumulator(Accumulator accumulator)
+        {
+            _accumulator = accumulator;
+        }
+
+        private AppConfig _appConfig;
+        internal void SetAppConfig(AppConfig appConfig)
+        {
+            _appConfig = appConfig;
+        }
+
+        private NumericDisplayHandler _numericDisplayHandler;
+        internal void SetNumericDisplayHandler(NumericDisplayHandler numericDisplayHandler)
+        {
+            _numericDisplayHandler = numericDisplayHandler;
+        }
+
+        private TapeHandler _tapeHandler;
+        internal void SetTapeHandler(TapeHandler tapeHandler)
+        {
+            _tapeHandler = tapeHandler;
+        }
+
     }
 }
