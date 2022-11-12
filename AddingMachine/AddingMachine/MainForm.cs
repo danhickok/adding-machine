@@ -1,3 +1,5 @@
+using System;
+
 namespace AddingMachine
 {
     public partial class MainForm : Form
@@ -133,19 +135,19 @@ namespace AddingMachine
         private void Key0_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("0000000000000");
+            SetNumericDisplay("111111111111");
         }
 
         private void Key1_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("0.0.0.0.0.0.0.0.0.0.0.0.0.");
+            SetNumericDisplay("1.1.1.1.1.1.1.1.1.1.1.1.");
         }
 
         private void Key2_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("0,0,0,0,0,0,0,0,0,0,0,0,0,");
+            SetNumericDisplay("1,1,1,1,1,1,1,1,1,1,1,1,");
         }
 
         private void Key3_Click(object sender, EventArgs e)
@@ -157,37 +159,37 @@ namespace AddingMachine
         private void Key4_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("222222222222");
         }
 
         private void Key5_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("2.2.2.2.2.2.2.2.2.2.2.2.");
         }
 
         private void Key6_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("2,2,2,2,2,2,2,2,2,2,2,2,");
         }
 
         private void Key7_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("333333333333");
         }
 
         private void Key8_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("3.3.3.3.3.3.3.3.3.3.3.3.");
         }
 
         private void Key9_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("3,3,3,3,3,3,3,3,3,3,3,3,");
         }
 
         private void KeyDecimal_Click(object sender, EventArgs e)
@@ -198,7 +200,8 @@ namespace AddingMachine
 
         private void KeyCCE_Click(object sender, EventArgs e)
         {
-
+            // for testing
+            SetNumericDisplay("0.");
         }
 
         private void KeyMultiply_Click(object sender, EventArgs e)
@@ -293,11 +296,24 @@ namespace AddingMachine
             }
         }
 
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                e.Handled = true;
+            }
+        }
+
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Escape)
             {
                 KeyCCE_Click(sender, new EventArgs());
+            }
+            else if(e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                e.Handled = true;
+                KeySTGT_Click(sender, new EventArgs());
             }
         }
 
