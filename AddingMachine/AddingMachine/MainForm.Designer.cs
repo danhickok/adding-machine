@@ -53,7 +53,7 @@
             this.KeyPanel = new System.Windows.Forms.Panel();
             this.KeyDecimal = new System.Windows.Forms.Button();
             this.Key0 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.KeySTGT = new System.Windows.Forms.Button();
             this.Key3 = new System.Windows.Forms.Button();
             this.Key2 = new System.Windows.Forms.Button();
             this.Key1 = new System.Windows.Forms.Button();
@@ -187,7 +187,8 @@
             // DigitBox0
             // 
             this.DigitBox0.BackColor = System.Drawing.Color.Black;
-            this.DigitBox0.Location = new System.Drawing.Point(0, 1);
+            this.DigitBox0.InitialImage = ((System.Drawing.Image)(resources.GetObject("DigitBox0.InitialImage")));
+            this.DigitBox0.Location = new System.Drawing.Point(10, 3);
             this.DigitBox0.Name = "DigitBox0";
             this.DigitBox0.Size = new System.Drawing.Size(19, 33);
             this.DigitBox0.TabIndex = 0;
@@ -220,6 +221,7 @@
             this.DecimalOptionF.Text = "F";
             this.DecimalOptionF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOptionF.UseVisualStyleBackColor = true;
+            this.DecimalOptionF.CheckedChanged += new System.EventHandler(this.DecimalOptionF_CheckedChanged);
             // 
             // DecimalOption0
             // 
@@ -235,6 +237,7 @@
             this.DecimalOption0.Text = "0";
             this.DecimalOption0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption0.UseVisualStyleBackColor = true;
+            this.DecimalOption0.CheckedChanged += new System.EventHandler(this.DecimalOption0_CheckedChanged);
             // 
             // DecimalOption2
             // 
@@ -250,6 +253,7 @@
             this.DecimalOption2.Text = "2";
             this.DecimalOption2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption2.UseVisualStyleBackColor = true;
+            this.DecimalOption2.CheckedChanged += new System.EventHandler(this.DecimalOption2_CheckedChanged);
             // 
             // DecimalOption4
             // 
@@ -265,6 +269,7 @@
             this.DecimalOption4.Text = "4";
             this.DecimalOption4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption4.UseVisualStyleBackColor = true;
+            this.DecimalOption4.CheckedChanged += new System.EventHandler(this.DecimalOption4_CheckedChanged);
             // 
             // DecimalOption6
             // 
@@ -280,13 +285,14 @@
             this.DecimalOption6.Text = "6";
             this.DecimalOption6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption6.UseVisualStyleBackColor = true;
+            this.DecimalOption6.CheckedChanged += new System.EventHandler(this.DecimalOption6_CheckedChanged);
             // 
             // KeyPanel
             // 
             this.KeyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.KeyPanel.Controls.Add(this.KeyDecimal);
             this.KeyPanel.Controls.Add(this.Key0);
-            this.KeyPanel.Controls.Add(this.button1);
+            this.KeyPanel.Controls.Add(this.KeySTGT);
             this.KeyPanel.Controls.Add(this.Key3);
             this.KeyPanel.Controls.Add(this.Key2);
             this.KeyPanel.Controls.Add(this.Key1);
@@ -315,6 +321,7 @@
             this.KeyDecimal.TabStop = false;
             this.KeyDecimal.Text = "·";
             this.KeyDecimal.UseVisualStyleBackColor = true;
+            this.KeyDecimal.Click += new System.EventHandler(this.KeyDecimal_Click);
             // 
             // Key0
             // 
@@ -326,17 +333,19 @@
             this.Key0.TabStop = false;
             this.Key0.Text = "0";
             this.Key0.UseVisualStyleBackColor = true;
+            this.Key0.Click += new System.EventHandler(this.Key0_Click);
             // 
-            // button1
+            // KeySTGT
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(195, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 80);
-            this.button1.TabIndex = 35;
-            this.button1.TabStop = false;
-            this.button1.Text = "ST\r\nGT";
-            this.button1.UseVisualStyleBackColor = true;
+            this.KeySTGT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.KeySTGT.Location = new System.Drawing.Point(195, 123);
+            this.KeySTGT.Name = "KeySTGT";
+            this.KeySTGT.Size = new System.Drawing.Size(64, 80);
+            this.KeySTGT.TabIndex = 35;
+            this.KeySTGT.TabStop = false;
+            this.KeySTGT.Text = "ST\r\nGT";
+            this.KeySTGT.UseVisualStyleBackColor = true;
+            this.KeySTGT.Click += new System.EventHandler(this.KeySTGT_Click);
             // 
             // Key3
             // 
@@ -348,6 +357,7 @@
             this.Key3.TabStop = false;
             this.Key3.Text = "3";
             this.Key3.UseVisualStyleBackColor = true;
+            this.Key3.Click += new System.EventHandler(this.Key3_Click);
             // 
             // Key2
             // 
@@ -359,6 +369,7 @@
             this.Key2.TabStop = false;
             this.Key2.Text = "2";
             this.Key2.UseVisualStyleBackColor = true;
+            this.Key2.Click += new System.EventHandler(this.Key2_Click);
             // 
             // Key1
             // 
@@ -370,6 +381,7 @@
             this.Key1.TabStop = false;
             this.Key1.Text = "1";
             this.Key1.UseVisualStyleBackColor = true;
+            this.Key1.Click += new System.EventHandler(this.Key1_Click);
             // 
             // Key6
             // 
@@ -381,6 +393,7 @@
             this.Key6.TabStop = false;
             this.Key6.Text = "6";
             this.Key6.UseVisualStyleBackColor = true;
+            this.Key6.Click += new System.EventHandler(this.Key6_Click);
             // 
             // Key5
             // 
@@ -392,6 +405,7 @@
             this.Key5.TabStop = false;
             this.Key5.Text = "5";
             this.Key5.UseVisualStyleBackColor = true;
+            this.Key5.Click += new System.EventHandler(this.Key5_Click);
             // 
             // Key4
             // 
@@ -403,6 +417,7 @@
             this.Key4.TabStop = false;
             this.Key4.Text = "4";
             this.Key4.UseVisualStyleBackColor = true;
+            this.Key4.Click += new System.EventHandler(this.Key4_Click);
             // 
             // KeyPlusEquals
             // 
@@ -414,6 +429,7 @@
             this.KeyPlusEquals.TabStop = false;
             this.KeyPlusEquals.Text = "+\r\n=";
             this.KeyPlusEquals.UseVisualStyleBackColor = true;
+            this.KeyPlusEquals.Click += new System.EventHandler(this.KeyPlusEquals_Click);
             // 
             // Key9
             // 
@@ -425,6 +441,7 @@
             this.Key9.TabStop = false;
             this.Key9.Text = "9";
             this.Key9.UseVisualStyleBackColor = true;
+            this.Key9.Click += new System.EventHandler(this.Key9_Click);
             // 
             // Key8
             // 
@@ -436,6 +453,7 @@
             this.Key8.TabStop = false;
             this.Key8.Text = "8";
             this.Key8.UseVisualStyleBackColor = true;
+            this.Key8.Click += new System.EventHandler(this.Key8_Click);
             // 
             // Key7
             // 
@@ -447,6 +465,7 @@
             this.Key7.TabStop = false;
             this.Key7.Text = "7";
             this.Key7.UseVisualStyleBackColor = true;
+            this.Key7.Click += new System.EventHandler(this.Key7_Click);
             // 
             // KeyMinus
             // 
@@ -458,6 +477,7 @@
             this.KeyMinus.TabStop = false;
             this.KeyMinus.Text = "−";
             this.KeyMinus.UseVisualStyleBackColor = true;
+            this.KeyMinus.Click += new System.EventHandler(this.KeyMinus_Click);
             // 
             // KeyMultiply
             // 
@@ -468,6 +488,7 @@
             this.KeyMultiply.TabStop = false;
             this.KeyMultiply.Text = "✕";
             this.KeyMultiply.UseVisualStyleBackColor = true;
+            this.KeyMultiply.Click += new System.EventHandler(this.KeyMultiply_Click);
             // 
             // KeyDivide
             // 
@@ -478,6 +499,7 @@
             this.KeyDivide.TabStop = false;
             this.KeyDivide.Text = "∕";
             this.KeyDivide.UseVisualStyleBackColor = true;
+            this.KeyDivide.Click += new System.EventHandler(this.KeyDivide_Click);
             // 
             // KeyCCE
             // 
@@ -489,6 +511,7 @@
             this.KeyCCE.TabStop = false;
             this.KeyCCE.Text = "CE/C";
             this.KeyCCE.UseVisualStyleBackColor = true;
+            this.KeyCCE.Click += new System.EventHandler(this.KeyCCE_Click);
             // 
             // TapeContainer
             // 
@@ -529,39 +552,39 @@
             this.DigitImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.DigitImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("DigitImages.ImageStream")));
             this.DigitImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.DigitImages.Images.SetKeyName(0, "Digit0");
-            this.DigitImages.Images.SetKeyName(1, "Digit1");
-            this.DigitImages.Images.SetKeyName(2, "Digit2");
-            this.DigitImages.Images.SetKeyName(3, "Digit3");
-            this.DigitImages.Images.SetKeyName(4, "Digit4");
-            this.DigitImages.Images.SetKeyName(5, "Digit5");
-            this.DigitImages.Images.SetKeyName(6, "Digit6");
-            this.DigitImages.Images.SetKeyName(7, "Digit7");
-            this.DigitImages.Images.SetKeyName(8, "Digit8");
-            this.DigitImages.Images.SetKeyName(9, "Digit9");
-            this.DigitImages.Images.SetKeyName(10, "Digit0d");
-            this.DigitImages.Images.SetKeyName(11, "Digit1d");
-            this.DigitImages.Images.SetKeyName(12, "Digit2d");
-            this.DigitImages.Images.SetKeyName(13, "Digit3d");
-            this.DigitImages.Images.SetKeyName(14, "Digit4d");
-            this.DigitImages.Images.SetKeyName(15, "Digit5d");
-            this.DigitImages.Images.SetKeyName(16, "Digit6d");
-            this.DigitImages.Images.SetKeyName(17, "Digit7d");
-            this.DigitImages.Images.SetKeyName(18, "Digit8d");
-            this.DigitImages.Images.SetKeyName(19, "Digit9d");
-            this.DigitImages.Images.SetKeyName(20, "Digit0c");
-            this.DigitImages.Images.SetKeyName(21, "Digit1c");
-            this.DigitImages.Images.SetKeyName(22, "Digit2c");
-            this.DigitImages.Images.SetKeyName(23, "Digit3c");
-            this.DigitImages.Images.SetKeyName(24, "Digit4c");
-            this.DigitImages.Images.SetKeyName(25, "Digit5c");
-            this.DigitImages.Images.SetKeyName(26, "Digit6c");
-            this.DigitImages.Images.SetKeyName(27, "Digit7c");
-            this.DigitImages.Images.SetKeyName(28, "Digit8c");
-            this.DigitImages.Images.SetKeyName(29, "Digit9c");
-            this.DigitImages.Images.SetKeyName(30, "DigitBlank");
-            this.DigitImages.Images.SetKeyName(31, "DigitE");
-            this.DigitImages.Images.SetKeyName(32, "DigitMinus");
+            this.DigitImages.Images.SetKeyName(0, "Digit0.bmp");
+            this.DigitImages.Images.SetKeyName(1, "Digit1.bmp");
+            this.DigitImages.Images.SetKeyName(2, "Digit2.bmp");
+            this.DigitImages.Images.SetKeyName(3, "Digit3.bmp");
+            this.DigitImages.Images.SetKeyName(4, "Digit4.bmp");
+            this.DigitImages.Images.SetKeyName(5, "Digit5.bmp");
+            this.DigitImages.Images.SetKeyName(6, "Digit6.bmp");
+            this.DigitImages.Images.SetKeyName(7, "Digit7.bmp");
+            this.DigitImages.Images.SetKeyName(8, "Digit8.bmp");
+            this.DigitImages.Images.SetKeyName(9, "Digit9.bmp");
+            this.DigitImages.Images.SetKeyName(10, "Digit0d.bmp");
+            this.DigitImages.Images.SetKeyName(11, "Digit1d.bmp");
+            this.DigitImages.Images.SetKeyName(12, "Digit2d.bmp");
+            this.DigitImages.Images.SetKeyName(13, "Digit3d.bmp");
+            this.DigitImages.Images.SetKeyName(14, "Digit4d.bmp");
+            this.DigitImages.Images.SetKeyName(15, "Digit5d.bmp");
+            this.DigitImages.Images.SetKeyName(16, "Digit6d.bmp");
+            this.DigitImages.Images.SetKeyName(17, "Digit7d.bmp");
+            this.DigitImages.Images.SetKeyName(18, "Digit8d.bmp");
+            this.DigitImages.Images.SetKeyName(19, "Digit9d.bmp");
+            this.DigitImages.Images.SetKeyName(20, "Digit0c.bmp");
+            this.DigitImages.Images.SetKeyName(21, "Digit1c.bmp");
+            this.DigitImages.Images.SetKeyName(22, "Digit2c.bmp");
+            this.DigitImages.Images.SetKeyName(23, "Digit3c.bmp");
+            this.DigitImages.Images.SetKeyName(24, "Digit4c.bmp");
+            this.DigitImages.Images.SetKeyName(25, "Digit5c.bmp");
+            this.DigitImages.Images.SetKeyName(26, "Digit6c.bmp");
+            this.DigitImages.Images.SetKeyName(27, "Digit7c.bmp");
+            this.DigitImages.Images.SetKeyName(28, "Digit8c.bmp");
+            this.DigitImages.Images.SetKeyName(29, "Digit9c.bmp");
+            this.DigitImages.Images.SetKeyName(30, "DigitBlank.bmp");
+            this.DigitImages.Images.SetKeyName(31, "DigitE.bmp");
+            this.DigitImages.Images.SetKeyName(32, "DigitMinus.bmp");
             // 
             // MainForm
             // 
@@ -573,6 +596,8 @@
             this.Controls.Add(this.DecimalOptionsPanel);
             this.Controls.Add(this.NumericDisplay);
             this.Controls.Add(this.MainFormMenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(278, 900);
             this.MinimumSize = new System.Drawing.Size(278, 400);
@@ -581,6 +606,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Adding Machine";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.MainFormMenuStrip.ResumeLayout(false);
             this.MainFormMenuStrip.PerformLayout();
             this.NumericDisplay.ResumeLayout(false);
@@ -616,7 +643,7 @@
         private Panel KeyPanel;
         private Button KeyDecimal;
         private Button Key0;
-        private Button button1;
+        private Button KeySTGT;
         private Button Key3;
         private Button Key2;
         private Button Key1;

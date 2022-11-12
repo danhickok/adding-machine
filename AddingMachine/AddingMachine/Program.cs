@@ -13,8 +13,6 @@ namespace AddingMachine
             ApplicationConfiguration.Initialize();
             
             var mainForm = new MainForm();
-            //TODO: instantiate Accumulator, AppConfig, NumericDisplayHandler, and TapeHandler, and pass them to mainForm
-
             Application.Run(mainForm);
         }
     }

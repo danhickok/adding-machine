@@ -1,0 +1,29 @@
+Design Notes
+============
+
+The purpose of this program is to fulfill the need of adding a list of numbers,
+but for circumstances where opening an instance of Excel would be a waste of
+resources.  As such, this program will need to be small and lightweight.
+
+At the same time, certain visual design features, namely the seven-segment
+number display and scrollable tape, will be retained to make this program
+unique.  These features were inspired from the Visual Basic 6.0 version of this
+program that I created some 20 years ago.
+
+The first iteration of this program will work only in standard 1080p resolution
+screens on Windows OS; subsequent iterations will consider being DPI-aware, but
+will still be restricted to Windows.
+
+This project is targeting .NET 6, which is the current long-term support version
+of .NET.
+
+While this project is too small for a complete Clean/Onion architecture, I have
+tried to follow a design that will emphasize a separation of concerns.  So, the
+UI will be *only* an interface, with no computing logic behind it.  As much as
+possible, I want to make the UI features perform as services for the other
+components.
+
+
+
+
+

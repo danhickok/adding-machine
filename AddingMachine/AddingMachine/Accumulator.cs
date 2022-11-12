@@ -8,5 +8,6 @@ namespace AddingMachine
 {
     internal class Accumulator
     {
+
     }
 }
