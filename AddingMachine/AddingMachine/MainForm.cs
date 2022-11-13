@@ -298,10 +298,10 @@ namespace AddingMachine
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                e.Handled = true;
-            }
+            //if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            //{
+            //    e.Handled = true;
+            //}
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -309,11 +309,13 @@ namespace AddingMachine
             if (e.KeyCode == System.Windows.Forms.Keys.Escape)
             {
                 KeyCCE_Click(sender, new EventArgs());
+                KeyCCE.Focus();
             }
             else if(e.KeyCode == System.Windows.Forms.Keys.Enter)
             {
                 e.Handled = true;
                 KeySTGT_Click(sender, new EventArgs());
+                KeySTGT.Focus();
             }
         }
 
