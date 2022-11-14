@@ -135,61 +135,61 @@ namespace AddingMachine
         private void Key0_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("111111111111");
+            SetNumericDisplay("000000000000");
         }
 
         private void Key1_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("1.1.1.1.1.1.1.1.1.1.1.1.");
+            SetNumericDisplay("111111111111");
         }
 
         private void Key2_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("1,1,1,1,1,1,1,1,1,1,1,1,");
+            SetNumericDisplay("222222222222");
         }
 
         private void Key3_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("E");
+            SetNumericDisplay("333333333333");
         }
 
         private void Key4_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("222222222222");
+            SetNumericDisplay("444444444444");
         }
 
         private void Key5_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("2.2.2.2.2.2.2.2.2.2.2.2.");
+            SetNumericDisplay("555555555555");
         }
 
         private void Key6_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("2,2,2,2,2,2,2,2,2,2,2,2,");
+            SetNumericDisplay("666666666666");
         }
 
         private void Key7_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("333333333333");
+            SetNumericDisplay("777777777777");
         }
 
         private void Key8_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("3.3.3.3.3.3.3.3.3.3.3.3.");
+            SetNumericDisplay("888888888888");
         }
 
         private void Key9_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("3,3,3,3,3,3,3,3,3,3,3,3,");
+            SetNumericDisplay("999999999999");
         }
 
         private void KeyDecimal_Click(object sender, EventArgs e)
@@ -206,17 +206,20 @@ namespace AddingMachine
 
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
-
+            // for testing
+            SetNumericDisplay("-E-");
         }
 
         private void KeyDivide_Click(object sender, EventArgs e)
         {
-
+            // for testing
+            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
         }
 
         private void KeyMinus_Click(object sender, EventArgs e)
         {
-
+            // for testing
+            SetNumericDisplay("-1-1-1-1-1-1");
         }
 
         private void KeyPlusEquals_Click(object sender, EventArgs e)
@@ -228,7 +231,7 @@ namespace AddingMachine
         private void KeySTGT_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,8,");
+            SetNumericDisplay("9876543210.12");
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -239,69 +242,80 @@ namespace AddingMachine
             {
                 case '0':
                     Key0_Click(sender, eventArgs);
+                    Key0.Focus();
                     break;
 
                 case '1':
                     Key1_Click(sender, eventArgs);
+                    Key1.Focus();
                     break;
 
                 case '2':
                     Key2_Click(sender, eventArgs);
+                    Key2.Focus();
                     break;
 
                 case '3':
                     Key3_Click(sender, eventArgs);
+                    Key3.Focus();
                     break;
 
                 case '4':
                     Key4_Click(sender, eventArgs);
+                    Key4.Focus();
                     break;
 
                 case '5':
                     Key5_Click(sender, eventArgs);
+                    Key5.Focus();
                     break;
 
                 case '6':
                     Key6_Click(sender, eventArgs);
+                    Key6.Focus();
                     break;
 
                 case '7':
                     Key7_Click(sender, eventArgs);
+                    Key7.Focus();
                     break;
 
                 case '8':
                     Key8_Click(sender, eventArgs);
+                    Key8.Focus();
                     break;
 
                 case '9':
                     Key9_Click(sender, eventArgs);
+                    Key9.Focus();
+                    break;
+
+                case '.':
+                    KeyDecimal_Click(sender, eventArgs);
+                    KeyDecimal.Focus();
                     break;
 
                 case '*':
                     KeyMultiply_Click(sender, eventArgs);
+                    KeyMultiply.Focus();
                     break;
 
                 case '/':
                     KeyDivide_Click(sender, eventArgs);
+                    KeyDivide.Focus();
                     break;
 
                 case '-':
                     KeyMinus_Click(sender, eventArgs);
+                    KeyMinus.Focus();
                     break;
 
                 case '+':
-                    KeySTGT_Click(sender, eventArgs);
+                    KeyPlusEquals_Click(sender, eventArgs);
+                    KeyPlusEquals.Focus();
                     break;
 
             }
-        }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-            //{
-            //    e.Handled = true;
-            //}
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -313,7 +327,6 @@ namespace AddingMachine
             }
             else if(e.KeyCode == System.Windows.Forms.Keys.Enter)
             {
-                e.Handled = true;
                 KeySTGT_Click(sender, new EventArgs());
                 KeySTGT.Focus();
             }
