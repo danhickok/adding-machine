@@ -136,102 +136,119 @@ namespace AddingMachine
         {
             // for testing
             SetNumericDisplay("000000000000");
+            StartKeyTimer();
         }
 
         private void Key1_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("111111111111");
+            StartKeyTimer();
         }
 
         private void Key2_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("222222222222");
+            StartKeyTimer();
         }
 
         private void Key3_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("333333333333");
+            StartKeyTimer();
         }
 
         private void Key4_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("444444444444");
+            StartKeyTimer();
         }
 
         private void Key5_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("555555555555");
+            StartKeyTimer();
         }
 
         private void Key6_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("666666666666");
+            StartKeyTimer();
         }
 
         private void Key7_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("777777777777");
+            StartKeyTimer();
         }
 
         private void Key8_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("888888888888");
+            StartKeyTimer();
         }
 
         private void Key9_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("999999999999");
+            StartKeyTimer();
         }
 
         private void KeyDecimal_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("0.0000");
+            StartKeyTimer();
         }
 
         private void KeyCCE_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("0.");
+            StartKeyTimer();
         }
 
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("-E-");
+            StartKeyTimer();
         }
 
         private void KeyDivide_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
+            StartKeyTimer();
         }
 
         private void KeyMinus_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("-1-1-1-1-1-1");
+            StartKeyTimer();
         }
 
         private void KeyPlusEquals_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("-23,456,789.0123");
+            StartKeyTimer();
         }
 
         private void KeySTGT_Click(object sender, EventArgs e)
         {
             // for testing
             SetNumericDisplay("9876543210.12");
+            StartKeyTimer();
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -314,7 +331,6 @@ namespace AddingMachine
                     KeyPlusEquals_Click(sender, eventArgs);
                     KeyPlusEquals.Focus();
                     break;
-
             }
         }
 
@@ -355,6 +371,19 @@ namespace AddingMachine
         private void DecimalOption6_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void KeyFocusTimer_Tick(object sender, EventArgs e)
+        {
+            KeyFocusTimer.Stop();
+            KeyFocusTimer.Enabled = false;
+            NumericDisplay.Focus();
+        }
+
+        private void StartKeyTimer()
+        {
+            KeyFocusTimer.Enabled = true;
+            KeyFocusTimer.Start();
         }
     }
 }

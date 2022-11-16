@@ -72,6 +72,7 @@
             this.TapeText0 = new System.Windows.Forms.Label();
             this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
             this.DigitImages = new System.Windows.Forms.ImageList(this.components);
+            this.KeyFocusTimer = new System.Windows.Forms.Timer(this.components);
             this.MainFormMenuStrip.SuspendLayout();
             this.NumericDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).BeginInit();
@@ -586,6 +587,11 @@
             this.DigitImages.Images.SetKeyName(31, "DigitE.bmp");
             this.DigitImages.Images.SetKeyName(32, "DigitMinus.bmp");
             // 
+            // KeyFocusTimer
+            // 
+            this.KeyFocusTimer.Enabled = true;
+            this.KeyFocusTimer.Tick += new System.EventHandler(this.KeyFocusTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -662,5 +668,6 @@
         private Label TapeText0;
         private PictureBox DigitBox0;
         private ImageList DigitImages;
+        private System.Windows.Forms.Timer KeyFocusTimer;
     }
 }
