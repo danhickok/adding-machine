@@ -192,6 +192,7 @@
             this.DigitBox0.Location = new System.Drawing.Point(10, 3);
             this.DigitBox0.Name = "DigitBox0";
             this.DigitBox0.Size = new System.Drawing.Size(19, 33);
+            this.DigitBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.DigitBox0.TabIndex = 0;
             this.DigitBox0.TabStop = false;
             // 

@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>AMlogo.ico</ApplicationIcon>
+    <ApplicationIcon>AMlogo2.ico</ApplicationIcon>
     <StartupObject>AddingMachine.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="AMlogo.ico" />
+    <Content Include="AMlogo2.ico" />
   </ItemGroup>
 
   <ItemGroup>

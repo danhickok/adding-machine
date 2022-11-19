@@ -55,6 +55,7 @@ namespace AddingMachine
                     InitialImage = DigitBox0.InitialImage,
                     Location = new Point(DigitBox0.Location.X + 19 * i, DigitBox0.Location.Y),
                     Size = DigitBox0.Size,
+                    SizeMode = DigitBox0.SizeMode,
                     Visible = true
                 };
 
