@@ -71,8 +71,9 @@
             this.TapeContainer = new System.Windows.Forms.Panel();
             this.TapeText0 = new System.Windows.Forms.Label();
             this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
-            this.DigitImages = new System.Windows.Forms.ImageList(this.components);
+            this.DigitImages19 = new System.Windows.Forms.ImageList(this.components);
             this.KeyFocusTimer = new System.Windows.Forms.Timer(this.components);
+            this.DigitImages38 = new System.Windows.Forms.ImageList(this.components);
             this.MainFormMenuStrip.SuspendLayout();
             this.NumericDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).BeginInit();
@@ -189,7 +190,7 @@
             // 
             this.DigitBox0.BackColor = System.Drawing.Color.Black;
             this.DigitBox0.InitialImage = ((System.Drawing.Image)(resources.GetObject("DigitBox0.InitialImage")));
-            this.DigitBox0.Location = new System.Drawing.Point(10, 3);
+            this.DigitBox0.Location = new System.Drawing.Point(10, 2);
             this.DigitBox0.Name = "DigitBox0";
             this.DigitBox0.Size = new System.Drawing.Size(19, 33);
             this.DigitBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -549,49 +550,88 @@
             this.TapeScrollBar.Size = new System.Drawing.Size(19, 183);
             this.TapeScrollBar.TabIndex = 0;
             // 
-            // DigitImages
+            // DigitImages19
             // 
-            this.DigitImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.DigitImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("DigitImages.ImageStream")));
-            this.DigitImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.DigitImages.Images.SetKeyName(0, "Digit0.bmp");
-            this.DigitImages.Images.SetKeyName(1, "Digit1.bmp");
-            this.DigitImages.Images.SetKeyName(2, "Digit2.bmp");
-            this.DigitImages.Images.SetKeyName(3, "Digit3.bmp");
-            this.DigitImages.Images.SetKeyName(4, "Digit4.bmp");
-            this.DigitImages.Images.SetKeyName(5, "Digit5.bmp");
-            this.DigitImages.Images.SetKeyName(6, "Digit6.bmp");
-            this.DigitImages.Images.SetKeyName(7, "Digit7.bmp");
-            this.DigitImages.Images.SetKeyName(8, "Digit8.bmp");
-            this.DigitImages.Images.SetKeyName(9, "Digit9.bmp");
-            this.DigitImages.Images.SetKeyName(10, "Digit0d.bmp");
-            this.DigitImages.Images.SetKeyName(11, "Digit1d.bmp");
-            this.DigitImages.Images.SetKeyName(12, "Digit2d.bmp");
-            this.DigitImages.Images.SetKeyName(13, "Digit3d.bmp");
-            this.DigitImages.Images.SetKeyName(14, "Digit4d.bmp");
-            this.DigitImages.Images.SetKeyName(15, "Digit5d.bmp");
-            this.DigitImages.Images.SetKeyName(16, "Digit6d.bmp");
-            this.DigitImages.Images.SetKeyName(17, "Digit7d.bmp");
-            this.DigitImages.Images.SetKeyName(18, "Digit8d.bmp");
-            this.DigitImages.Images.SetKeyName(19, "Digit9d.bmp");
-            this.DigitImages.Images.SetKeyName(20, "Digit0c.bmp");
-            this.DigitImages.Images.SetKeyName(21, "Digit1c.bmp");
-            this.DigitImages.Images.SetKeyName(22, "Digit2c.bmp");
-            this.DigitImages.Images.SetKeyName(23, "Digit3c.bmp");
-            this.DigitImages.Images.SetKeyName(24, "Digit4c.bmp");
-            this.DigitImages.Images.SetKeyName(25, "Digit5c.bmp");
-            this.DigitImages.Images.SetKeyName(26, "Digit6c.bmp");
-            this.DigitImages.Images.SetKeyName(27, "Digit7c.bmp");
-            this.DigitImages.Images.SetKeyName(28, "Digit8c.bmp");
-            this.DigitImages.Images.SetKeyName(29, "Digit9c.bmp");
-            this.DigitImages.Images.SetKeyName(30, "DigitBlank.bmp");
-            this.DigitImages.Images.SetKeyName(31, "DigitE.bmp");
-            this.DigitImages.Images.SetKeyName(32, "DigitMinus.bmp");
+            this.DigitImages19.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.DigitImages19.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("DigitImages19.ImageStream")));
+            this.DigitImages19.TransparentColor = System.Drawing.Color.Transparent;
+            this.DigitImages19.Images.SetKeyName(0, "Digit19_0.png");
+            this.DigitImages19.Images.SetKeyName(1, "Digit19_1.png");
+            this.DigitImages19.Images.SetKeyName(2, "Digit19_2.png");
+            this.DigitImages19.Images.SetKeyName(3, "Digit19_3.png");
+            this.DigitImages19.Images.SetKeyName(4, "Digit19_4.png");
+            this.DigitImages19.Images.SetKeyName(5, "Digit19_5.png");
+            this.DigitImages19.Images.SetKeyName(6, "Digit19_6.png");
+            this.DigitImages19.Images.SetKeyName(7, "Digit19_7.png");
+            this.DigitImages19.Images.SetKeyName(8, "Digit19_8.png");
+            this.DigitImages19.Images.SetKeyName(9, "Digit19_9.png");
+            this.DigitImages19.Images.SetKeyName(10, "Digit19_0d.png");
+            this.DigitImages19.Images.SetKeyName(11, "Digit19_1d.png");
+            this.DigitImages19.Images.SetKeyName(12, "Digit19_2d.png");
+            this.DigitImages19.Images.SetKeyName(13, "Digit19_3d.png");
+            this.DigitImages19.Images.SetKeyName(14, "Digit19_4d.png");
+            this.DigitImages19.Images.SetKeyName(15, "Digit19_5d.png");
+            this.DigitImages19.Images.SetKeyName(16, "Digit19_6d.png");
+            this.DigitImages19.Images.SetKeyName(17, "Digit19_7d.png");
+            this.DigitImages19.Images.SetKeyName(18, "Digit19_8d.png");
+            this.DigitImages19.Images.SetKeyName(19, "Digit19_9d.png");
+            this.DigitImages19.Images.SetKeyName(20, "Digit19_0c.png");
+            this.DigitImages19.Images.SetKeyName(21, "Digit19_1c.png");
+            this.DigitImages19.Images.SetKeyName(22, "Digit19_2c.png");
+            this.DigitImages19.Images.SetKeyName(23, "Digit19_3c.png");
+            this.DigitImages19.Images.SetKeyName(24, "Digit19_4c.png");
+            this.DigitImages19.Images.SetKeyName(25, "Digit19_5c.png");
+            this.DigitImages19.Images.SetKeyName(26, "Digit19_6c.png");
+            this.DigitImages19.Images.SetKeyName(27, "Digit19_7c.png");
+            this.DigitImages19.Images.SetKeyName(28, "Digit19_8c.png");
+            this.DigitImages19.Images.SetKeyName(29, "Digit19_9c.png");
+            this.DigitImages19.Images.SetKeyName(30, "Digit19_Blank.png");
+            this.DigitImages19.Images.SetKeyName(31, "Digit19_E.png");
+            this.DigitImages19.Images.SetKeyName(32, "Digit19_Minus.png");
             // 
             // KeyFocusTimer
             // 
             this.KeyFocusTimer.Enabled = true;
             this.KeyFocusTimer.Tick += new System.EventHandler(this.KeyFocusTimer_Tick);
+            // 
+            // DigitImages38
+            // 
+            this.DigitImages38.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.DigitImages38.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("DigitImages38.ImageStream")));
+            this.DigitImages38.TransparentColor = System.Drawing.Color.Transparent;
+            this.DigitImages38.Images.SetKeyName(0, "Digit38_0.png");
+            this.DigitImages38.Images.SetKeyName(1, "Digit38_1.png");
+            this.DigitImages38.Images.SetKeyName(2, "Digit38_2.png");
+            this.DigitImages38.Images.SetKeyName(3, "Digit38_3.png");
+            this.DigitImages38.Images.SetKeyName(4, "Digit38_4.png");
+            this.DigitImages38.Images.SetKeyName(5, "Digit38_5.png");
+            this.DigitImages38.Images.SetKeyName(6, "Digit38_6.png");
+            this.DigitImages38.Images.SetKeyName(7, "Digit38_7.png");
+            this.DigitImages38.Images.SetKeyName(8, "Digit38_8.png");
+            this.DigitImages38.Images.SetKeyName(9, "Digit38_9.png");
+            this.DigitImages38.Images.SetKeyName(10, "Digit38_0d.png");
+            this.DigitImages38.Images.SetKeyName(11, "Digit38_1d.png");
+            this.DigitImages38.Images.SetKeyName(12, "Digit38_2d.png");
+            this.DigitImages38.Images.SetKeyName(13, "Digit38_3d.png");
+            this.DigitImages38.Images.SetKeyName(14, "Digit38_4d.png");
+            this.DigitImages38.Images.SetKeyName(15, "Digit38_5d.png");
+            this.DigitImages38.Images.SetKeyName(16, "Digit38_6d.png");
+            this.DigitImages38.Images.SetKeyName(17, "Digit38_7d.png");
+            this.DigitImages38.Images.SetKeyName(18, "Digit38_8d.png");
+            this.DigitImages38.Images.SetKeyName(19, "Digit38_9d.png");
+            this.DigitImages38.Images.SetKeyName(20, "Digit38_0c.png");
+            this.DigitImages38.Images.SetKeyName(21, "Digit38_1c.png");
+            this.DigitImages38.Images.SetKeyName(22, "Digit38_2c.png");
+            this.DigitImages38.Images.SetKeyName(23, "Digit38_3c.png");
+            this.DigitImages38.Images.SetKeyName(24, "Digit38_4c.png");
+            this.DigitImages38.Images.SetKeyName(25, "Digit38_5c.png");
+            this.DigitImages38.Images.SetKeyName(26, "Digit38_6c.png");
+            this.DigitImages38.Images.SetKeyName(27, "Digit38_7c.png");
+            this.DigitImages38.Images.SetKeyName(28, "Digit38_8c.png");
+            this.DigitImages38.Images.SetKeyName(29, "Digit38_9c.png");
+            this.DigitImages38.Images.SetKeyName(30, "Digit38_Blank.png");
+            this.DigitImages38.Images.SetKeyName(31, "Digit38_E.png");
+            this.DigitImages38.Images.SetKeyName(32, "Digit38_Minus.png");
             // 
             // MainForm
             // 
@@ -668,7 +708,8 @@
         private VScrollBar TapeScrollBar;
         private Label TapeText0;
         private PictureBox DigitBox0;
-        private ImageList DigitImages;
+        private ImageList DigitImages19;
         private System.Windows.Forms.Timer KeyFocusTimer;
+        private ImageList DigitImages38;
     }
 }

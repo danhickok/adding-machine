@@ -9,12 +9,17 @@ namespace AddingMachine
         private const int MaxTapeTextControls = 27;
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
+        private ImageList DigitImages;
 
         private bool Loading = false;
 
         public MainForm()
         {
             InitializeComponent();
+
+            DigitImages = DigitImages19;
+            DigitBox0.InitialImage = DigitImages.Images[(int)DI.DigitBlank];
+
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
         }
