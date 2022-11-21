@@ -84,6 +84,7 @@
             // 
             // MainFormMenuStrip
             // 
+            this.MainFormMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainFormMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -635,7 +636,8 @@
             // 
             // MainForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(262, 505);
             this.Controls.Add(this.TapeContainer);
             this.Controls.Add(this.KeyPanel);

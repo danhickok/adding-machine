@@ -24,6 +24,9 @@ possible, I want to make the UI features perform as services for the other
 components.
 
 
+High-DPI scaling is discussed here:
+https://learn.microsoft.com/en-us/visualstudio/designers/disable-dpi-awareness?view=vs-2022
+
 
 
 
