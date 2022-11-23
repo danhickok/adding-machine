@@ -27,6 +27,8 @@ components.
 High-DPI scaling is discussed here:
 https://learn.microsoft.com/en-us/visualstudio/designers/disable-dpi-awareness?view=vs-2022
 
+Also
+https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.containercontrol.autoscalemode?source=recommendations&view=windowsdesktop-7.0
 
 
 
