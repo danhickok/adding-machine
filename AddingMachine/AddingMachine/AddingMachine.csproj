@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>AMicon.ico</ApplicationIcon>
     <StartupObject>AddingMachine.Program</StartupObject>
+    <PackageIcon>AMicon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +37,13 @@
 
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Design\AMicon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

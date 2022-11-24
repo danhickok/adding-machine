@@ -10,20 +10,18 @@ namespace AddingMachine
         private const int MaxTapeTextControls = 27;
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
-        private ImageList? DigitImages;
-
-        private bool Loading = false;
+        private ImageList DigitImages = new();
 
         public MainForm()
         {
             InitializeComponent();
 
-            DetermineImageSource();
+            SetDigitImageSource();
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
         }
 
-        private void DetermineImageSource()
+        private void SetDigitImageSource()
         {
             if (DigitBox0.Size.Width >= 38)
                 DigitImages = DigitImages38;
@@ -33,6 +31,8 @@ namespace AddingMachine
 
         private void PopulateTapeTextControls()
         {
+            TapeText0.Width = TapeContainer.ClientSize.Width - TapeScrollBar.Size.Width;
+
             TapeText.Add(TapeText0);
             for (int i = 1; i < MaxTapeTextControls; ++i)
             {
@@ -43,7 +43,7 @@ namespace AddingMachine
                     AutoSize = TapeText0.AutoSize,
                     BackColor = TapeText0.BackColor,
                     Font = TapeText0.Font,
-                    Location = new Point(TapeText0.Location.X, TapeText0.Location.Y - 20 * i),
+                    Location = new Point(TapeText0.Location.X, TapeText0.Location.Y - TapeText0.Size.Height * i),
                     Size = TapeText0.Size,
                     TextAlign = TapeText0.TextAlign,
                     Visible = false,
@@ -403,7 +403,12 @@ namespace AddingMachine
 
         private void MainForm_DpiChanged(object sender, DpiChangedEventArgs e)
         {
-            DetermineImageSource();
+            SetDigitImageSource();
+        }
+
+        private void MainForm_LocationChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

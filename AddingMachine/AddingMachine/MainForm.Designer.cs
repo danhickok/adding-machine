@@ -313,7 +313,7 @@
             this.KeyPanel.Controls.Add(this.KeyCCE);
             this.KeyPanel.Location = new System.Drawing.Point(0, 298);
             this.KeyPanel.Name = "KeyPanel";
-            this.KeyPanel.Size = new System.Drawing.Size(260, 207);
+            this.KeyPanel.Size = new System.Drawing.Size(260, 208);
             this.KeyPanel.TabIndex = 4;
             // 
             // KeyDecimal
@@ -655,6 +655,7 @@
             this.Text = "Adding Machine";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DpiChanged += new System.Windows.Forms.DpiChangedEventHandler(this.MainForm_DpiChanged);
+            this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.MainFormMenuStrip.ResumeLayout(false);
