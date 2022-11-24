@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace AddingMachine
 {
@@ -9,7 +10,7 @@ namespace AddingMachine
         private const int MaxTapeTextControls = 27;
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
-        private ImageList DigitImages;
+        private ImageList? DigitImages;
 
         private bool Loading = false;
 
@@ -17,11 +18,17 @@ namespace AddingMachine
         {
             InitializeComponent();
 
-            DigitImages = DigitImages19;
-            DigitBox0.InitialImage = DigitImages.Images[(int)DI.DigitBlank];
-
+            DetermineImageSource();
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
+        }
+
+        private void DetermineImageSource()
+        {
+            if (DigitBox0.Size.Width >= 38)
+                DigitImages = DigitImages38;
+            else
+                DigitImages = DigitImages19;
         }
 
         private void PopulateTapeTextControls()
@@ -50,6 +57,8 @@ namespace AddingMachine
 
         private void PopulateNumericDisplayControls()
         {
+            DigitBox0.InitialImage = DigitImages.Images[(int)DI.DigitBlank];
+
             DigitBoxes.Add(DigitBox0);
             for (int i = 1; i < MaxDigits; ++i)
             {
@@ -390,6 +399,11 @@ namespace AddingMachine
         {
             KeyFocusTimer.Enabled = true;
             KeyFocusTimer.Start();
+        }
+
+        private void MainForm_DpiChanged(object sender, DpiChangedEventArgs e)
+        {
+            DetermineImageSource();
         }
     }
 }
