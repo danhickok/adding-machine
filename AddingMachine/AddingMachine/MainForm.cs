@@ -6,9 +6,9 @@ namespace AddingMachine
 {
     public partial class MainForm : Form
     {
-        public const int MaxDigits = 12;
-
+        private const int MaxDigits = 12;
         private const int MaxTapeTextControls = 27;
+
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private ImageList DigitImages = new();
@@ -94,7 +94,7 @@ namespace AddingMachine
             }
         }
 
-        public void SetNumericDisplay(string value)
+        private void SetNumericDisplay(string value)
         {
             // clear the display
             for (var i = 0; i < MaxDigits; ++i)
