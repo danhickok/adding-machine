@@ -1,3 +1,4 @@
+using AddingMachine.Properties;
 using System;
 using System.Diagnostics;
 
@@ -81,7 +82,16 @@ namespace AddingMachine
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //TODO: restore position, size, and screen
+            if (Settings.Default.FormLeft == -1 && Settings.Default.FormTop == -1)
+            {
+                var screen = Screen.PrimaryScreen;
+                Location = new Point((screen.WorkingArea.Width - Size.Width) / 2, (screen.WorkingArea.Height - Size.Height) / 2);
+            }
+            else
+            {
+                Size = new Size(Size.Width, Settings.Default.FormHeight);
+                Location = new Point(Settings.Default.FormLeft, Settings.Default.FormTop);
+            }
         }
 
         public void SetNumericDisplay(string value)
@@ -408,7 +418,10 @@ namespace AddingMachine
 
         private void MainForm_LocationChanged(object sender, EventArgs e)
         {
-
+            Settings.Default.FormLeft = Location.X;
+            Settings.Default.FormTop = Location.Y;
+            Settings.Default.FormHeight = Size.Height;
+            Settings.Default.Save();
         }
     }
 }

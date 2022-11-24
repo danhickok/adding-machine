@@ -22,5 +22,41 @@ namespace AddingMachine.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int FormTop {
+            get {
+                return ((int)(this["FormTop"]));
+            }
+            set {
+                this["FormTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int FormLeft {
+            get {
+                return ((int)(this["FormLeft"]));
+            }
+            set {
+                this["FormLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int FormHeight {
+            get {
+                return ((int)(this["FormHeight"]));
+            }
+            set {
+                this["FormHeight"] = value;
+            }
+        }
     }
 }
