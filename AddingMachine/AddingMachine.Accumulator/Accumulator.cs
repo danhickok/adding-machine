@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,10 @@ namespace AddingMachine.Accumulator
 {
     public class Accumulator
     {
-        private string currentDisplay;
+        public static char DecimalChar { get; } =
+            CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+
+        private string currentDisplay = "";
         public string CurrentDisplay {
             get
             {
@@ -18,7 +22,7 @@ namespace AddingMachine.Accumulator
             private set
             {
                 currentDisplay = value;
-                currentValue = decimal.Parse(currentDisplay);
+                _ = decimal.TryParse(currentDisplay, out currentValue);
             }
         }
 
@@ -48,7 +52,8 @@ namespace AddingMachine.Accumulator
             set
             {
                 decimalOption = value;
-                //TODO: update currentDisplay
+                CurrentValue += 0;
+                Reformat();
             }
         }
 
@@ -57,18 +62,44 @@ namespace AddingMachine.Accumulator
         private bool decimalEntered;
         private decimal operand;
 
-        public Accumulator(int maxDigits, DecimalOptions numberOfDecimalPlaces)
+        public Accumulator(int maxDigits, DecimalOptions decimalOption)
         {
-            currentDisplay = string.Empty;
             this.maxDigits = maxDigits;
-            this.decimalOption = numberOfDecimalPlaces;
-            numberOfDigitsEntered = 0;
-            decimalEntered = false;
+            this.decimalOption = decimalOption;
+            CurrentValue = 0;
+            operand = 0;
         }
 
         private void Reformat()
         {
-            currentDisplay = currentValue.ToString();
+            string formatString;
+            switch (decimalOption)
+            {
+                case DecimalOptions.Zero:
+                    formatString = "N0";
+                    break;
+
+                case DecimalOptions.Two:
+                    formatString = "N2";
+                    break;
+
+                case DecimalOptions.Four:
+                    formatString = "N4";
+                    break;
+
+                case DecimalOptions.Six:
+                    formatString = "N6";
+                    break;
+
+                default:
+                    formatString = "G";
+                    break;
+            }
+
+            currentDisplay = CurrentValue.ToString(formatString);
+            if ((decimalOption == DecimalOptions.Zero || decimalOption == DecimalOptions.Float)
+                    && !currentDisplay.Contains(DecimalChar))
+                currentDisplay += DecimalChar;
         }
 
         public void AddKey(char key)
@@ -85,6 +116,10 @@ namespace AddingMachine.Accumulator
                 case '7':
                 case '8':
                 case '9':
+                    if (numberOfDigitsEntered == 0)
+                    {
+                        currentDisplay = string.Empty;
+                    }
                     if (numberOfDigitsEntered < maxDigits)
                     {
                         CurrentDisplay += key;

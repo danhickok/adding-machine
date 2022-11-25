@@ -13,11 +13,14 @@ namespace AddingMachine
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private ImageList DigitImages = new();
-        private readonly AMA.Accumulator Accumulator = new AMA.Accumulator(MaxDigits, 0);
+        private readonly AMA.Accumulator Accumulator =
+            new AMA.Accumulator(MaxDigits, AMA.DecimalOptions.Float);
 
         public MainForm()
         {
             InitializeComponent();
+
+            KeyDecimal.Text = AMA.Accumulator.DecimalChar.ToString();
 
             SetDigitImageSource();
             PopulateTapeTextControls();
@@ -367,8 +370,19 @@ namespace AddingMachine
                     break;
 
                 case '.':
-                    KeyDecimal_Click(sender, eventArgs);
-                    KeyDecimal.Focus();
+                    if (e.KeyChar == AMA.Accumulator.DecimalChar)
+                    {
+                        KeyDecimal_Click(sender, eventArgs);
+                        KeyDecimal.Focus();
+                    }
+                    break;
+
+                case ',':
+                    if (e.KeyChar == AMA.Accumulator.DecimalChar)
+                    {
+                        KeyDecimal_Click(sender, eventArgs);
+                        KeyDecimal.Focus();
+                    }
                     break;
 
                 case '*':
