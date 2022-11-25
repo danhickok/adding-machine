@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddingMachine
+namespace AddingMachine.Accumulator
 {
     public class Accumulator
     {
@@ -37,17 +38,17 @@ namespace AddingMachine
             }
         }
 
-        private int numberOfDecimalPlaces;
-        public int NumberOfDecimalPlaces
+        private DecimalOptions decimalOption;
+        public DecimalOptions DecimalOption
         {
             get
             {
-                return numberOfDecimalPlaces;
+                return decimalOption;
             }
             set
             {
-                numberOfDecimalPlaces = value;
-
+                decimalOption = value;
+                //TODO: update currentDisplay
             }
         }
 
@@ -56,10 +57,11 @@ namespace AddingMachine
         private bool decimalEntered;
         private decimal operand;
 
-        public Accumulator(int maxDigits)
+        public Accumulator(int maxDigits, DecimalOptions numberOfDecimalPlaces)
         {
             currentDisplay = string.Empty;
             this.maxDigits = maxDigits;
+            this.decimalOption = numberOfDecimalPlaces;
             numberOfDigitsEntered = 0;
             decimalEntered = false;
         }

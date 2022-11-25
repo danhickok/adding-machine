@@ -1,4 +1,5 @@
 using AddingMachine.Properties;
+using AMA = AddingMachine.Accumulator;
 using System;
 using System.Diagnostics;
 
@@ -12,6 +13,7 @@ namespace AddingMachine
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private ImageList DigitImages = new();
+        private readonly AMA.Accumulator Accumulator = new AMA.Accumulator(MaxDigits, 0);
 
         public MainForm()
         {
@@ -20,6 +22,7 @@ namespace AddingMachine
             SetDigitImageSource();
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
+            SetDecimalOption();
         }
 
         private void SetDigitImageSource()
@@ -77,6 +80,37 @@ namespace AddingMachine
                 NumericDisplay.Controls.Add(digitBox);
 
                 DigitBoxes.Add(digitBox);
+            }
+        }
+
+        private void SetDecimalOption()
+        {
+            var option = (AMA.DecimalOptions)Settings.Default.DecimalOption;
+            switch(option)
+            {
+                case AMA.DecimalOptions.Float:
+                    DecimalOptionF.Checked = true;
+                    break;
+
+                case AMA.DecimalOptions.Zero:
+                    DecimalOption0.Checked = true;
+                    break;
+
+                case AMA.DecimalOptions.Two:
+                    DecimalOption2.Checked = true;
+                    break;
+
+                case AMA.DecimalOptions.Four:
+                    DecimalOption4.Checked = true;
+                    break;
+
+                case AMA.DecimalOptions.Six:
+                    DecimalOption6.Checked = true;
+                    break;
+
+                default:
+                    DecimalOptionF.Checked = true;
+                    break;
             }
         }
 
@@ -375,27 +409,32 @@ namespace AddingMachine
 
         private void DecimalOptionF_CheckedChanged(object sender, EventArgs e)
         {
-
+            Accumulator.DecimalOption = AMA.DecimalOptions.Float;
+            SaveDecimalOption();
         }
 
         private void DecimalOption0_CheckedChanged(object sender, EventArgs e)
         {
-
+            Accumulator.DecimalOption = AMA.DecimalOptions.Zero;
+            SaveDecimalOption();
         }
 
         private void DecimalOption2_CheckedChanged(object sender, EventArgs e)
         {
-
+            Accumulator.DecimalOption = AMA.DecimalOptions.Two;
+            SaveDecimalOption();
         }
 
         private void DecimalOption4_CheckedChanged(object sender, EventArgs e)
         {
-
+            Accumulator.DecimalOption = AMA.DecimalOptions.Four;
+            SaveDecimalOption();
         }
 
         private void DecimalOption6_CheckedChanged(object sender, EventArgs e)
         {
-
+            Accumulator.DecimalOption = AMA.DecimalOptions.Six;
+            SaveDecimalOption();
         }
 
         private void KeyFocusTimer_Tick(object sender, EventArgs e)
@@ -421,6 +460,42 @@ namespace AddingMachine
             Settings.Default.FormLeft = Location.X;
             Settings.Default.FormTop = Location.Y;
             Settings.Default.FormHeight = Size.Height;
+            Settings.Default.Save();
+        }
+
+        private void DecimalOption6_Click(object sender, EventArgs e)
+        {
+            Accumulator.DecimalOption = AMA.DecimalOptions.Six;
+            SaveDecimalOption();
+        }
+
+        private void DecimalOption4_Click(object sender, EventArgs e)
+        {
+            Accumulator.DecimalOption = AMA.DecimalOptions.Four;
+            SaveDecimalOption();
+        }
+
+        private void DecimalOption2_Click(object sender, EventArgs e)
+        {
+            Accumulator.DecimalOption = AMA.DecimalOptions.Two;
+            SaveDecimalOption();
+        }
+
+        private void DecimalOption0_Click(object sender, EventArgs e)
+        {
+            Accumulator.DecimalOption = AMA.DecimalOptions.Zero;
+            SaveDecimalOption();
+        }
+
+        private void DecimalOptionF_Click(object sender, EventArgs e)
+        {
+            Accumulator.DecimalOption = AMA.DecimalOptions.Float;
+            SaveDecimalOption();
+        }
+
+        private void SaveDecimalOption()
+        {
+            Settings.Default.DecimalOption = (int)Accumulator.DecimalOption;
             Settings.Default.Save();
         }
     }

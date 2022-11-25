@@ -1,4 +1,4 @@
-using AddingMachine;
+using AMA = AddingMachine.Accumulator;
 
 namespace AddingMachine.Tests
 {
@@ -12,7 +12,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorTest()
         {
-            //var acc = new AddingMachine.Accumulator();
+            var acc = new AMA.Accumulator(0, 0);
         }
     }
 }

@@ -215,7 +215,7 @@
             // 
             this.DecimalOptionF.Appearance = System.Windows.Forms.Appearance.Button;
             this.DecimalOptionF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.DecimalOptionF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DecimalOptionF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.DecimalOptionF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DecimalOptionF.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DecimalOptionF.Location = new System.Drawing.Point(95, 0);
@@ -225,13 +225,13 @@
             this.DecimalOptionF.Text = "F";
             this.DecimalOptionF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOptionF.UseVisualStyleBackColor = true;
-            this.DecimalOptionF.CheckedChanged += new System.EventHandler(this.DecimalOptionF_CheckedChanged);
+            this.DecimalOptionF.Click += new System.EventHandler(this.DecimalOptionF_Click);
             // 
             // DecimalOption0
             // 
             this.DecimalOption0.Appearance = System.Windows.Forms.Appearance.Button;
             this.DecimalOption0.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.DecimalOption0.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DecimalOption0.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.DecimalOption0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DecimalOption0.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DecimalOption0.Location = new System.Drawing.Point(72, 0);
@@ -241,13 +241,13 @@
             this.DecimalOption0.Text = "0";
             this.DecimalOption0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption0.UseVisualStyleBackColor = true;
-            this.DecimalOption0.CheckedChanged += new System.EventHandler(this.DecimalOption0_CheckedChanged);
+            this.DecimalOption0.Click += new System.EventHandler(this.DecimalOption0_Click);
             // 
             // DecimalOption2
             // 
             this.DecimalOption2.Appearance = System.Windows.Forms.Appearance.Button;
             this.DecimalOption2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.DecimalOption2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DecimalOption2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.DecimalOption2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DecimalOption2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DecimalOption2.Location = new System.Drawing.Point(49, 0);
@@ -257,13 +257,13 @@
             this.DecimalOption2.Text = "2";
             this.DecimalOption2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption2.UseVisualStyleBackColor = true;
-            this.DecimalOption2.CheckedChanged += new System.EventHandler(this.DecimalOption2_CheckedChanged);
+            this.DecimalOption2.Click += new System.EventHandler(this.DecimalOption2_Click);
             // 
             // DecimalOption4
             // 
             this.DecimalOption4.Appearance = System.Windows.Forms.Appearance.Button;
             this.DecimalOption4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.DecimalOption4.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DecimalOption4.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.DecimalOption4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DecimalOption4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DecimalOption4.Location = new System.Drawing.Point(26, 0);
@@ -273,13 +273,13 @@
             this.DecimalOption4.Text = "4";
             this.DecimalOption4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption4.UseVisualStyleBackColor = true;
-            this.DecimalOption4.CheckedChanged += new System.EventHandler(this.DecimalOption4_CheckedChanged);
+            this.DecimalOption4.Click += new System.EventHandler(this.DecimalOption4_Click);
             // 
             // DecimalOption6
             // 
             this.DecimalOption6.Appearance = System.Windows.Forms.Appearance.Button;
             this.DecimalOption6.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.DecimalOption6.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DecimalOption6.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.DecimalOption6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DecimalOption6.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DecimalOption6.Location = new System.Drawing.Point(3, 0);
@@ -289,7 +289,7 @@
             this.DecimalOption6.Text = "6";
             this.DecimalOption6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DecimalOption6.UseVisualStyleBackColor = true;
-            this.DecimalOption6.CheckedChanged += new System.EventHandler(this.DecimalOption6_CheckedChanged);
+            this.DecimalOption6.Click += new System.EventHandler(this.DecimalOption6_Click);
             // 
             // KeyPanel
             // 
