@@ -46,6 +46,7 @@ namespace AddingMachine.Tests
             Assert.That(acc.Value, Is.EqualTo(0M), "Initial value isn't zero");
 
             // test regular key entry
+
             AddKeys(acc, "123");
             Assert.That(acc.Value, Is.EqualTo(123M), "Regular key entry is not expected value");
 
@@ -57,6 +58,18 @@ namespace AddingMachine.Tests
 
             AddKeys(acc, "67");
             Assert.That(acc.Value, Is.EqualTo(12_345.67M), "Regular key entry is not expected value");
+
+            // test leading zeros
+
+            AddKeys(acc, "C");
+            AddKeys(acc, "0");
+            Assert.That(acc.Value, Is.EqualTo(0M), "One zero key is not expected value");
+
+            AddKeys(acc, "0000");
+            Assert.That(acc.Value, Is.EqualTo(0M), "five zero keys is not expected value");
+
+            AddKeys(acc, "0288");
+            Assert.That(acc.Value, Is.EqualTo(288M), "Keys with leading zeros is not expected value");
         }
 
         [Test]
@@ -65,7 +78,7 @@ namespace AddingMachine.Tests
             var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
             AddKeys(acc, "123");
-            Assert.That(acc.Display, Does.Not.Contain("."), "Digit keys only should not contain a decimal");
+            Assert.That(acc.Display, Does.Not.Contain("."), "Digit keys only should not yet contain a decimal");
 
             AddKeys(acc, ".");
             Assert.That(acc.Display.Count(c => c == '.'), Is.EqualTo(1), "Decimal not once after entered");
@@ -177,6 +190,9 @@ namespace AddingMachine.Tests
             AddKeys(acc, "T");
             Assert.That(acc.Value, Is.EqualTo(15_000M), "Grand total is incorrect");
 
+            AddKeys(acc, "T");
+            Assert.That(acc.Value, Is.EqualTo(0M), "Total after grand total is incorrect");
+
             // multiplication and division
 
             AddKeys(acc, "C");
@@ -210,16 +226,16 @@ namespace AddingMachine.Tests
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "100*");
-            AddKeys(acc, "40+");
+            AddKeys(acc, "40++");
             AddKeys(acc, "50*");
-            AddKeys(acc, "20+T");
+            AddKeys(acc, "20++T");
             Assert.That(acc.Value, Is.EqualTo(5_000M), "Result of totalling two products is incorrect");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "1000/");
-            AddKeys(acc, "4+");
+            AddKeys(acc, "4++");
             AddKeys(acc, "500/");
-            AddKeys(acc, "2+T");
+            AddKeys(acc, "2++T");
             Assert.That(acc.Value, Is.EqualTo(500M), "Result of totalling two quotients is incorrect");
 
             AddKeys(acc, "TTC");
@@ -263,7 +279,27 @@ namespace AddingMachine.Tests
 
             // reasonable complex calculation
 
-            //TODO: lots of additions, subtractions, multiplication, division - a sanity test
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "147.82+");
+            AddKeys(acc, "11.95+");
+            AddKeys(acc, "8.60+");
+            AddKeys(acc, "38.92+-113.17+");
+            AddKeys(acc, "67.36+");
+            AddKeys(acc, "94.42+");
+            AddKeys(acc, "107.34+");
+            AddKeys(acc, "22.92+");
+            AddKeys(acc, "147.57+");
+            AddKeys(acc, "132.96+");
+            AddKeys(acc, "4*25++");
+            AddKeys(acc, "161.83+");
+            AddKeys(acc, "111.74+");
+            AddKeys(acc, "74.35+");
+            AddKeys(acc, "12.33-");
+            AddKeys(acc, "159.21+");
+            AddKeys(acc, "121+");
+            AddKeys(acc, "68.27+");
+            AddKeys(acc, "168.03+T");
+            Assert.That(acc.Value, Is.EqualTo(1_806.21M), "Reasonable complex calculation is incorrect");
         }
 
         [Test]
@@ -273,17 +309,73 @@ namespace AddingMachine.Tests
 
             acc.Value = 12_345.67M;
             acc.AddKey('C');
-            Assert.That(acc.Value, Is.EqualTo(0M), "Clear did not reset assigned current value to zero");
+            Assert.That(acc.Value, Is.EqualTo(0M), "Clear did not reset assigned value to zero");
 
-            //TODO: test clear entry vs. clear
-            //TODO: test clear after keys vs. clear after assignment
-            //TODO: test clear after math, clear after addition, and combinations
+            AddKeys(acc, "C");
+            AddKeys(acc, "12345");
+            Assert.That(acc.Value, Is.EqualTo(12_345M), "Keyed value after clear is incorrect");
+
+            AddKeys(acc, "C");
+            Assert.That(acc.Value, Is.EqualTo(0M), "Clear did not reset keyed value to zero");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "12345+");
+            AddKeys(acc, "23456");
+            AddKeys(acc, "C");
+            AddKeys(acc, "34567+T");
+            Assert.That(acc.Value, Is.EqualTo(46_192M), "Clear entry during addition resulted in incorrect total");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "1000+");
+            AddKeys(acc, "50*");
+            AddKeys(acc, "20");
+            AddKeys(acc, "C");
+            AddKeys(acc, "50++T");
+            Assert.That(acc.Value, Is.EqualTo(3_500M), "Clear entry during multiplication resulted in incorrect total");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "1000+");
+            AddKeys(acc, "1000+");
+            AddKeys(acc, "C");
+            AddKeys(acc, "2000+");
+            AddKeys(acc, "CC");
+            Assert.That(acc.Value, Is.EqualTo(0M), "Full clear after addition is not zero");
         }
 
         [Test]
         public void AccumulatorErrorTest()
         {
-            //TODO: test overflow, underflow, and division by zero
+            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "999999999999+");
+            AddKeys(acc, "999999999999+");
+            Assert.That(acc.Display, Is.EqualTo("-E-"), "Two maximum values totaled did not result in error display");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "42/");
+            AddKeys(acc, "0+");
+            Assert.That(acc.Display, Is.EqualTo("-E-"), "Division by zero did not result in error display");
+        }
+
+        [Test]
+        [TestCase('0')]
+        [TestCase('9')]
+        [TestCase('.')]
+        [TestCase('*')]
+        [TestCase('/')]
+        [TestCase('+')]
+        [TestCase('T')]
+        [TestCase('C')]
+        public void AccumulatorAbuseTest(char testChar)
+        {
+            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            int timesToRepeat = 2000;
+
+            Assert.That(() =>
+            {
+                AddKeys(acc, new string(testChar, timesToRepeat));
+            }, Throws.Nothing, $"Repeatedly keying '{testChar}' {timesToRepeat} times threw an exception");
         }
 
         private void AddKeys(AMA.Accumulator acc, string keys)
