@@ -14,7 +14,7 @@ namespace AddingMachine.Accumulator
             CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
 
         private string currentDisplay = "";
-        public string CurrentDisplay {
+        public string Display {
             get
             {
                 return currentDisplay;
@@ -27,7 +27,7 @@ namespace AddingMachine.Accumulator
         }
 
         private decimal currentValue;
-        public decimal CurrentValue
+        public decimal Value
         {
             get
             {
@@ -52,7 +52,7 @@ namespace AddingMachine.Accumulator
             set
             {
                 decimalOption = value;
-                CurrentValue += 0;
+                Value += 0;
                 Reformat();
             }
         }
@@ -66,7 +66,7 @@ namespace AddingMachine.Accumulator
         {
             this.maxDigits = maxDigits;
             this.decimalOption = decimalOption;
-            CurrentValue = 0;
+            Value = 0;
             operand = 0;
         }
 
@@ -96,7 +96,7 @@ namespace AddingMachine.Accumulator
                     break;
             }
 
-            currentDisplay = CurrentValue.ToString(formatString);
+            currentDisplay = Value.ToString(formatString);
             if ((decimalOption == DecimalOptions.Zero || decimalOption == DecimalOptions.Float)
                     && !currentDisplay.Contains(DecimalChar))
                 currentDisplay += DecimalChar;
@@ -122,7 +122,7 @@ namespace AddingMachine.Accumulator
                     }
                     if (numberOfDigitsEntered < maxDigits)
                     {
-                        CurrentDisplay += key;
+                        Display += key;
                         numberOfDigitsEntered++;
                     }
                     break;
@@ -134,7 +134,7 @@ namespace AddingMachine.Accumulator
                         {
                             AddKey('0');
                         }
-                        CurrentDisplay += key;
+                        Display += key;
                         decimalEntered = true;
                     }
                     break;
