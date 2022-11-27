@@ -323,7 +323,7 @@ namespace AddingMachine.Tests
             AddKeys(acc, "23456");
             AddKeys(acc, "C");
             AddKeys(acc, "34567+T");
-            Assert.That(acc.Value, Is.EqualTo(46_192M), "Clear entry during addition resulted in incorrect total");
+            Assert.That(acc.Value, Is.EqualTo(46_912M), "Clear entry during addition resulted in incorrect total");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "1000+");
@@ -350,12 +350,12 @@ namespace AddingMachine.Tests
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+");
             AddKeys(acc, "999999999999+");
-            Assert.That(acc.Display, Is.EqualTo("-E-"), "Two maximum values totaled did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "42/");
             AddKeys(acc, "0+");
-            Assert.That(acc.Display, Is.EqualTo("-E-"), "Division by zero did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Division by zero did not result in error display");
         }
 
         [Test]

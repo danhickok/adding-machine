@@ -281,7 +281,7 @@ namespace AddingMachine
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
             // for testing
-            SetNumericDisplay("-E-");
+            SetNumericDisplay(AMA.Accumulator.ErrorDisplay);
             StartKeyTimer();
         }
 
