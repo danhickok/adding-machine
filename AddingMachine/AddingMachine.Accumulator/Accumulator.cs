@@ -13,67 +13,75 @@ namespace AddingMachine.Accumulator
         public static char DecimalChar { get; } =
             CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
 
-        private string currentDisplay = "";
+        private string _display = "";
         public string Display {
             get
             {
-                return currentDisplay;
+                return _display;
             }
             private set
             {
-                currentDisplay = value;
-                _ = decimal.TryParse(currentDisplay, out currentValue);
+                _display = value;
+                _ = decimal.TryParse(_display, out _value);
             }
         }
 
-        private decimal currentValue;
+        private decimal _value;
         public decimal Value
         {
             get
             {
-                return currentValue;
+                return _value;
             }
             set
             {
-                currentValue = value;
+                _value = value;
                 numberOfDigitsEntered = 0;
                 decimalEntered = false;
                 Reformat();
             }
         }
 
-        private DecimalOptions decimalOption;
+        private DecimalOptions _decimalOption;
         public DecimalOptions DecimalOption
         {
             get
             {
-                return decimalOption;
+                return _decimalOption;
             }
             set
             {
-                decimalOption = value;
+                _decimalOption = value;
                 Value += 0;
                 Reformat();
             }
         }
 
-        private readonly int maxDigits;
+        private readonly int MaxDigits;
+        
         private int numberOfDigitsEntered;
         private bool decimalEntered;
+        private decimal total;
+        private decimal grandTotal;
         private decimal operand;
+        private bool multiplicationInitiated;
+        private bool divisionInitiated;
 
         public Accumulator(int maxDigits, DecimalOptions decimalOption)
         {
-            this.maxDigits = maxDigits;
-            this.decimalOption = decimalOption;
-            Value = 0;
-            operand = 0;
+            MaxDigits = maxDigits;
+            DecimalOption = decimalOption;
+            total = 0M;
+            grandTotal = 0M;
+            operand = 0M;
+            multiplicationInitiated= false;
+            divisionInitiated = false;
         }
 
         private void Reformat()
         {
             string formatString;
-            switch (decimalOption)
+            switch (_decimalOption)
             {
                 case DecimalOptions.Zero:
                     formatString = "N0";
@@ -96,10 +104,10 @@ namespace AddingMachine.Accumulator
                     break;
             }
 
-            currentDisplay = Value.ToString(formatString);
-            if ((decimalOption == DecimalOptions.Zero || decimalOption == DecimalOptions.Float)
-                    && !currentDisplay.Contains(DecimalChar))
-                currentDisplay += DecimalChar;
+            _display = Value.ToString(formatString);
+            if ((_decimalOption == DecimalOptions.Zero || _decimalOption == DecimalOptions.Float)
+                    && !_display.Contains(DecimalChar))
+                _display += DecimalChar;
         }
 
         public void AddKey(char key)
@@ -118,9 +126,9 @@ namespace AddingMachine.Accumulator
                 case '9':
                     if (numberOfDigitsEntered == 0)
                     {
-                        currentDisplay = string.Empty;
+                        _display = string.Empty;
                     }
-                    if (numberOfDigitsEntered < maxDigits)
+                    if (numberOfDigitsEntered < MaxDigits)
                     {
                         Display += key;
                         numberOfDigitsEntered++;
@@ -140,27 +148,68 @@ namespace AddingMachine.Accumulator
                     break;
 
                 case '*':
-                    //TODO: multiply
+                    if (multiplicationInitiated)
+                    {
+                        Value = operand * Value;
+                    }
+
+                    operand = Value;
+                    multiplicationInitiated = true;
                     break;
 
                 case '/':
-                    //TODO: divide
+                    if (divisionInitiated)
+                    {
+                        Value = operand / Value;
+                    }
+                    
+                    operand= Value;
+                    divisionInitiated = true;
                     break;
 
                 case '-':
-                    //TODO: subtract
+                    if (multiplicationInitiated)
+                    {
+                        Value = operand * Value;
+                        multiplicationInitiated = false;
+                    }
+                    else if (divisionInitiated)
+                    {
+                        Value = operand / Value;
+                        divisionInitiated = false;
+                    }
+                    else
+                    {
+                        total -= Value;
+                        grandTotal -= Value;
+                    }
                     break;
 
                 case '+':
-                    //TODO: add
+                    if (multiplicationInitiated)
+                    {
+                        Value = operand * Value;
+                        multiplicationInitiated = false;
+                    }
+                    else if (divisionInitiated)
+                    {
+                        Value = operand / Value;
+                        divisionInitiated = false;
+                    }
+                    else
+                    {
+                        total += Value;
+                        grandTotal += Value;
+                    }
                     break;
 
                 case 'C':
-                    //TODO: clear entry/clear
+                    Value = 0M;
                     break;
 
                 case 'T':
-                    //TODO: total/grand total
+                    Value = total;
+                    total = 0M;
                     break;
             }
         }
