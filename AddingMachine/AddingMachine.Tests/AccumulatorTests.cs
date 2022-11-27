@@ -349,8 +349,13 @@ namespace AddingMachine.Tests
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+");
-            AddKeys(acc, "999999999999+");
+            AddKeys(acc, "1+T");
             Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "999999999999+T");
+            AddKeys(acc, "999999999999+TT");
+            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Grand total did not result in error display");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "42/");

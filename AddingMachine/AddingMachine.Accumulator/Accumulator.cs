@@ -179,7 +179,16 @@ namespace AddingMachine.Accumulator
 
                     if (multiplicationInitiated)
                     {
-                        Value = operand * Value;
+                        try
+                        {
+                            Value = operand * Value;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                     }
 
                     numberOfDigitsEntered = 0;
@@ -200,6 +209,7 @@ namespace AddingMachine.Accumulator
                         try
                         {
                             Value = operand / Value;
+                            CheckForOverflow();
                         }
                         catch
                         {
@@ -223,13 +233,31 @@ namespace AddingMachine.Accumulator
 
                     if (multiplicationInitiated)
                     {
-                        Value = operand * Value;
-                        multiplicationInitiated = false;
+                        try
+                        {
+                            Value = operand * Value;
+                            multiplicationInitiated = false;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                     }
                     else if (divisionInitiated)
                     {
-                        Value = operand / Value;
-                        divisionInitiated = false;
+                        try
+                        {
+                            Value = operand / Value;
+                            divisionInitiated = false;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                     }
                     else
                     {
@@ -250,13 +278,31 @@ namespace AddingMachine.Accumulator
 
                     if (multiplicationInitiated)
                     {
-                        Value = operand * Value;
-                        multiplicationInitiated = false;
+                        try
+                        {
+                            Value = operand * Value;
+                            multiplicationInitiated = false;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                     }
                     else if (divisionInitiated)
                     {
-                        Value = operand / Value;
-                        divisionInitiated = false;
+                        try
+                        {
+                            Value = operand / Value;
+                            divisionInitiated = false;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                     }
                     else
                     {
@@ -297,12 +343,30 @@ namespace AddingMachine.Accumulator
 
                     if (totalWasPreviousKey)
                     {
-                        Value = grandTotal;
+                        try
+                        {
+                            Value = grandTotal;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                         grandTotal = 0M;
                     }
                     else
                     {
-                        Value = total;
+                        try
+                        {
+                            Value = total;
+                            CheckForOverflow();
+                        }
+                        catch
+                        {
+                            hasError = true;
+                            Value = 0M;
+                        }
                         total = 0M;
                         totalWasPreviousKey = true;
                     }
@@ -313,6 +377,12 @@ namespace AddingMachine.Accumulator
                     clearWasPreviousKey = false;
                     break;
             }
+        }
+
+        private void CheckForOverflow()
+        {
+            if ((double)Value >= Math.Pow(10, MaxDigits) || (double)Value <= -Math.Pow(10, MaxDigits))
+                throw new Exception("SizeOverflow");
         }
     }
 }

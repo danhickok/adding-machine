@@ -25,10 +25,33 @@ components.
 
 
 High-DPI scaling is discussed here:
-https://learn.microsoft.com/en-us/visualstudio/designers/disable-dpi-awareness?view=vs-2022
+https://learn.microsoft.com/en-us/visualstudio/designers/disable-dpi-awareness?v
+iew=vs-2022
 
 Also
-https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.containercontrol.autoscalemode?source=recommendations&view=windowsdesktop-7.0
+https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.containercontr
+ol.autoscalemode?source=recommendations&view=windowsdesktop-7.0
+
+
+
+11/27/2022
+----------
+
+I've decided that I don't need extra classes to manage the tape, numeric
+display, keypad, option buttons, or configuration.
+
+The tape can be managed in the form, as can the numeric display (as PictureBox
+controls), and the same for most of the other objects.  But the "brains" is the
+accumulator, and that justifiably needed its own class - and I needed to put
+that class into its own project so that I could write tests for it.
+
+Test-driven development has significantly simplified development of the
+accumulator.
+
+At this point I can see that I should use events raised by the accumulator to
+tell the form when to update the numeric display.  The same will probably be
+true for the population of the paper tape, when I get to it.
+
 
 
 
