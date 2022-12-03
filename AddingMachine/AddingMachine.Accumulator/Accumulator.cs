@@ -10,12 +10,15 @@ namespace AddingMachine.Accumulator
 {
     public class Accumulator
     {
-        public event EventHandler<DisplayChangedEventArgs> DisplayChanged;
-        public event EventHandler<NewTapeValueEventArgs> NewTapeValue;
-
         public const string ErrorDisplay = "-E-";
         public static char DecimalChar { get; } =
             CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+
+        public event EventHandler<DisplayChangedEventArgs>? DisplayChanged;
+        public event EventHandler<NewTapeEntryPublishedEventArgs>? NewTapeEntryPublished;
+
+        protected virtual void OnDisplayChanged(DisplayChangedEventArgs e) => DisplayChanged?.Invoke(this, e);
+        protected virtual void OnNewTapeEntryPublished(NewTapeEntryPublishedEventArgs e) => NewTapeEntryPublished?.Invoke(this, e);
 
         private string _display = "";
         public string Display {
@@ -27,6 +30,7 @@ namespace AddingMachine.Accumulator
             {
                 _display = value;
                 _ = decimal.TryParse(_display, out _value);
+                OnDisplayChanged(new DisplayChangedEventArgs(_display));
             }
         }
 
@@ -184,14 +188,49 @@ namespace AddingMachine.Accumulator
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand * Value;
                             CheckForOverflow();
+                            
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "="
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
+                    }
+                    else
+                    {
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = Display,
+                                Value = Value,
+                                Operation = "*"
+                            }));
                     }
 
                     numberOfDigitsEntered = 0;
