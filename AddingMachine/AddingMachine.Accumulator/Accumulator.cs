@@ -10,6 +10,9 @@ namespace AddingMachine.Accumulator
 {
     public class Accumulator
     {
+        public event EventHandler<DisplayChangedEventArgs> DisplayChanged;
+        public event EventHandler<NewTapeValueEventArgs> NewTapeValue;
+
         public const string ErrorDisplay = "-E-";
         public static char DecimalChar { get; } =
             CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
