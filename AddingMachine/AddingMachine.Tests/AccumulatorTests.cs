@@ -6,9 +6,19 @@ namespace AddingMachine.Tests
 
     public class AccumulatorTests
     {
+        AMA.Accumulator? acc;
+
         [SetUp]
         public void Setup()
         {
+            acc = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            acc = null;
+            //TODO: remove event listeners
         }
 
         [Test]
@@ -18,7 +28,7 @@ namespace AddingMachine.Tests
         [TestCase(16)]
         public void AccumulatorMaxDigitsTest(int maxDigits)
         {
-            var acc = new AMA.Accumulator(maxDigits, AMA.DecimalOptions.Zero);
+            acc = new AMA.Accumulator(maxDigits, AMA.DecimalOptions.Zero);
             var testDigits = "12345678901234567";
 
             Assert.That(acc.Display, Is.EqualTo("0."),
@@ -42,7 +52,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorValueTest()
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
             Assert.That(acc.Value, Is.EqualTo(0M), "Initial value isn't zero");
 
             // test regular key entry
@@ -75,7 +85,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorDecimalTest()
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
             AddKeys(acc, "123");
             Assert.That(acc.Display, Does.Not.Contain("."), "Digit keys only should not yet contain a decimal");
@@ -139,7 +149,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorMathTest()
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
             // addition and subtraction
 
@@ -305,7 +315,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorClearTest()
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
             acc.Value = 12_345.67M;
             acc.AddKey('C');
@@ -345,7 +355,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorErrorTest()
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+");
@@ -374,13 +384,39 @@ namespace AddingMachine.Tests
         [TestCase('C')]
         public void AccumulatorAbuseTest(char testChar)
         {
-            var acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
             int timesToRepeat = 2000;
 
             Assert.That(() =>
             {
                 AddKeys(acc, new string(testChar, timesToRepeat));
             }, Throws.Nothing, $"Repeatedly keying '{testChar}' {timesToRepeat} times threw an exception");
+        }
+
+        [Test]
+        public void AccumulatorEventsTest()
+        {
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Two);
+
+            var currentDisplay = "not set";
+            var currentTapeEntry = new AMA.TapeEntry
+            {
+                Display = "not set",
+                Value = -1,
+                Operation = "not set",
+                IsError = false,
+            };
+
+            acc.DisplayChanged += (sender, e) =>
+            {
+                currentDisplay = e.Display;
+            };
+            
+            acc.NewTapeEntryPublished += (sender, e) =>
+            {
+                currentTapeEntry = e.NewTapeEntry; //TODO: should this be a clone here? maybe TapeEntry should be a struct?
+            };
+
         }
 
         private void AddKeys(AMA.Accumulator acc, string keys)
