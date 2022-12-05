@@ -414,9 +414,27 @@ namespace AddingMachine.Tests
             
             acc.NewTapeEntryPublished += (sender, e) =>
             {
-                currentTapeEntry = e.NewTapeEntry; //TODO: should this be a clone here? maybe TapeEntry should be a struct?
+                currentTapeEntry = e.NewTapeEntry.Copy();
             };
 
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "123");
+            Assert.That(currentDisplay, Is.EqualTo("123"), "Current display not updated after clear and three digits");
+
+            AddKeys(acc, "4.5");
+            Assert.That(currentDisplay, Is.EqualTo("1234.5"), "Current display not correct after additional digit, decimal, digit");
+
+            AddKeys(acc, "+");
+            Assert.That(currentDisplay, Is.EqualTo("1234.50"), "Current display not correct after addition operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("1234.50"), "Tape display not correct after addition operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(1_234.5M), "Tape value not correct after addition operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after addition operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after addition operation");
+            });
+
+            //TODO: finish
         }
 
         private void AddKeys(AMA.Accumulator acc, string keys)
