@@ -496,12 +496,13 @@
             // 
             // KeyDivide
             // 
+            this.KeyDivide.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.KeyDivide.Location = new System.Drawing.Point(67, 3);
             this.KeyDivide.Name = "KeyDivide";
             this.KeyDivide.Size = new System.Drawing.Size(64, 40);
             this.KeyDivide.TabIndex = 22;
             this.KeyDivide.TabStop = false;
-            this.KeyDivide.Text = "∕";
+            this.KeyDivide.Text = "÷";
             this.KeyDivide.UseVisualStyleBackColor = true;
             this.KeyDivide.Click += new System.EventHandler(this.KeyDivide_Click);
             // 

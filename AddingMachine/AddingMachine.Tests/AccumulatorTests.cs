@@ -18,7 +18,6 @@ namespace AddingMachine.Tests
         public void TearDown()
         {
             acc = null;
-            //TODO: remove event listeners
         }
 
         [Test]
@@ -87,20 +86,24 @@ namespace AddingMachine.Tests
         {
             acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
 
-            AddKeys(acc, "123");
+            AddKeys(acc, "12345");
             Assert.That(acc.Display, Does.Not.Contain("."), "Digit keys only should not yet contain a decimal");
 
             AddKeys(acc, ".");
             Assert.That(acc.Display.Count(c => c == '.'), Is.EqualTo(1), "Decimal not once after entered");
 
-            AddKeys(acc, "45");
+            AddKeys(acc, "67");
             Assert.That(acc.Display.Count(c => c == '.'), Is.EqualTo(1), "Decimal not once after additional digit keys");
 
             AddKeys(acc, ".");
             Assert.That(acc.Display.Count(c => c == '.'), Is.EqualTo(1), "Decimal not once after second decimal");
 
-            AddKeys(acc, "67.89");
+            AddKeys(acc, "89");
             Assert.That(acc.Display.Count(c => c == '.'), Is.EqualTo(1), "Decimal not once after additional digits");
+
+            // also test presence of comma separator after operation
+            AddKeys(acc, "+");
+            Assert.That(acc.Display, Is.EqualTo("12,345.6789"), "Format of number after addition is not as expected");
         }
 
         [Test]
@@ -382,7 +385,7 @@ namespace AddingMachine.Tests
         [TestCase('+')]
         [TestCase('T')]
         [TestCase('C')]
-        public void AccumulatorAbuseTest(char testChar)
+        public void AccumulatorAbuseTest1(char testChar)
         {
             acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
             int timesToRepeat = 2000;
@@ -391,6 +394,36 @@ namespace AddingMachine.Tests
             {
                 AddKeys(acc, new string(testChar, timesToRepeat));
             }, Throws.Nothing, $"Repeatedly keying '{testChar}' {timesToRepeat} times threw an exception");
+        }
+
+        [Test]
+        public void AccumulatorAbuseTest2()
+        {
+            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+
+            Assert.That(() =>
+            {
+                AddKeys(acc, "36T/*.4+0640-2C3+408C8-*715C3C7C*99/990/95*/.18+.2");
+                AddKeys(acc, "55061*+/85T90.23434-CT83989+/+806-/33-.C-2.8534-.0");
+                AddKeys(acc, "T--33.97.-83143*382+45/9T152*5C*5.21T+*50-04871+58");
+                AddKeys(acc, "C97-825+39C/*T6T-636-/78.+-C96628-C829*+6275-8+..2");
+                AddKeys(acc, "9T4T*80973+.95T*/0/94-*C/.1T6T94+8.60*-8.7/56285++");
+                AddKeys(acc, "2+45/72632**53T67467*C396*812*0/.1C4*8C638*5T*607T");
+                AddKeys(acc, "38-C-/.83T.969*.+C0*0-45354.5.*-682T-+3186-5C69+2C");
+                AddKeys(acc, "TT-4+1-T6408T765176+522+520/678/63/33C0*18.+5-4+92");
+                AddKeys(acc, "-7-0283/48*-41+0/9.-T97.84/166+6.6*T11+545*5669T/0");
+                AddKeys(acc, "+74T*48+5TT16*/-C1C98+03*65+T173-C.C+.*8.82T353439");
+                AddKeys(acc, "*26072.4C45C*-/+2+*T0938377005/5+**3+C09*724*-+1.+");
+                AddKeys(acc, "C3542863.7T9T*/5C+3+7492010968.2C+.6303940-+0C+-2/");
+                AddKeys(acc, "3/296T34-7495/9T781674C*0TT86CT4+16-+6.+7C-46C44-0");
+                AddKeys(acc, "892/1+-340T1524866C-./*+9.7**01.*9./68*+-1863.0-28");
+                AddKeys(acc, "*86-/90.C589.739./-01+60/6.68/42-/7.-2C*+*7-2+-4T4");
+                AddKeys(acc, "T1-/*7523*5T4157.50*98-238--3.4C46-CT74+843-C.++6+");
+                AddKeys(acc, "+-64+15+8-9+.13819*./0.+*T-.5845C+8834.5T5T82*--.C");
+                AddKeys(acc, "+3*2.1006-1T09/253-.55364/+476T34063-3014+5*C6*--4");
+                AddKeys(acc, "1C+8901-/184T.*46+522*T78+44592+297/.2C4.82002*1C7");
+                AddKeys(acc, "4+3TC0T..8485/20027T.858595-T2C84-22*01764007735.9");
+            }, Throws.Nothing, "Random sequence of keys threw an exception");
         }
 
         [Test]
@@ -425,16 +458,76 @@ namespace AddingMachine.Tests
             Assert.That(currentDisplay, Is.EqualTo("1234.5"), "Current display not correct after additional digit, decimal, digit");
 
             AddKeys(acc, "+");
-            Assert.That(currentDisplay, Is.EqualTo("1234.50"), "Current display not correct after addition operation");
+            Assert.That(currentDisplay, Is.EqualTo("1,234.50"), "Current display not correct after first addition operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("1234.50"), "Tape display not correct after addition operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(1_234.5M), "Tape value not correct after addition operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after addition operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after addition operation");
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("1,234.50"), "Tape display not correct first after addition operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(1_234.5M), "Tape value not correct after first addition operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after first addition operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after first addition operation");
             });
 
-            //TODO: finish
+            AddKeys(acc, "2345.6+");
+            Assert.That(currentDisplay, Is.EqualTo("2,345.60"), "Current display not correct after second addition operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("2,345.60"), "Tape display not correct after second addition operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(2_345.6M), "Tape value not correct after second addition operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after second addition operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after second addition operation");
+            });
+
+            AddKeys(acc, "9999.9-");
+            Assert.That(currentDisplay, Is.EqualTo("9,999.90"), "Current display not correct after third addition operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("9,999.90"), "Tape display not correct after third addition operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(-9_999.9M), "Tape value not correct after third addition operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("-"), "Tape operation not correct after third addition operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after third addition operation");
+            });
+
+            AddKeys(acc, "T");
+            Assert.That(currentDisplay, Is.EqualTo("-6,419.80"), "Current display not correct after total operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("-6,419.80"), "Tape display not correct after total operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(-6_419.8M), "Tape value not correct after total operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("T"), "Tape operation not correct after total operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after total operation");
+            });
+
+            AddKeys(acc, "T");
+            Assert.That(currentDisplay, Is.EqualTo("-6,419.80"), "Current display not correct after total operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("-6,419.80"), "Tape display not correct after total operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(-6_419.8M), "Tape value not correct after total operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("T"), "Tape operation not correct after total operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after total operation");
+            });
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "478*");
+            Assert.That(currentDisplay, Is.EqualTo("478.00"), "Current display not correct after multiply operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("478.00"), "Tape display not correct after multiply operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(478M), "Tape value not correct after multiply operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo("*"), "Tape operation not correct after multiply operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after multiply operation");
+            });
+
+            AddKeys(acc, "25+");
+            Assert.That(currentDisplay, Is.EqualTo("25.00"), "Current display not correct after equals operation");
+            Assert.Multiple(() =>
+            {
+                Assert.That(currentTapeEntry.Display, Is.EqualTo("25.00"), "Tape display not correct after equals operation");
+                Assert.That(currentTapeEntry.Value, Is.EqualTo(25M), "Tape value not correct after equals operation");
+                Assert.That(currentTapeEntry.Operation, Is.EqualTo(""), "Tape operation not correct after equals operation");
+                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after equals operation");
+            });
+            //TODO: doesn't this fire two NewTapeEntryPublished events?  you need to check both results, possibly after delay
         }
 
         private void AddKeys(AMA.Accumulator acc, string keys)
