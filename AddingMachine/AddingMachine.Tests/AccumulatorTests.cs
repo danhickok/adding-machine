@@ -1,12 +1,12 @@
-using AMA = AddingMachine.Accumulator;
+using Core = AddingMachine.Accumulator;
 
 namespace AddingMachine.Tests
 {
-    // Note: I don't have any internationalization tests here - all have hardcoded "." as decimal
+    // Note: No internationalization tests here - all have hardcoded "." as decimal and "," as thousands separator
 
     public class AccumulatorTests
     {
-        AMA.Accumulator? acc;
+        Core.Accumulator? acc;
 
         [SetUp]
         public void Setup()
@@ -27,7 +27,7 @@ namespace AddingMachine.Tests
         [TestCase(16)]
         public void AccumulatorMaxDigitsTest(int maxDigits)
         {
-            acc = new AMA.Accumulator(maxDigits, AMA.DecimalOptions.Zero);
+            acc = new Core.Accumulator(maxDigits, Core.DecimalOptions.Zero);
             var testDigits = "12345678901234567";
 
             Assert.That(acc.Display, Is.EqualTo("0."),
@@ -51,7 +51,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorValueTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
             Assert.That(acc.Value, Is.EqualTo(0M), "Initial value isn't zero");
 
             // test regular key entry
@@ -84,7 +84,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorDecimalTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             AddKeys(acc, "12345");
             Assert.That(acc.Display, Does.Not.Contain("."), "Digit keys only should not yet contain a decimal");
@@ -109,50 +109,50 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorChangeDecimalOptionTest()
         {
-            AMA.Accumulator acc;
+            Core.Accumulator acc;
 
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Zero);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Zero);
             Assert.That(acc.Display, Is.EqualTo("0."), "Decimal pattern not right at initial zeero");
 
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Two);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Two);
             Assert.That(acc.Display, Is.EqualTo("0.00"), "Decimal pattern not right at initial two");
 
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Four);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Four);
             Assert.That(acc.Display, Is.EqualTo("0.0000"), "Decimal pattern not right at initial four");
 
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Six);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Six);
             Assert.That(acc.Display, Is.EqualTo("0.000000"), "Decimal pattern not right at initial six");
 
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
             Assert.That(acc.Display, Is.EqualTo("0."), "Decimal pattern not right at initial float");
 
             acc.Value = 123.45678901M;
 
             Assert.That(acc.Display, Is.EqualTo("123.45678901"), "Decimal pattern not right after value assignment");
 
-            acc.DecimalOption = AMA.DecimalOptions.Six;
+            acc.DecimalOption = Core.DecimalOptions.Six;
             Assert.That(acc.Display, Is.EqualTo("123.456789"), "Decimal pattern not right after option set to six");
 
-            acc.DecimalOption = AMA.DecimalOptions.Four;
+            acc.DecimalOption = Core.DecimalOptions.Four;
             Assert.That(acc.Display, Is.EqualTo("123.4568"), "Decimal pattern not right after option set to four");
 
-            acc.DecimalOption = AMA.DecimalOptions.Two;
+            acc.DecimalOption = Core.DecimalOptions.Two;
             Assert.That(acc.Display, Is.EqualTo("123.46"), "Decimal pattern not right after option set to two");
 
-            acc.DecimalOption = AMA.DecimalOptions.Zero;
+            acc.DecimalOption = Core.DecimalOptions.Zero;
             Assert.That(acc.Display, Is.EqualTo("123."), "Decimal pattern not right after option set to zero");
 
-            acc.DecimalOption = AMA.DecimalOptions.Float;
+            acc.DecimalOption = Core.DecimalOptions.Float;
             Assert.That(acc.Display, Is.EqualTo("123.45678901"), "Decimal pattern not right after option set back to float");
 
-            acc.DecimalOption = AMA.DecimalOptions.Two;
+            acc.DecimalOption = Core.DecimalOptions.Two;
             Assert.That(acc.Display, Is.EqualTo("123.46"), "Decimal pattern not right after option set back to zero");
         }
 
         [Test]
         public void AccumulatorMathTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             // addition and subtraction
 
@@ -318,7 +318,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorClearTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             acc.Value = 12_345.67M;
             acc.AddKey('C');
@@ -358,22 +358,22 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorErrorTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+");
             AddKeys(acc, "1+T");
-            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+T");
             AddKeys(acc, "999999999999+TT");
-            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Grand total did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Grand total did not result in error display");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "42/");
             AddKeys(acc, "0+");
-            Assert.That(acc.Display, Is.EqualTo(AMA.Accumulator.ErrorDisplay), "Division by zero did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Division by zero did not result in error display");
         }
 
         [Test]
@@ -387,7 +387,7 @@ namespace AddingMachine.Tests
         [TestCase('C')]
         public void AccumulatorAbuseTest1(char testChar)
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
             int timesToRepeat = 2000;
 
             Assert.That(() =>
@@ -399,7 +399,7 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorAbuseTest2()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Float);
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             Assert.That(() =>
             {
@@ -429,108 +429,168 @@ namespace AddingMachine.Tests
         [Test]
         public void AccumulatorEventsTest()
         {
-            acc = new AMA.Accumulator(12, AMA.DecimalOptions.Two);
-
             var currentDisplay = "not set";
-            var currentTapeEntry = new AMA.TapeEntry
-            {
-                Display = "not set",
-                Value = -1,
-                Operation = "not set",
-                IsError = false,
-            };
+            var tapeEntries = new List<Core.TapeEntry>();
+            int ti = -1;
 
-            acc.DisplayChanged += (sender, e) =>
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Two);
+            
+            EventHandler<Core.DisplayChangedEventArgs> displayChangedHandler = (sender, e) =>
             {
                 currentDisplay = e.Display;
             };
-            
-            acc.NewTapeEntryPublished += (sender, e) =>
+
+            EventHandler<Core.NewTapeEntryPublishedEventArgs> newTapeEntryPublished = (sender, e) =>
             {
-                currentTapeEntry = e.NewTapeEntry.Copy();
+                tapeEntries.Add(e.NewTapeEntry.Copy());
+                ti++;
             };
 
+            var clearTape = () =>
+            {
+                tapeEntries.Clear();
+                ti = -1;
+            };
+
+            acc.DisplayChanged += displayChangedHandler;
+            acc.NewTapeEntryPublished += newTapeEntryPublished;
+
             AddKeys(acc, "TTC");
+            clearTape();
+            
             AddKeys(acc, "123");
             Assert.That(currentDisplay, Is.EqualTo("123"), "Current display not updated after clear and three digits");
+            Assert.That(ti, Is.EqualTo(-1), "Tape was populated after three digits and before operation");
 
             AddKeys(acc, "4.5");
             Assert.That(currentDisplay, Is.EqualTo("1234.5"), "Current display not correct after additional digit, decimal, digit");
+            Assert.That(ti, Is.EqualTo(-1), "Tape was populated after additional digit, decimal, digit and before operation");
 
             AddKeys(acc, "+");
             Assert.That(currentDisplay, Is.EqualTo("1,234.50"), "Current display not correct after first addition operation");
+
+            Assert.That(ti, Is.EqualTo(0), "Tape was not populated after first addition operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("1,234.50"), "Tape display not correct first after addition operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(1_234.5M), "Tape value not correct after first addition operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after first addition operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after first addition operation");
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo("1,234.50"), "Tape display not correct first after addition operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(1_234.5M), "Tape value not correct after first addition operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo("+"), "Tape operation not correct after first addition operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after first addition operation");
             });
 
             AddKeys(acc, "2345.6+");
             Assert.That(currentDisplay, Is.EqualTo("2,345.60"), "Current display not correct after second addition operation");
+
+            Assert.That(ti, Is.EqualTo(1), "Tape was not correctly populated after second addition operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("2,345.60"), "Tape display not correct after second addition operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(2_345.6M), "Tape value not correct after second addition operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("+"), "Tape operation not correct after second addition operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after second addition operation");
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo("2,345.60"), "Tape display not correct after second addition operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(2_345.6M), "Tape value not correct after second addition operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo("+"), "Tape operation not correct after second addition operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after second addition operation");
             });
 
             AddKeys(acc, "9999.9-");
             Assert.That(currentDisplay, Is.EqualTo("9,999.90"), "Current display not correct after third addition operation");
+
+            Assert.That(ti, Is.EqualTo(2), "Tape was not correctly populated after third addition operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("9,999.90"), "Tape display not correct after third addition operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(-9_999.9M), "Tape value not correct after third addition operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("-"), "Tape operation not correct after third addition operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after third addition operation");
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo("9,999.90"), "Tape display not correct after third addition operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(-9_999.9M), "Tape value not correct after third addition operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo("-"), "Tape operation not correct after third addition operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after third addition operation");
             });
 
             AddKeys(acc, "T");
             Assert.That(currentDisplay, Is.EqualTo("-6,419.80"), "Current display not correct after total operation");
+
+            Assert.That(ti, Is.EqualTo(4), "Tape was not correctly populated after total operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("-6,419.80"), "Tape display not correct after total operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(-6_419.8M), "Tape value not correct after total operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("T"), "Tape operation not correct after total operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after total operation");
+                // total line
+                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("-6,419.80"), "Tape display not correct after total operation");
+                Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(-6_419.8M), "Tape value not correct after total operation");
+                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo("T"), "Tape operation not correct after total operation");
+                Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after total operation");
+                // empty line
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo(""), "Tape has no empty line after total operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(0M), "Tape value not correct for empty line after total operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not empty for empty line after total operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in empty line after total operation");
             });
 
             AddKeys(acc, "T");
-            Assert.That(currentDisplay, Is.EqualTo("-6,419.80"), "Current display not correct after total operation");
+            Assert.That(currentDisplay, Is.EqualTo("-6,419.80"), "Current display not correct after grand total operation");
+
+            Assert.That(ti, Is.EqualTo(7), "Tape was not correctly populated after grand total operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("-6,419.80"), "Tape display not correct after total operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(-6_419.8M), "Tape value not correct after total operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("T"), "Tape operation not correct after total operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after total operation");
+                // grand total line
+                Assert.That(tapeEntries[ti - 2].Display, Is.EqualTo("-6,419.80"), "Tape display not correct after grand total operation");
+                Assert.That(tapeEntries[ti - 2].Value, Is.EqualTo(-6_419.8M), "Tape value not correct after grand total operation");
+                Assert.That(tapeEntries[ti - 2].Operation, Is.EqualTo("T"), "Tape operation not correct after grand total operation");
+                Assert.That(tapeEntries[ti - 2].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after grand total operation");
+                // empty line
+                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo(""), "Tape has no empty line after grand total operation");
+                Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(0M), "Tape value not correct for empty line after grand total operation");
+                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo(""), "Tape operation not empty for empty line after grand total operation");
+                Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error wrong in empty line after grand total operation");
+                // empty line
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo(""), "Tape has no second empty line after grand total operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(0M), "Tape value not correct for second empty line after grand total operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not empty for second empty line after grand total operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in second empty line after grand total operation");
             });
 
-            AddKeys(acc, "TTC");
+            AddKeys(acc, "C");
+            Assert.That(currentDisplay, Is.EqualTo("0.00"), "Current display not correct after clear operation");
+
+            Assert.That(ti, Is.EqualTo(9), "Tape was not correctly populated after clear operation");
+            Assert.Multiple(() =>
+            {
+                // clear line
+                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("0.00"), "Tape has no empty line after clear operation");
+                Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(0M), "Tape value not correct for empty line after clear operation");
+                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo("C"), "Tape operation not empty for empty line after clear operation");
+                Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error wrong in empty line after clear operation");
+                // empty line
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo(""), "Tape has no empty line after clear operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(0M), "Tape value not correct for empty line after clear operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not empty for empty line after clear operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in empty line after clear operation");
+            });
+
+
             AddKeys(acc, "478*");
             Assert.That(currentDisplay, Is.EqualTo("478.00"), "Current display not correct after multiply operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("478.00"), "Tape display not correct after multiply operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(478M), "Tape value not correct after multiply operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo("*"), "Tape operation not correct after multiply operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after multiply operation");
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo("478.00"), "Tape display not correct after multiply operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(478M), "Tape value not correct after multiply operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo("*"), "Tape operation not correct after multiply operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after multiply operation");
             });
 
             AddKeys(acc, "25+");
             Assert.That(currentDisplay, Is.EqualTo("25.00"), "Current display not correct after equals operation");
             Assert.Multiple(() =>
             {
-                Assert.That(currentTapeEntry.Display, Is.EqualTo("25.00"), "Tape display not correct after equals operation");
-                Assert.That(currentTapeEntry.Value, Is.EqualTo(25M), "Tape value not correct after equals operation");
-                Assert.That(currentTapeEntry.Operation, Is.EqualTo(""), "Tape operation not correct after equals operation");
-                Assert.That(currentTapeEntry.IsError, Is.EqualTo(false), "Tape error changed unexpectedly after equals operation");
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo("25.00"), "Tape display not correct after equals operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(25M), "Tape value not correct after equals operation");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not correct after equals operation");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after equals operation");
             });
             //TODO: doesn't this fire two NewTapeEntryPublished events?  you need to check both results, possibly after delay
+
+            // cleanup
+            Assert.That(() => {
+                acc.DisplayChanged -= displayChangedHandler;
+                acc.NewTapeEntryPublished -= newTapeEntryPublished;
+            }, Throws.Nothing, "Received an exception when removing event listeners");
         }
 
-        private void AddKeys(AMA.Accumulator acc, string keys)
+        private void AddKeys(Core.Accumulator acc, string keys)
         {
             foreach (var key in keys)
             {
