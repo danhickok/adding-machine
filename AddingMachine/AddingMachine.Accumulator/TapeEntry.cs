@@ -1,4 +1,4 @@
-﻿namespace AddingMachine.Accumulator
+﻿namespace AddingMachine.Core
 {
     public class TapeEntry
     {

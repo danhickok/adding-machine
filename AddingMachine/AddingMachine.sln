@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddingMachine", "AddingMach
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddingMachine.Tests", "AddingMachine.Tests\AddingMachine.Tests.csproj", "{FDFB59C1-9A7E-4A14-A81B-9FA8FD055B5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddingMachine.Accumulator", "AddingMachine.Accumulator\AddingMachine.Accumulator.csproj", "{7D79911F-E3B7-4796-B683-88F729D37350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddingMachine.Core", "AddingMachine.Accumulator\AddingMachine.Core.csproj", "{7D79911F-E3B7-4796-B683-88F729D37350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

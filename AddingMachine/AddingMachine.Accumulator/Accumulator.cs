@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AddingMachine.Accumulator
+namespace AddingMachine.Core
 {
     public class Accumulator
     {
@@ -102,7 +103,7 @@ namespace AddingMachine.Accumulator
             }
 
             string formatString;
-            switch (_decimalOption)
+            switch (DecimalOption)
             {
                 case DecimalOptions.Zero:
                     formatString = "N0";
@@ -121,14 +122,44 @@ namespace AddingMachine.Accumulator
                     break;
 
                 default:
-                    formatString = "G";
+                    formatString = "N" + MaxDigits;
                     break;
             }
 
             _display = Value.ToString(formatString);
-            if ((_decimalOption == DecimalOptions.Zero || _decimalOption == DecimalOptions.Float)
-                    && !_display.Contains(DecimalChar))
+            
+            // add decimal to end if no decimal in result
+            if (!_display.Contains(DecimalChar))
                 _display += DecimalChar;
+
+            // floating point only
+            if (DecimalOption == DecimalOptions.Float)
+            {
+                // remove trailing zeros
+                _display = Regex.Replace(_display, "0+$", "");
+
+                // position of decimal counts only digits, minus sign, and decimal
+                var pattern = "^[-0-9" + DecimalChar + "]";
+                var positionOfDecimal = Regex.Replace(_display, pattern, "").IndexOf(DecimalChar);
+
+                // number of digits counts only digits and minus sign
+                pattern = "[-0-9]";
+                var numberOfDigits = Regex.Matches(_display, pattern).Count;
+
+                if (positionOfDecimal > MaxDigits)
+                {
+                    // too many digits before the decimal
+                    Value = 0M;
+                    hasError = true;
+                    _display = ErrorDisplay;
+                }
+                else if (numberOfDigits > MaxDigits)
+                {
+                    // round to necessary number of decimal places to stay within max digits
+                    formatString = "N" + (MaxDigits - positionOfDecimal);
+                    _display = Value.ToString(formatString);
+                }
+            }
         }
 
         public void AddKey(char key)
@@ -350,6 +381,7 @@ namespace AddingMachine.Accumulator
                     {
                         total += Value;
                         grandTotal += Value;
+                        Reformat();
                     }
 
                     numberOfDigitsEntered = 0;

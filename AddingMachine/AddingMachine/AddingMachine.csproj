@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AddingMachine.Accumulator\AddingMachine.Accumulator.csproj" />
+    <ProjectReference Include="..\AddingMachine.Accumulator\AddingMachine.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
