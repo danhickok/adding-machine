@@ -514,7 +514,7 @@ namespace AddingMachine.Tests
             Assert.Multiple(() =>
             {
                 Assert.That(tapeEntries[ti].Display, Is.EqualTo("9,999.90"), "Tape display not correct after third addition operation");
-                Assert.That(tapeEntries[ti].Value, Is.EqualTo(-9_999.9M), "Tape value not correct after third addition operation");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(9_999.9M), "Tape value not correct after third addition operation");
                 Assert.That(tapeEntries[ti].Operation, Is.EqualTo("-"), "Tape operation not correct after third addition operation");
                 Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after third addition operation");
             });
@@ -546,7 +546,7 @@ namespace AddingMachine.Tests
                 // grand total line
                 Assert.That(tapeEntries[ti - 2].Display, Is.EqualTo("-6,419.80"), "Tape display not correct after grand total operation");
                 Assert.That(tapeEntries[ti - 2].Value, Is.EqualTo(-6_419.8M), "Tape value not correct after grand total operation");
-                Assert.That(tapeEntries[ti - 2].Operation, Is.EqualTo("T"), "Tape operation not correct after grand total operation");
+                Assert.That(tapeEntries[ti - 2].Operation, Is.EqualTo("GT"), "Tape operation not correct after grand total operation");
                 Assert.That(tapeEntries[ti - 2].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after grand total operation");
                 // empty line
                 Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo(""), "Tape has no empty line after grand total operation");
@@ -598,13 +598,13 @@ namespace AddingMachine.Tests
             });
 
             AddKeys(acc, "25+");
-            Assert.That(() => currentDisplay, Is.EqualTo("25.00").After(timeDelay), "Current display not correct after equals operation");
+            Assert.That(() => currentDisplay, Is.EqualTo("11,950.00").After(timeDelay), "Current display not correct after equals operation");
 
             Assert.That(() => ti, Is.EqualTo(2).After(timeDelay), "Tape was not correctly populated after equals operation");
             Assert.Multiple(() =>
             {
                 // operand line
-                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("25.00"), "Tape display not correct after equals operation");
+                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("25"), "Tape display not correct after equals operation");
                 Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(25M), "Tape value not correct after equals operation");
                 Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo(""), "Tape operation not correct after equals operation");
                 Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after equals operation");

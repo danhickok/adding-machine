@@ -160,6 +160,8 @@ namespace AddingMachine.Core
                     _display = Value.ToString(formatString);
                 }
             }
+
+            OnDisplayChanged(new DisplayChangedEventArgs(_display));
         }
 
         public void AddKey(char key)
@@ -255,6 +257,8 @@ namespace AddingMachine.Core
                     }
                     else
                     {
+                        Reformat();
+
                         OnNewTapeEntryPublished(
                             new NewTapeEntryPublishedEventArgs(new TapeEntry
                             {
@@ -317,6 +321,8 @@ namespace AddingMachine.Core
                     }
                     else
                     {
+                        Reformat();
+
                         OnNewTapeEntryPublished(
                             new NewTapeEntryPublishedEventArgs(new TapeEntry
                             {
@@ -361,7 +367,7 @@ namespace AddingMachine.Core
                                 {
                                     Display = Display,
                                     Value = Value,
-                                    Operation = "=-"
+                                    Operation = "="
                                 }));
                         }
                         catch
@@ -400,7 +406,7 @@ namespace AddingMachine.Core
                                 {
                                     Display = Display,
                                     Value = Value,
-                                    Operation = "=-"
+                                    Operation = "="
                                 }));
                         }
                         catch
@@ -465,7 +471,7 @@ namespace AddingMachine.Core
                                 {
                                     Display = Display,
                                     Value = Value,
-                                    Operation = "=+"
+                                    Operation = "="
                                 }));
                         }
                         catch
@@ -504,7 +510,7 @@ namespace AddingMachine.Core
                                 {
                                     Display = Display,
                                     Value = Value,
-                                    Operation = "=+"
+                                    Operation = "="
                                 }));
                         }
                         catch
