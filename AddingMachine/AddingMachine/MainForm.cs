@@ -1,7 +1,4 @@
 using AddingMachine.Properties;
-using Core = AddingMachine.Core;
-using System;
-using System.Diagnostics;
 
 namespace AddingMachine
 {
@@ -10,6 +7,7 @@ namespace AddingMachine
         private const int MaxDigits = 12;
         private const int MaxTapeTextControls = 27;
 
+        private bool TestMode = false;
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private ImageList DigitImages = new();
@@ -26,6 +24,7 @@ namespace AddingMachine
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
             SetDecimalOption();
+            SetTestMode();
         }
 
         private void SetDigitImageSource()
@@ -89,7 +88,7 @@ namespace AddingMachine
         private void SetDecimalOption()
         {
             var option = (Core.DecimalOptions)Settings.Default.DecimalOption;
-            switch(option)
+            switch (option)
             {
                 case Core.DecimalOptions.Float:
                     DecimalOptionF.Checked = true;
@@ -114,6 +113,19 @@ namespace AddingMachine
                 default:
                     DecimalOptionF.Checked = true;
                     break;
+            }
+        }
+
+        private void SetTestMode()
+        {
+            var args = Environment.GetCommandLineArgs();
+            if (args != null)
+            {
+                foreach (var arg in args)
+                {
+                    if (arg.ToLower() == "/t")
+                        TestMode = true;
+                }
             }
         }
 
@@ -187,7 +199,7 @@ namespace AddingMachine
                         else if (value[i + 1] == ',')
                             index += 20;
                     }
-                    
+
                     DigitBoxes[p].Image = DigitImages.Images[index];
                     p++;
                 }
@@ -196,120 +208,154 @@ namespace AddingMachine
 
         private void Key0_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("000000000000");
+            if (TestMode)
+                SetNumericDisplay("000000000000");
+            else
+                Accumulator.AddKey('0');
             StartKeyTimer();
         }
 
         private void Key1_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("111111111111");
+            if (TestMode)
+                SetNumericDisplay("111111111111");
+            else
+                Accumulator.AddKey('1');
             StartKeyTimer();
         }
 
         private void Key2_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("222222222222");
+            if (TestMode)
+                SetNumericDisplay("222222222222");
+            else
+                Accumulator.AddKey('2');
             StartKeyTimer();
         }
 
         private void Key3_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("333333333333");
+            if (TestMode)
+                SetNumericDisplay("333333333333");
+            else
+                Accumulator.AddKey('3');
             StartKeyTimer();
         }
 
         private void Key4_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("444444444444");
+            if (TestMode)
+                SetNumericDisplay("444444444444");
+            else
+                Accumulator.AddKey('4');
             StartKeyTimer();
         }
 
         private void Key5_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("555555555555");
+            if (TestMode)
+                SetNumericDisplay("555555555555");
+            else
+                Accumulator.AddKey('5');
             StartKeyTimer();
         }
 
         private void Key6_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("666666666666");
+            if (TestMode)
+                SetNumericDisplay("666666666666");
+            else
+                Accumulator.AddKey('6');
             StartKeyTimer();
         }
 
         private void Key7_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("777777777777");
+            if (TestMode)
+                SetNumericDisplay("777777777777");
+            else
+                Accumulator.AddKey('7');
             StartKeyTimer();
         }
 
         private void Key8_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("888888888888");
+            if (TestMode)
+                SetNumericDisplay("888888888888");
+            else
+                Accumulator.AddKey('8');
             StartKeyTimer();
         }
 
         private void Key9_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("999999999999");
+            if (TestMode)
+                SetNumericDisplay("999999999999");
+            else
+                Accumulator.AddKey('9');
             StartKeyTimer();
         }
 
         private void KeyDecimal_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("0.0000");
+            if (TestMode)
+                SetNumericDisplay("0.0000");
+            else
+                Accumulator.AddKey('.');
             StartKeyTimer();
         }
 
         private void KeyCCE_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("0.");
+            if (TestMode)
+                SetNumericDisplay("0.");
+            else
+                Accumulator.AddKey('C');
             StartKeyTimer();
         }
 
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay(Core.Accumulator.ErrorDisplay);
+            if (TestMode)
+                SetNumericDisplay(Core.Accumulator.ErrorDisplay);
+            else
+                Accumulator.AddKey('*');
             StartKeyTimer();
         }
 
         private void KeyDivide_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
+            if (TestMode)
+                SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
+            else
+                Accumulator.AddKey('/');
             StartKeyTimer();
         }
 
         private void KeyMinus_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("-1-1-1-1-1-1");
+            if (TestMode)
+                SetNumericDisplay("-1-1-1-1-1-1");
+            else
+                Accumulator.AddKey('-');
             StartKeyTimer();
         }
 
         private void KeyPlusEquals_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("-23,456,789.0123");
+            if (TestMode)
+                SetNumericDisplay("-23,456,789.0123");
+            else
+                Accumulator.AddKey('+');
             StartKeyTimer();
         }
 
         private void KeySTGT_Click(object sender, EventArgs e)
         {
-            // for testing
-            SetNumericDisplay("9876543210.12");
+            if (TestMode)
+                SetNumericDisplay("9876543210.12");
+            else
+                Accumulator.AddKey('T');
             StartKeyTimer();
         }
 
@@ -414,7 +460,7 @@ namespace AddingMachine
                 KeyCCE_Click(sender, new EventArgs());
                 KeyCCE.Focus();
             }
-            else if(e.KeyCode == System.Windows.Forms.Keys.Enter)
+            else if (e.KeyCode == System.Windows.Forms.Keys.Enter)
             {
                 KeySTGT_Click(sender, new EventArgs());
                 KeySTGT.Focus();
