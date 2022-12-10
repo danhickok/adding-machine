@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AddingMachine.Accumulator\AddingMachine.Core.csproj" />
+    <ProjectReference Include="..\AddingMachine.Core\AddingMachine.Core.csproj" />
   </ItemGroup>
 
 </Project>

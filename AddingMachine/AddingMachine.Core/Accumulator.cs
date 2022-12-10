@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace AddingMachine.Core
 {
@@ -22,7 +16,8 @@ namespace AddingMachine.Core
         protected virtual void OnNewTapeEntryPublished(NewTapeEntryPublishedEventArgs e) => NewTapeEntryPublished?.Invoke(this, e);
 
         private string _display = "";
-        public string Display {
+        public string Display
+        {
             get
             {
                 return _display;
@@ -67,7 +62,7 @@ namespace AddingMachine.Core
         }
 
         private readonly int MaxDigits;
-        
+
         private int numberOfDigitsEntered;
         private bool decimalEntered;
         private decimal total;
@@ -83,7 +78,7 @@ namespace AddingMachine.Core
         {
             MaxDigits = maxDigits;
             DecimalOption = decimalOption;
-            
+
             total = 0M;
             grandTotal = 0M;
             operand = 0M;
@@ -127,7 +122,7 @@ namespace AddingMachine.Core
             }
 
             _display = Value.ToString(formatString);
-            
+
             // add decimal to end if no decimal in result
             if (!_display.Contains(DecimalChar))
                 _display += DecimalChar;
@@ -191,7 +186,7 @@ namespace AddingMachine.Core
                         numberOfDigitsEntered++;
                     }
 
-                    clearWasPreviousKey = false; 
+                    clearWasPreviousKey = false;
                     totalWasPreviousKey = false;
                     break;
 
@@ -209,7 +204,7 @@ namespace AddingMachine.Core
                         decimalEntered = true;
                     }
 
-                    clearWasPreviousKey = false; 
+                    clearWasPreviousKey = false;
                     totalWasPreviousKey = false;
                     break;
 
@@ -226,7 +221,7 @@ namespace AddingMachine.Core
 
                             Value = operand * Value;
                             CheckForOverflow();
-                            
+
                             OnNewTapeEntryPublished(
                                 new NewTapeEntryPublishedEventArgs(new TapeEntry
                                 {
@@ -273,7 +268,7 @@ namespace AddingMachine.Core
 
                     operand = Value;
                     multiplicationInitiated = true;
-                    clearWasPreviousKey = false; 
+                    clearWasPreviousKey = false;
                     totalWasPreviousKey = false;
                     break;
 
@@ -337,7 +332,7 @@ namespace AddingMachine.Core
 
                     operand = Value;
                     divisionInitiated = true;
-                    clearWasPreviousKey = false; 
+                    clearWasPreviousKey = false;
                     totalWasPreviousKey = false;
                     break;
 
