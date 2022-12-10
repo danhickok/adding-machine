@@ -281,14 +281,49 @@ namespace AddingMachine.Core
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand / Value;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "="
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
+                    }
+                    else
+                    {
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = Display,
+                                Value = Value,
+                                Operation = "/"
+                            }));
                     }
 
                     numberOfDigitsEntered = 0;
@@ -308,34 +343,93 @@ namespace AddingMachine.Core
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand * Value;
                             multiplicationInitiated = false;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "=-"
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
                     }
                     else if (divisionInitiated)
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand / Value;
                             divisionInitiated = false;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "=-"
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
                     }
                     else
                     {
                         total -= Value;
                         grandTotal -= Value;
+                        Reformat();
+
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = Display,
+                                Value = Value,
+                                Operation = "-"
+                            }));
                     }
 
                     numberOfDigitsEntered = 0;
@@ -353,28 +447,78 @@ namespace AddingMachine.Core
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand * Value;
                             multiplicationInitiated = false;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "=+"
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
                     }
                     else if (divisionInitiated)
                     {
                         try
                         {
+                            var previousDisplay = Display;
+                            var previousValue = Value;
+
                             Value = operand / Value;
                             divisionInitiated = false;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = previousDisplay,
+                                    Value = previousValue,
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "=+"
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
                     }
                     else
@@ -382,6 +526,14 @@ namespace AddingMachine.Core
                         total += Value;
                         grandTotal += Value;
                         Reformat();
+
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = Display,
+                                Value = Value,
+                                Operation = "+"
+                            }));
                     }
 
                     numberOfDigitsEntered = 0;
@@ -404,6 +556,21 @@ namespace AddingMachine.Core
 
                     Value = 0M;
 
+                    OnNewTapeEntryPublished(
+                        new NewTapeEntryPublishedEventArgs(new TapeEntry
+                        {
+                            Display = Display,
+                            Value = Value,
+                            Operation = "C"
+                        }));
+                    OnNewTapeEntryPublished(
+                        new NewTapeEntryPublishedEventArgs(new TapeEntry
+                        {
+                            Display = "",
+                            Value = 0,
+                            Operation = ""
+                        }));
+
                     numberOfDigitsEntered = 0;
                     decimalEntered = false;
 
@@ -421,12 +588,43 @@ namespace AddingMachine.Core
                         {
                             Value = grandTotal;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "GT"
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = "",
+                                    Value = 0,
+                                    Operation = ""
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = "",
+                                    Value = 0,
+                                    Operation = ""
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
+
                         grandTotal = 0M;
                     }
                     else
@@ -435,12 +633,36 @@ namespace AddingMachine.Core
                         {
                             Value = total;
                             CheckForOverflow();
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    Operation = "T"
+                                }));
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = "",
+                                    Value = 0,
+                                    Operation = ""
+                                }));
                         }
                         catch
                         {
                             hasError = true;
                             Value = 0M;
+
+                            OnNewTapeEntryPublished(
+                                new NewTapeEntryPublishedEventArgs(new TapeEntry
+                                {
+                                    Display = Display,
+                                    Value = Value,
+                                    IsError = true
+                                }));
                         }
+
                         total = 0M;
                         totalWasPreviousKey = true;
                     }

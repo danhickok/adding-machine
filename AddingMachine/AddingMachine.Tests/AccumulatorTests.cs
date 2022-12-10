@@ -425,6 +425,20 @@ namespace AddingMachine.Tests
         }
 
         [Test]
+        public void AccumulatorAbuseTest3()
+        {
+            acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
+
+            Assert.That(() =>
+            {
+                for (char i = char.MinValue; i < char.MaxValue; ++i)
+                {
+                    acc.AddKey(i);
+                }
+            }, Throws.Nothing, "Full range of characters threw an exception");
+        }
+
+        [Test]
         public void AccumulatorEventsTest()
         {
             var currentDisplay = "not set";
