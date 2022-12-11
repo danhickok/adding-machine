@@ -1,3 +1,4 @@
+using AddingMachine.Core;
 using AddingMachine.Properties;
 
 namespace AddingMachine
@@ -11,15 +12,15 @@ namespace AddingMachine
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private ImageList DigitImages = new();
-        private readonly Core.Accumulator Accumulator =
-            new Core.Accumulator(MaxDigits, Core.DecimalOptions.Float);
+        private readonly Accumulator Accumulator =
+            new Accumulator(MaxDigits, DecimalOptions.Float);
 
         public MainForm()
         {
             InitializeComponent();
             ProcessCommandLineArguments();
 
-            KeyDecimal.Text = Core.Accumulator.DecimalChar.ToString();
+            KeyDecimal.Text = Accumulator.DecimalChar.ToString();
 
             SetDigitImageSource();
             PopulateTapeTextControls();
@@ -104,26 +105,26 @@ namespace AddingMachine
 
         private void SetDecimalOption()
         {
-            var option = (Core.DecimalOptions)Settings.Default.DecimalOption;
+            var option = (DecimalOptions)Settings.Default.DecimalOption;
             switch (option)
             {
-                case Core.DecimalOptions.Float:
+                case DecimalOptions.Float:
                     DecimalOptionF.Checked = true;
                     break;
 
-                case Core.DecimalOptions.Zero:
+                case DecimalOptions.Zero:
                     DecimalOption0.Checked = true;
                     break;
 
-                case Core.DecimalOptions.Two:
+                case DecimalOptions.Two:
                     DecimalOption2.Checked = true;
                     break;
 
-                case Core.DecimalOptions.Four:
+                case DecimalOptions.Four:
                     DecimalOption4.Checked = true;
                     break;
 
-                case Core.DecimalOptions.Six:
+                case DecimalOptions.Six:
                     DecimalOption6.Checked = true;
                     break;
 
@@ -145,6 +146,19 @@ namespace AddingMachine
                 Size = new Size(Size.Width, Settings.Default.FormHeight);
                 Location = new Point(Settings.Default.FormLeft, Settings.Default.FormTop);
             }
+
+            Accumulator.DisplayChanged += Accumulator_DisplayChanged;
+            Accumulator.NewTapeEntryPublished += Accumulator_NewTapeEntryPublished;
+        }
+
+        private void Accumulator_DisplayChanged(object? sender, DisplayChangedEventArgs e)
+        {
+            SetNumericDisplay(e.Display);
+        }
+
+        private void Accumulator_NewTapeEntryPublished(object? sender, NewTapeEntryPublishedEventArgs e)
+        {
+            //TODO: do something with the new tape entry
         }
 
         private void SetNumericDisplay(string value)
@@ -321,7 +335,7 @@ namespace AddingMachine
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
             if (TestMode)
-                SetNumericDisplay(Core.Accumulator.ErrorDisplay);
+                SetNumericDisplay(Accumulator.ErrorDisplay);
             else
                 Accumulator.AddKey('*');
             StartKeyTimer();
@@ -420,7 +434,7 @@ namespace AddingMachine
                     break;
 
                 case '.':
-                    if (e.KeyChar == Core.Accumulator.DecimalChar)
+                    if (e.KeyChar == Accumulator.DecimalChar)
                     {
                         KeyDecimal_Click(sender, eventArgs);
                         KeyDecimal.Focus();
@@ -428,7 +442,7 @@ namespace AddingMachine
                     break;
 
                 case ',':
-                    if (e.KeyChar == Core.Accumulator.DecimalChar)
+                    if (e.KeyChar == Accumulator.DecimalChar)
                     {
                         KeyDecimal_Click(sender, eventArgs);
                         KeyDecimal.Focus();
@@ -473,31 +487,31 @@ namespace AddingMachine
 
         private void DecimalOptionF_CheckedChanged(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Float;
+            Accumulator.DecimalOption = DecimalOptions.Float;
             SaveDecimalOption();
         }
 
         private void DecimalOption0_CheckedChanged(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Zero;
+            Accumulator.DecimalOption = DecimalOptions.Zero;
             SaveDecimalOption();
         }
 
         private void DecimalOption2_CheckedChanged(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Two;
+            Accumulator.DecimalOption = DecimalOptions.Two;
             SaveDecimalOption();
         }
 
         private void DecimalOption4_CheckedChanged(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Four;
+            Accumulator.DecimalOption = DecimalOptions.Four;
             SaveDecimalOption();
         }
 
         private void DecimalOption6_CheckedChanged(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Six;
+            Accumulator.DecimalOption = DecimalOptions.Six;
             SaveDecimalOption();
         }
 
@@ -529,31 +543,31 @@ namespace AddingMachine
 
         private void DecimalOption6_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Six;
+            Accumulator.DecimalOption = DecimalOptions.Six;
             SaveDecimalOption();
         }
 
         private void DecimalOption4_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Four;
+            Accumulator.DecimalOption = DecimalOptions.Four;
             SaveDecimalOption();
         }
 
         private void DecimalOption2_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Two;
+            Accumulator.DecimalOption = DecimalOptions.Two;
             SaveDecimalOption();
         }
 
         private void DecimalOption0_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Zero;
+            Accumulator.DecimalOption = DecimalOptions.Zero;
             SaveDecimalOption();
         }
 
         private void DecimalOptionF_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = Core.DecimalOptions.Float;
+            Accumulator.DecimalOption = DecimalOptions.Float;
             SaveDecimalOption();
         }
 
@@ -561,6 +575,12 @@ namespace AddingMachine
         {
             Settings.Default.DecimalOption = (int)Accumulator.DecimalOption;
             Settings.Default.Save();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
+            Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
         }
     }
 }
