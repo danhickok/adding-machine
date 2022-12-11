@@ -17,6 +17,7 @@ namespace AddingMachine
         public MainForm()
         {
             InitializeComponent();
+            ProcessCommandLineArguments();
 
             KeyDecimal.Text = Core.Accumulator.DecimalChar.ToString();
 
@@ -24,7 +25,23 @@ namespace AddingMachine
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
             SetDecimalOption();
-            SetTestMode();
+        }
+
+        private void ProcessCommandLineArguments()
+        {
+            var args = Environment.GetCommandLineArgs();
+            if (args != null)
+            {
+                foreach (var arg in args)
+                {
+                    switch(arg.ToLower())
+                    {
+                        case "/t":
+                            TestMode = true;
+                            break;
+                    }
+                }
+            }
         }
 
         private void SetDigitImageSource()
@@ -113,19 +130,6 @@ namespace AddingMachine
                 default:
                     DecimalOptionF.Checked = true;
                     break;
-            }
-        }
-
-        private void SetTestMode()
-        {
-            var args = Environment.GetCommandLineArgs();
-            if (args != null)
-            {
-                foreach (var arg in args)
-                {
-                    if (arg.ToLower() == "/t")
-                        TestMode = true;
-                }
             }
         }
 
