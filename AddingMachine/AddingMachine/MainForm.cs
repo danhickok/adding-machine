@@ -9,11 +9,11 @@ namespace AddingMachine
         private const int MaxTapeTextControls = 27;
 
         private bool TestMode = false;
+        private ImageList DigitImages = new();
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
-        private ImageList DigitImages = new();
-        private readonly Accumulator Accumulator =
-            new Accumulator(MaxDigits, DecimalOptions.Float);
+        private readonly List<TapeEntry> TapeEntries = new();
+        private readonly Accumulator Accumulator = new(MaxDigits, DecimalOptions.Float);
 
         public MainForm()
         {
@@ -26,6 +26,7 @@ namespace AddingMachine
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
             SetDecimalOption();
+            InitializeTapeEntries();
         }
 
         private void ProcessCommandLineArguments()
@@ -134,6 +135,11 @@ namespace AddingMachine
             }
         }
 
+        private void InitializeTapeEntries()
+        {
+            TapeEntries.Clear();
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             if (Settings.Default.FormLeft == -1 && Settings.Default.FormTop == -1)
@@ -158,7 +164,8 @@ namespace AddingMachine
 
         private void Accumulator_NewTapeEntryPublished(object? sender, NewTapeEntryPublishedEventArgs e)
         {
-            //TODO: do something with the new tape entry
+            TapeEntries.Add(e.NewTapeEntry);
+            //TODO: need to call a routine that updates the TapeText controls
         }
 
         private void SetNumericDisplay(string value)
