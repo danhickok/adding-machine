@@ -165,7 +165,29 @@ namespace AddingMachine
         private void Accumulator_NewTapeEntryPublished(object? sender, NewTapeEntryPublishedEventArgs e)
         {
             TapeEntries.Add(e.NewTapeEntry);
-            //TODO: need to call a routine that updates the TapeText controls
+            UpdateTapeControls(true);
+        }
+
+        private void UpdateTapeControls(bool forceScrollToBottom = false)
+        {
+            if (forceScrollToBottom)
+            {
+                TapeScrollBar.Minimum = 0;
+                TapeScrollBar.Maximum = TapeEntries.Count;
+                TapeScrollBar.Value = TapeScrollBar.Maximum;
+            }
+
+            //TODO: loop through the tape entries and populate the TapeText[i] labels
+        }
+
+        private void TapeScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            UpdateTapeControls();
+        }
+
+        private void TapeScrollBar_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateTapeControls();
         }
 
         private void SetNumericDisplay(string value)
@@ -588,6 +610,41 @@ namespace AddingMachine
         {
             Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
             Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
+        }
+
+        private void NewTapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenTapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveTapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AboutAddingMachineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
