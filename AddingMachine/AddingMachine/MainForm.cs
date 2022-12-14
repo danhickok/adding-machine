@@ -177,7 +177,33 @@ namespace AddingMachine
                 TapeScrollBar.Value = TapeScrollBar.Maximum;
             }
 
-            //TODO: loop through the tape entries and populate the TapeText[i] labels
+            var textIndex = 0;
+            var entryIndex = TapeScrollBar.Value;
+            
+            // visible tape text
+            while (textIndex < TapeText.Count)
+            {
+                entryIndex--;
+                if (entryIndex < 0 || entryIndex >= TapeEntries.Count)
+                    break;
+                
+                TapeText[textIndex].Text = $"{TapeEntries[entryIndex].Display}  {TapeEntries[entryIndex].Operation,-2}";
+                TapeText[textIndex].Visible = true;
+                
+                if (TapeEntries[entryIndex].Value < 0 || TapeEntries[entryIndex].Operation.Contains('-'))
+                    TapeText[textIndex].ForeColor = Color.DarkRed;
+                else
+                    TapeText[textIndex].ForeColor = SystemColors.ControlText;
+
+                textIndex++;
+            }
+
+            // hidden tape text
+            while (textIndex < TapeText.Count)
+            {
+                TapeText[textIndex].Visible = false;
+                textIndex++;
+            }
         }
 
         private void TapeScrollBar_Scroll(object sender, ScrollEventArgs e)
