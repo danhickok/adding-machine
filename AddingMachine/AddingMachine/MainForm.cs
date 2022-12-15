@@ -638,11 +638,8 @@ namespace AddingMachine
             }
             Loading = false;
 
-            //TODO: debugging
-            this.Text = $"{TapeScrollBar.Minimum},{TapeScrollBar.Value},{TapeScrollBar.Maximum} : {TapeEntries.Count}";
-
             var textIndex = 0;
-            var entryIndex = TapeEntries.Count - 1 - TapeScrollBar.Value;
+            var entryIndex = TapeEntries.Count - 1 - (TapeScrollBar.Maximum - TapeScrollBar.Value);
 
             // visible tape text
             while (textIndex < TapeText.Count)
@@ -678,7 +675,7 @@ namespace AddingMachine
 
         private int NumberOfVisibleTapeTextLines()
         {
-            return (int)Math.Ceiling((double)TapeContainer.ClientSize.Height / TapeText[0].Height);
+            return (int)Math.Floor((double)TapeContainer.ClientSize.Height / TapeText[0].Height);
         }
 
         #endregion
