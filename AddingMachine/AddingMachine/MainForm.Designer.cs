@@ -554,6 +554,7 @@
             // 
             this.TapeScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TapeScrollBar.LargeChange = 1;
             this.TapeScrollBar.Location = new System.Drawing.Point(234, 0);
             this.TapeScrollBar.Name = "TapeScrollBar";
             this.TapeScrollBar.Size = new System.Drawing.Size(19, 183);
