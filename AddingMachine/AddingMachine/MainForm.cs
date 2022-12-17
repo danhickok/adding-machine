@@ -141,7 +141,7 @@ namespace AddingMachine
         private void InitializeTapeEntries()
         {
             TapeEntries.Clear();
-            TapeEntries.Add(new TapeEntry { Display = "TOP OF TAPE" });
+            TapeEntries.Add(new());
             UpdateTapeControls(true);
         }
 

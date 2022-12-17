@@ -94,6 +94,7 @@ namespace AddingMachine.Core
             if (hasError)
             {
                 _display = ErrorDisplay;
+                OnDisplayChanged(new DisplayChangedEventArgs(_display));
                 return;
             }
 
@@ -161,6 +162,9 @@ namespace AddingMachine.Core
 
         public void AddKey(char key)
         {
+            if (hasError && key != 'C')
+                return;
+
             switch (key)
             {
                 case '0':
@@ -173,9 +177,6 @@ namespace AddingMachine.Core
                 case '7':
                 case '8':
                 case '9':
-                    if (hasError)
-                        return;
-
                     if (numberOfDigitsEntered == 0)
                     {
                         _display = string.Empty;
@@ -191,9 +192,6 @@ namespace AddingMachine.Core
                     break;
 
                 case '.':
-                    if (hasError)
-                        return;
-
                     if (!decimalEntered)
                     {
                         if (numberOfDigitsEntered == 0)
@@ -209,9 +207,6 @@ namespace AddingMachine.Core
                     break;
 
                 case '*':
-                    if (hasError)
-                        return;
-
                     if (multiplicationInitiated)
                     {
                         try
@@ -273,9 +268,6 @@ namespace AddingMachine.Core
                     break;
 
                 case '/':
-                    if (hasError)
-                        return;
-
                     if (divisionInitiated)
                     {
                         try
@@ -337,9 +329,6 @@ namespace AddingMachine.Core
                     break;
 
                 case '-':
-                    if (hasError)
-                        return;
-
                     if (multiplicationInitiated)
                     {
                         try
@@ -441,9 +430,6 @@ namespace AddingMachine.Core
                     break;
 
                 case '+':
-                    if (hasError)
-                        return;
-
                     if (multiplicationInitiated)
                     {
                         try
@@ -545,11 +531,15 @@ namespace AddingMachine.Core
                     break;
 
                 case 'C':
-                    if (hasError)
-                        hasError = false;
-
-                    if (clearWasPreviousKey)
+                    if (hasError || clearWasPreviousKey)
                     {
+                        if (hasError)
+                        {
+                            total = 0M;
+                            grandTotal = 0M;
+                        }
+
+                        hasError = false;
                         multiplicationInitiated = false;
                         divisionInitiated = false;
                         operand = 0M;
@@ -580,9 +570,6 @@ namespace AddingMachine.Core
                     break;
 
                 case 'T':
-                    if (hasError)
-                        return;
-
                     if (totalWasPreviousKey)
                     {
                         try

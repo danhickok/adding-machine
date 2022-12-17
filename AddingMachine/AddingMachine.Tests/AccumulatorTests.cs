@@ -359,6 +359,29 @@ namespace AddingMachine.Tests
             acc = new Core.Accumulator(12, Core.DecimalOptions.Float);
 
             AddKeys(acc, "TTC");
+            AddKeys(acc, "42/");
+            AddKeys(acc, "0+");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Division by zero did not result in error display");
+
+            AddKeys(acc, "012345");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Error does not remain after digits");
+
+            AddKeys(acc, "+");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Error does not remain after operator");
+
+            AddKeys(acc, "T");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Error does not remain after total");
+
+            AddKeys(acc, "T");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Error does not remain after grand total");
+
+            AddKeys(acc, "C");
+            Assert.That(acc.Display, Is.Not.EqualTo(Core.Accumulator.ErrorDisplay), "Error is not cleared after clear");
+
+            AddKeys(acc, "42+27+T");
+            Assert.That(acc.Display, Is.EqualTo("69."), "Normal operation not restored after clearing error");
+
+            AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+");
             AddKeys(acc, "1+T");
             Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
@@ -367,11 +390,6 @@ namespace AddingMachine.Tests
             AddKeys(acc, "999999999999+T");
             AddKeys(acc, "999999999999+TT");
             Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Grand total did not result in error display");
-
-            AddKeys(acc, "TTC");
-            AddKeys(acc, "42/");
-            AddKeys(acc, "0+");
-            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Division by zero did not result in error display");
         }
 
         [Test]
@@ -614,6 +632,18 @@ namespace AddingMachine.Tests
                 Assert.That(tapeEntries[ti].Operation, Is.EqualTo("="), "Tape operation not correct after equals operation");
                 Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error changed unexpectedly after equals operation");
             });
+
+            // error and recovery
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "42/0+");
+            Assert.That(() => currentDisplay, Is.EqualTo(Core.Accumulator.ErrorDisplay).After(timeDelay), "Current display not receiving error");
+            Assert.That(tapeEntries[ti].Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Tape display not receiving error");
+
+            AddKeys(acc, "C");
+            AddKeys(acc, "42/2+");
+            Assert.That(() => currentDisplay, Is.EqualTo("21.00").After(timeDelay), "Current display not correct after recovery from error");
+            Assert.That(tapeEntries[ti].Display, Is.EqualTo("21.00"), "Tape not correct after recovery from error");
 
             // cleanup
             Assert.That(() => {
