@@ -549,6 +549,7 @@
             this.TapeText0.TabIndex = 1;
             this.TapeText0.Text = "0.00 GT";
             this.TapeText0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TapeText0.DoubleClick += new System.EventHandler(this.TapeText_DoubleClick);
             // 
             // TapeScrollBar
             // 
@@ -604,6 +605,7 @@
             // KeyFocusTimer
             // 
             this.KeyFocusTimer.Enabled = true;
+            this.KeyFocusTimer.Interval = 50;
             this.KeyFocusTimer.Tick += new System.EventHandler(this.KeyFocusTimer_Tick);
             // 
             // DigitImages38

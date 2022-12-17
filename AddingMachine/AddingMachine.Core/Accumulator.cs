@@ -135,11 +135,11 @@ namespace AddingMachine.Core
                 _display = Regex.Replace(_display, "0+$", "");
 
                 // position of decimal counts only digits, minus sign, and decimal
-                var pattern = "^[-0-9" + DecimalChar + "]";
+                var pattern = @"[^-\d\" + DecimalChar + "]";
                 var positionOfDecimal = Regex.Replace(_display, pattern, "").IndexOf(DecimalChar);
 
                 // number of digits counts only digits and minus sign
-                pattern = "[-0-9]";
+                pattern = @"[-\d]";
                 var numberOfDigits = Regex.Matches(_display, pattern).Count;
 
                 if (positionOfDecimal > MaxDigits)
@@ -665,7 +665,7 @@ namespace AddingMachine.Core
 
         private void CheckForOverflow()
         {
-            if ((double)Value >= Math.Pow(10, MaxDigits) || (double)Value <= -Math.Pow(10, MaxDigits))
+            if ((double)Value >= Math.Pow(10, MaxDigits) || (double)Value <= -Math.Pow(10, MaxDigits - 1))
                 throw new Exception("SizeOverflow");
         }
     }

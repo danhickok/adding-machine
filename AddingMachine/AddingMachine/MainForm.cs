@@ -60,6 +60,7 @@ namespace AddingMachine
         private void PopulateTapeTextControls()
         {
             TapeText0.Width = TapeContainer.ClientSize.Width - TapeScrollBar.Size.Width;
+            TapeText0.Tag = -1;
 
             TapeText.Add(TapeText0);
             for (int i = 1; i < MaxTapeTextControls; ++i)
@@ -73,9 +74,12 @@ namespace AddingMachine
                     Font = TapeText0.Font,
                     Location = new Point(TapeText0.Location.X, TapeText0.Location.Y - TapeText0.Size.Height * i),
                     Size = TapeText0.Size,
+                    Tag = -1,
                     TextAlign = TapeText0.TextAlign,
                     Visible = false,
                 };
+
+                label.DoubleClick += TapeText_DoubleClick;
 
                 TapeContainer.Controls.Add(label);
 
@@ -606,6 +610,15 @@ namespace AddingMachine
 
         #region tape events
 
+        private void TapeText_DoubleClick(object? sender, EventArgs e)
+        {
+            var entryIndex = (int?)(sender as Label)?.Tag;
+            if (entryIndex.HasValue && entryIndex.Value >= 0 && entryIndex.Value < TapeEntries.Count)
+            {
+                Accumulator.Value = TapeEntries[entryIndex.Value].Value;
+            }
+        }
+
         private void TapeScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
             if (!Loading)
@@ -646,8 +659,15 @@ namespace AddingMachine
             {
                 if (entryIndex < 0 || entryIndex >= TapeEntries.Count)
                     break;
+                
+                var operation = TapeEntries[entryIndex].Operation;
+                if (operation == "*")
+                    operation = KeyMultiply.Text;
+                else if (operation == "/")
+                    operation = KeyDivide.Text;
 
-                TapeText[textIndex].Text = $"{TapeEntries[entryIndex].Display}  {TapeEntries[entryIndex].Operation,-2}";
+                TapeText[textIndex].Tag = entryIndex;
+                TapeText[textIndex].Text = $"{TapeEntries[entryIndex].Display}  {operation,-2}";
                 TapeText[textIndex].Visible = true;
 
                 if (TapeEntries[entryIndex].Value < 0 || TapeEntries[entryIndex].Operation.Contains('-'))
@@ -662,6 +682,7 @@ namespace AddingMachine
             // hidden tape text
             while (textIndex < TapeText.Count)
             {
+                TapeText[textIndex].Tag = -1;
                 TapeText[textIndex].Visible = false;
                 textIndex++;
             }

@@ -382,14 +382,24 @@ namespace AddingMachine.Tests
             Assert.That(acc.Display, Is.EqualTo("69."), "Normal operation not restored after clearing error");
 
             AddKeys(acc, "TTC");
-            AddKeys(acc, "999999999999+");
+            AddKeys(acc, "999999999999");
+            Assert.That(acc.Display, Is.Not.EqualTo(Core.Accumulator.ErrorDisplay), "Entering amount that is maximum value resulted in error display");
+            
+            AddKeys(acc, "+");
+            Assert.That(acc.Display, Is.Not.EqualTo(Core.Accumulator.ErrorDisplay), "Adding amount that is maximum value resulted in error display");
+
             AddKeys(acc, "1+T");
-            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Two maximum values totaled did not result in error display");
+            Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Sum exceeding maximum value did not result in error display");
 
             AddKeys(acc, "TTC");
             AddKeys(acc, "999999999999+T");
             AddKeys(acc, "999999999999+TT");
             Assert.That(acc.Display, Is.EqualTo(Core.Accumulator.ErrorDisplay), "Grand total did not result in error display");
+
+            AddKeys(acc, "TTC");
+            AddKeys(acc, "99999999999+T");
+            AddKeys(acc, "1+TT");
+            Assert.That(acc.Display, Is.Not.EqualTo(Core.Accumulator.ErrorDisplay), "Sum within maximum value result in error display");
         }
 
         [Test]
