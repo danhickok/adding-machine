@@ -694,13 +694,11 @@ namespace AddingMachine
 
             TapeScrollBar.Minimum = 0;
             TapeScrollBar.Maximum = Math.Max(0, TapeEntries.Count - numberOfLines);
-            
-            //TODO: trying to find a formula that makes for a pleasing slider size
-            TapeScrollBar.LargeChange = Math.Max(1,
-                numberOfLines * (TapeScrollBar.Maximum * TapeScrollBar.Maximum / (TapeEntries.Count + 1)));
+
+            TapeScrollBar.LargeChange = Math.Max(1, numberOfLines - (TapeEntries.Count - TapeScrollBar.Maximum));
 
             //TODO: debugging for above, remove when not needed
-            Text = $"{TapeScrollBar.Minimum},{TapeScrollBar.Value},{TapeScrollBar.Maximum} : {TapeScrollBar.LargeChange}";
+            Text = $"{TapeScrollBar.Minimum},{TapeScrollBar.Value},{TapeScrollBar.Maximum} ::{TapeScrollBar.LargeChange}:: {TapeEntries.Count} : {numberOfLines}";
         }
 
         private int NumberOfVisibleTapeTextLines()
