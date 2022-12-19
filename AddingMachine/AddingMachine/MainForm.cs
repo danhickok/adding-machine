@@ -181,6 +181,7 @@ namespace AddingMachine
         private void MainForm_DpiChanged(object sender, DpiChangedEventArgs e)
         {
             SetDigitImageSource();
+            TapeScrollBar.Left = TapeContainer.ClientRectangle.Width - TapeScrollBar.Size.Width;
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -652,7 +653,7 @@ namespace AddingMachine
             Loading = false;
 
             var textIndex = 0;
-            var entryIndex = TapeEntries.Count - 1 - (TapeScrollBar.Maximum - TapeScrollBar.Value);
+            var entryIndex = Math.Max(0, TapeEntries.Count - 1 - (TapeScrollBar.Maximum - TapeScrollBar.Value));
 
             // visible tape text
             while (textIndex < TapeText.Count)
@@ -693,9 +694,9 @@ namespace AddingMachine
             var numberOfLines = NumberOfVisibleTapeTextLines();
 
             TapeScrollBar.Minimum = 0;
-            TapeScrollBar.Maximum = Math.Max(0, TapeEntries.Count - numberOfLines);
+            TapeScrollBar.Maximum = Math.Max(numberOfLines, TapeEntries.Count);
 
-            TapeScrollBar.LargeChange = Math.Max(1, numberOfLines - (TapeEntries.Count - TapeScrollBar.Maximum));
+            TapeScrollBar.LargeChange = numberOfLines;
 
             //TODO: debugging for above, remove when not needed
             Text = $"{TapeScrollBar.Minimum},{TapeScrollBar.Value},{TapeScrollBar.Maximum} ::{TapeScrollBar.LargeChange}:: {TapeEntries.Count} : {numberOfLines}";
@@ -703,7 +704,7 @@ namespace AddingMachine
 
         private int NumberOfVisibleTapeTextLines()
         {
-            return (int)Math.Floor((double)TapeContainer.ClientSize.Height / TapeText[0].Height);
+            return (int)Math.Floor((double)TapeContainer.ClientSize.Height / TapeText0.Height);
         }
 
         #endregion
