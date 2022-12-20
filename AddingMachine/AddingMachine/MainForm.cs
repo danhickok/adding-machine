@@ -11,6 +11,7 @@ namespace AddingMachine
         private bool TestMode = false;
         private bool Loading = false;
         private ImageList DigitImages = new();
+        private int NumberOfVisibleTapeTextLines;
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private readonly List<TapeEntry> TapeEntries = new();
@@ -181,7 +182,7 @@ namespace AddingMachine
         private void MainForm_DpiChanged(object sender, DpiChangedEventArgs e)
         {
             SetDigitImageSource();
-            TapeScrollBar.Left = TapeContainer.ClientRectangle.Width - TapeScrollBar.Size.Width;
+            RecalculateNumberOfVisibleTapeTextLines();
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -632,6 +633,7 @@ namespace AddingMachine
         {
             if (!Loading)
             {
+                RecalculateNumberOfVisibleTapeTextLines();
                 UpdateTapeControls();
             }
         }
@@ -652,8 +654,11 @@ namespace AddingMachine
             }
             Loading = false;
 
+            // to fill in the tape text, we start with the lowest tape text, counting up,
+            // and the highest tape value, counting down
+            
             var textIndex = 0;
-            var entryIndex = Math.Max(0, TapeEntries.Count - 1 - (TapeScrollBar.Maximum - TapeScrollBar.Value));
+            var entryIndex = Math.Max(0, Math.Min(TapeEntries.Count, TapeScrollBar.Value + NumberOfVisibleTapeTextLines)) - 1;
 
             // visible tape text
             while (textIndex < TapeText.Count)
@@ -668,7 +673,7 @@ namespace AddingMachine
                     operation = KeyDivide.Text;
 
                 TapeText[textIndex].Tag = entryIndex;
-                TapeText[textIndex].Text = $"{TapeEntries[entryIndex].Display}  {operation,-2}";
+                TapeText[textIndex].Text = $"{TapeEntries[entryIndex].Display}  {operation,-2}    ";
                 TapeText[textIndex].Visible = true;
 
                 if (TapeEntries[entryIndex].Value < 0 || TapeEntries[entryIndex].Operation.Contains('-'))
@@ -691,20 +696,15 @@ namespace AddingMachine
 
         private void UpdateTapeScrollBarRange()
         {
-            var numberOfLines = NumberOfVisibleTapeTextLines();
-
             TapeScrollBar.Minimum = 0;
-            TapeScrollBar.Maximum = Math.Max(numberOfLines, TapeEntries.Count);
+            TapeScrollBar.Maximum = Math.Max(NumberOfVisibleTapeTextLines, TapeEntries.Count);
 
-            TapeScrollBar.LargeChange = numberOfLines;
-
-            //TODO: debugging for above, remove when not needed
-            Text = $"{TapeScrollBar.Minimum},{TapeScrollBar.Value},{TapeScrollBar.Maximum} ::{TapeScrollBar.LargeChange}:: {TapeEntries.Count} : {numberOfLines}";
+            TapeScrollBar.LargeChange = NumberOfVisibleTapeTextLines + 1;
         }
 
-        private int NumberOfVisibleTapeTextLines()
+        private void RecalculateNumberOfVisibleTapeTextLines()
         {
-            return (int)Math.Floor((double)TapeContainer.ClientSize.Height / TapeText0.Height);
+            NumberOfVisibleTapeTextLines = (int)Math.Floor((double)TapeContainer.ClientSize.Height / TapeText0.Height);
         }
 
         #endregion

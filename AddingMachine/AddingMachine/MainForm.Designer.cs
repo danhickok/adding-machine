@@ -531,8 +531,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.TapeContainer.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.TapeContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.TapeContainer.Controls.Add(this.TapeText0);
             this.TapeContainer.Controls.Add(this.TapeScrollBar);
+            this.TapeContainer.Controls.Add(this.TapeText0);
             this.TapeContainer.Location = new System.Drawing.Point(3, 27);
             this.TapeContainer.Name = "TapeContainer";
             this.TapeContainer.Size = new System.Drawing.Size(256, 187);
