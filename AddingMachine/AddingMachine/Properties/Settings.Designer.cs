@@ -70,5 +70,17 @@ namespace AddingMachine.Properties {
                 this["DecimalOption"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int TapeLinesToKeep {
+            get {
+                return ((int)(this["TapeLinesToKeep"]));
+            }
+            set {
+                this["TapeLinesToKeep"] = value;
+            }
+        }
     }
 }

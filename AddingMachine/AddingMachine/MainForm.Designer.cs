@@ -69,8 +69,8 @@
             this.KeyDivide = new System.Windows.Forms.Button();
             this.KeyCCE = new System.Windows.Forms.Button();
             this.TapeContainer = new System.Windows.Forms.Panel();
-            this.TapeText0 = new System.Windows.Forms.Label();
             this.TapeScrollBar = new System.Windows.Forms.VScrollBar();
+            this.TapeText0 = new System.Windows.Forms.Label();
             this.DigitImages19 = new System.Windows.Forms.ImageList(this.components);
             this.KeyFocusTimer = new System.Windows.Forms.Timer(this.components);
             this.DigitImages38 = new System.Windows.Forms.ImageList(this.components);
@@ -538,6 +538,18 @@
             this.TapeContainer.Size = new System.Drawing.Size(256, 187);
             this.TapeContainer.TabIndex = 5;
             // 
+            // TapeScrollBar
+            // 
+            this.TapeScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TapeScrollBar.LargeChange = 1;
+            this.TapeScrollBar.Location = new System.Drawing.Point(234, 0);
+            this.TapeScrollBar.Name = "TapeScrollBar";
+            this.TapeScrollBar.Size = new System.Drawing.Size(19, 183);
+            this.TapeScrollBar.TabIndex = 0;
+            this.TapeScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.TapeScrollBar_Scroll);
+            this.TapeScrollBar.SizeChanged += new System.EventHandler(this.TapeScrollBar_SizeChanged);
+            // 
             // TapeText0
             // 
             this.TapeText0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -550,18 +562,6 @@
             this.TapeText0.Text = "0.00 GT";
             this.TapeText0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TapeText0.DoubleClick += new System.EventHandler(this.TapeText_DoubleClick);
-            // 
-            // TapeScrollBar
-            // 
-            this.TapeScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TapeScrollBar.LargeChange = 1;
-            this.TapeScrollBar.Location = new System.Drawing.Point(234, 0);
-            this.TapeScrollBar.Name = "TapeScrollBar";
-            this.TapeScrollBar.Size = new System.Drawing.Size(19, 183);
-            this.TapeScrollBar.TabIndex = 0;
-            this.TapeScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.TapeScrollBar_Scroll);
-            this.TapeScrollBar.SizeChanged += new System.EventHandler(this.TapeScrollBar_SizeChanged);
             // 
             // DigitImages19
             // 
