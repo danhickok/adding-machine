@@ -545,22 +545,28 @@ namespace AddingMachine.Core
                         operand = 0M;
                     }
 
+                    var previousNumberOfDigitsEntered = numberOfDigitsEntered;
+                    var previousDecimalEntered = decimalEntered;
+
                     Value = 0M;
 
-                    OnNewTapeEntryPublished(
-                        new NewTapeEntryPublishedEventArgs(new TapeEntry
-                        {
-                            Display = Display,
-                            Value = Value,
-                            Operation = "C"
-                        }));
-                    OnNewTapeEntryPublished(
-                        new NewTapeEntryPublishedEventArgs(new TapeEntry
-                        {
-                            Display = "",
-                            Value = 0,
-                            Operation = ""
-                        }));
+                    if (previousNumberOfDigitsEntered == 0 && !previousDecimalEntered)
+                    {
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = Display,
+                                Value = Value,
+                                Operation = "C"
+                            }));
+                        OnNewTapeEntryPublished(
+                            new NewTapeEntryPublishedEventArgs(new TapeEntry
+                            {
+                                Display = "",
+                                Value = 0,
+                                Operation = ""
+                            }));
+                    }
 
                     numberOfDigitsEntered = 0;
                     decimalEntered = false;

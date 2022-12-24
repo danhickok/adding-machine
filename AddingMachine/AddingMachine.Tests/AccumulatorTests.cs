@@ -472,6 +472,7 @@ namespace AddingMachine.Tests
             var currentDisplay = "not set";
             var tapeEntries = new List<Core.TapeEntry>();
             int ti = -1;
+            int tiBefore;
 
             acc = new Core.Accumulator(12, Core.DecimalOptions.Two);
             
@@ -588,24 +589,61 @@ namespace AddingMachine.Tests
                 Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in second empty line after grand total operation");
             });
 
-            // clearing
+            AddKeys(acc, "TTC");
+            clearTape();
+
+            // clear entry and clear
+
+            tiBefore = ti;
+
+            AddKeys(acc, "123C");
+            Assert.That(() => currentDisplay, Is.EqualTo("0.00").After(timeDelay), "Current display not correct after clear entry operation");
+            Assert.That(() => ti, Is.EqualTo(tiBefore).After(timeDelay), "Tape should not be updated after clear entry operation");
+
+            AddKeys(acc, ".C");
+            Assert.That(() => currentDisplay, Is.EqualTo("0.00").After(timeDelay), "Current display not correct after second clear entry operation");
+            Assert.That(() => ti, Is.EqualTo(tiBefore).After(timeDelay), "Tape should not be updated after second clear entry operation");
 
             AddKeys(acc, "C");
             Assert.That(() => currentDisplay, Is.EqualTo("0.00").After(timeDelay), "Current display not correct after clear operation");
 
-            Assert.That(() => ti, Is.EqualTo(9).After(timeDelay), "Tape was not correctly populated after clear operation");
+            Assert.That(() => ti, Is.EqualTo(tiBefore + 2).After(timeDelay), "Tape was not correctly populated after clear operation");
             Assert.Multiple(() =>
             {
                 // clear line
                 Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("0.00"), "Tape has no empty line after clear operation");
                 Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(0M), "Tape value not correct for empty line after clear operation");
-                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo("C"), "Tape operation not empty for empty line after clear operation");
+                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo("C"), "Tape operation not correct for empty line after clear operation");
                 Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error wrong in empty line after clear operation");
                 // empty line
                 Assert.That(tapeEntries[ti].Display, Is.EqualTo(""), "Tape has no empty line after clear operation");
                 Assert.That(tapeEntries[ti].Value, Is.EqualTo(0M), "Tape value not correct for empty line after clear operation");
                 Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not empty for empty line after clear operation");
                 Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in empty line after clear operation");
+            });
+
+            tiBefore = ti;
+
+            AddKeys(acc, "456C");
+            Assert.That(() => currentDisplay, Is.EqualTo("0.00").After(timeDelay), "Current display not correct after third clear entry operation");
+            Assert.That(() => ti, Is.EqualTo(tiBefore).After(timeDelay), "Tape should not be updated after third clear entry operation");
+
+            AddKeys(acc, "100+100+100+TC");
+            Assert.That(() => currentDisplay, Is.EqualTo("0.00").After(timeDelay), "Current display not correct after clear after total");
+
+            Assert.That(() => ti, Is.EqualTo(tiBefore + 7).After(timeDelay), "Unexpected number of tape entries after clear after total");
+            Assert.Multiple(() =>
+            {
+                // clear line
+                Assert.That(tapeEntries[ti - 1].Display, Is.EqualTo("0.00"), "Tape has incorrect display after clear after total");
+                Assert.That(tapeEntries[ti - 1].Value, Is.EqualTo(0M), "Tape value not correct after clear after total");
+                Assert.That(tapeEntries[ti - 1].Operation, Is.EqualTo("C"), "Tape operation not correct after clear after total");
+                Assert.That(tapeEntries[ti - 1].IsError, Is.EqualTo(false), "Tape error wrong after clear after total");
+                // empty line
+                Assert.That(tapeEntries[ti].Display, Is.EqualTo(""), "Tape has no empty line after clear after total");
+                Assert.That(tapeEntries[ti].Value, Is.EqualTo(0M), "Tape value not correct for empty line after clear after total");
+                Assert.That(tapeEntries[ti].Operation, Is.EqualTo(""), "Tape operation not empty for empty line after clear after total");
+                Assert.That(tapeEntries[ti].IsError, Is.EqualTo(false), "Tape error wrong in empty line after clear after total");
             });
 
             AddKeys(acc, "TTC");
