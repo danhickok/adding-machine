@@ -538,7 +538,8 @@ namespace AddingMachine
 
         private void AppPreferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: open preferences dialog
+            var optionsDialog = new OptionsDialog();
+            optionsDialog.ShowDialog();
         }
 
         #endregion
