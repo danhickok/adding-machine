@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AddingMachine
 {
-    public partial class OptionsForm : Form
+    public partial class OptionsDialog : Form
     {
-        public OptionsForm()
+        public OptionsDialog()
         {
             InitializeComponent();
         }

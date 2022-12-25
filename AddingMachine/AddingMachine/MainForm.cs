@@ -536,6 +536,11 @@ namespace AddingMachine
             //TODO: open an about form
         }
 
+        private void AppPreferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO: open preferences dialog
+        }
+
         #endregion
 
         #region display events

@@ -74,6 +74,8 @@
             this.DigitImages19 = new System.Windows.Forms.ImageList(this.components);
             this.KeyFocusTimer = new System.Windows.Forms.Timer(this.components);
             this.DigitImages38 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.AppPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormMenuStrip.SuspendLayout();
             this.NumericDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DigitBox0)).BeginInit();
@@ -102,6 +104,8 @@
             this.OpenTapeToolStripMenuItem,
             this.SaveTapeToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.AppPreferencesToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.ExitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -647,6 +651,18 @@
             this.DigitImages38.Images.SetKeyName(31, "Digit38_E.png");
             this.DigitImages38.Images.SetKeyName(32, "Digit38_Minus.png");
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // AppPreferencesToolStripMenuItem
+            // 
+            this.AppPreferencesToolStripMenuItem.Name = "AppPreferencesToolStripMenuItem";
+            this.AppPreferencesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.AppPreferencesToolStripMenuItem.Text = "&Preferences...";
+            this.AppPreferencesToolStripMenuItem.Click += new System.EventHandler(this.AppPreferencesToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -729,5 +745,7 @@
         private ImageList DigitImages19;
         private System.Windows.Forms.Timer KeyFocusTimer;
         private ImageList DigitImages38;
+        private ToolStripMenuItem AppPreferencesToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem2;
     }
 }

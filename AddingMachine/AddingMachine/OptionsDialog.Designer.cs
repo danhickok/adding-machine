@@ -1,6 +1,6 @@
 ﻿namespace AddingMachine
 {
-    partial class OptionsForm
+    partial class OptionsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
             this.AppOptionsOKButton = new System.Windows.Forms.Button();
             this.AppOptionsCancelButton = new System.Windows.Forms.Button();
             this.TapeLinesOptionContainer = new System.Windows.Forms.Panel();
