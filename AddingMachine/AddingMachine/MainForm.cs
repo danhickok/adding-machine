@@ -7,15 +7,19 @@ namespace AddingMachine
     {
         private const int MaxDigits = 12;
         private const int MaxTapeTextControls = 27;
+        private const string TapeFileFilter = "Adding Machine Tape Files (*.amt)|*.amt|All files (*.*)|*.*";
+        private const string TapeFileExtension = "amt";
+
+        private readonly string DefaultTapeFilePath = "";
+        private readonly List<Label> TapeText = new();
+        private readonly List<PictureBox> DigitBoxes = new();
+        private readonly List<TapeEntry> TapeEntries = new();
+        private readonly Accumulator Accumulator = new(MaxDigits, DecimalOptions.Float);
 
         private bool TestMode = false;
         private bool Loading = false;
         private ImageList DigitImages = new();
         private int NumberOfVisibleTapeTextLines;
-        private readonly List<Label> TapeText = new();
-        private readonly List<PictureBox> DigitBoxes = new();
-        private readonly List<TapeEntry> TapeEntries = new();
-        private readonly Accumulator Accumulator = new(MaxDigits, DecimalOptions.Float);
 
         #region constructor and initialization
 
@@ -30,7 +34,15 @@ namespace AddingMachine
             PopulateTapeTextControls();
             PopulateNumericDisplayControls();
             SetDecimalOption();
-            InitializeTapeEntries();
+
+            if (Settings.Default.TapeLinesToKeep == 0)
+            {
+                InitializeTapeEntries();
+            }
+            else
+            {
+                LoadDefaultTape();
+            }
         }
 
         private void ProcessCommandLineArguments()
@@ -297,6 +309,7 @@ namespace AddingMachine
         {
             Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
             Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
+            SaveDefaultTape();
         }
 
         #endregion
@@ -506,25 +519,7 @@ namespace AddingMachine
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (messageResult == DialogResult.Yes)
             {
-                try
-                {
-                    var dialog = new SaveFileDialog();
-                    dialog.DefaultExt = "amt";
-                    dialog.Filter = "Adding Machine Tape Files (*.amt)|*.amt|All files (*.*)|*.*";
-                    dialog.Title = "Adding Machine - Save Tape";
-                    var dialogResult = dialog.ShowDialog();
-
-                    if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
-                        return;
-
-                    var path = dialog.FileName;
-                    var tp = new TapePersistence(path);
-                    tp.Save(TapeEntries);
-                }
-                catch(Exception)
-                {
-                    MessageBox.Show("An error occurred", "Adding Machine", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                SaveTape();
             }
             else if (messageResult == DialogResult.Cancel)
             {
@@ -536,12 +531,38 @@ namespace AddingMachine
 
         private void OpenTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: open and read in saved tape
+            try
+            {
+                var dialog = new OpenFileDialog();
+                dialog.DefaultExt = TapeFileExtension;
+                dialog.Filter = TapeFileFilter;
+                dialog.Title = Text + " - Open Tape";
+                var dialogResult = dialog.ShowDialog();
+
+                if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
+                    return;
+
+                var path = dialog.FileName;
+                var tp = new TapePersistence(path);
+                var data = tp.Load();
+
+                TapeEntries.Clear();
+                TapeEntries.AddRange(data);
+                UpdateTapeControls(true);
+            }
+            catch (InvalidTapeFileFormatException)
+            {
+                MessageBox.Show("Invalid file format", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void SaveTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: write out tape to file
+            SaveTape();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -551,12 +572,28 @@ namespace AddingMachine
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: copy current value from accumulator to clipboard
+            try
+            {
+                Clipboard.SetText(Accumulator.Value.ToString());
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: assign value to accumulator from text in clipboard
+            try
+            {
+                var text = Clipboard.GetText();
+                decimal.TryParse(text, out decimal result);
+                Accumulator.Value = result;
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void AboutAddingMachineToolStripMenuItem_Click(object sender, EventArgs e)
@@ -756,6 +793,80 @@ namespace AddingMachine
         {
             KeyFocusTimer.Enabled = true;
             KeyFocusTimer.Start();
+        }
+
+        #endregion
+
+        #region file methods
+
+        private void LoadDefaultTape()
+        {
+            try
+            {
+                var tp = new TapePersistence(DefaultTapeFilePath);
+                var data = tp.Load();
+
+                var keep = Settings.Default.TapeLinesToKeep;
+                var count = data.Count;
+                if (keep > 0 && count > keep)
+                {
+                    data.RemoveRange(0, count - keep);
+                }
+
+                TapeEntries.Clear();
+                TapeEntries.AddRange(data);
+                UpdateTapeControls(true);
+            }
+            catch (Exception)
+            {
+                // ignore errors in loading default tape
+                InitializeTapeEntries();
+            }
+        }
+
+        private void SaveDefaultTape()
+        {
+            try
+            {
+                var tp = new TapePersistence(DefaultTapeFilePath);
+                tp.Save(TapeEntries);
+            }
+            catch (Exception)
+            {
+                // ignore, since this is called on exit
+            }
+        }
+
+        private void SaveTape()
+        {
+            try
+            {
+                var dialog = new SaveFileDialog();
+                dialog.DefaultExt = TapeFileExtension;
+                dialog.Filter = TapeFileFilter;
+                dialog.Title = Text + " - Save Tape";
+                var dialogResult = dialog.ShowDialog();
+
+                if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
+                    return;
+
+                var path = dialog.FileName;
+                var tp = new TapePersistence(path);
+                tp.Save(TapeEntries);
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
+        }
+
+        #endregion
+
+        #region other private methods
+
+        private void ShowGenericErrorMessage()
+        {
+            MessageBox.Show("An error occurred", "Adding Machine", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         #endregion
