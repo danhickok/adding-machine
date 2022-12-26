@@ -61,8 +61,9 @@ namespace AddingMachine.Tests
         {
             using (var sw = new StreamWriter(filePath))
             {
+                sw.WriteLine(TapePersistence.VersionCode);
                 foreach (var line in _testData)
-                sw.WriteLine(line.ToString());
+                    sw.WriteLine(line.ToString());
             }
         }
 

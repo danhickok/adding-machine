@@ -502,7 +502,35 @@ namespace AddingMachine
 
         private void NewTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: ask to save tape
+            var messageResult = MessageBox.Show("Do you want to save the current tape?", "Adding Machine",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (messageResult == DialogResult.Yes)
+            {
+                try
+                {
+                    var dialog = new SaveFileDialog();
+                    dialog.DefaultExt = "amt";
+                    dialog.Filter = "Adding Machine Tape Files (*.amt)|*.amt|All files (*.*)|*.*";
+                    dialog.Title = "Adding Machine - Save Tape";
+                    var dialogResult = dialog.ShowDialog();
+
+                    if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
+                        return;
+
+                    var path = dialog.FileName;
+                    var tp = new TapePersistence(path);
+                    tp.Save(TapeEntries);
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("An error occurred", "Adding Machine", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (messageResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
             InitializeTapeEntries();
         }
 

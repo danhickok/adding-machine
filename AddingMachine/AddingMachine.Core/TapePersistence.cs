@@ -2,6 +2,8 @@
 {
     public class TapePersistence
     {
+        public const string VersionCode = "ver1";
+
         private readonly string _path;
 
         public TapePersistence(string path)
@@ -17,18 +19,20 @@
             {
                 using (var sr = new StreamReader(_path))
                 {
+                    var firstLine = sr.ReadLine();
+                    if (firstLine != VersionCode)
+                        throw new InvalidTapeFileFormatException();
+
                     while (!sr.EndOfStream)
                     {
                         var line = sr.ReadLine();
-                        var entry = new TapeEntry();
-                        entry.FromString(line ?? "");
-                        data.Add(entry);
+                        data.Add(new TapeEntry(line ?? ""));
                     }
                 }
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
-                // ignore file not found errors
+                // ignore file not found errors - just return the empty list
             }
             catch(Exception)
             {
@@ -42,6 +46,7 @@
         {
             using (var sw = new StreamWriter(_path))
             {
+                sw.WriteLine(VersionCode);
                 foreach (var entry in data)
                     sw.WriteLine(entry.ToString());
             }

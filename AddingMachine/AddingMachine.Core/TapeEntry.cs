@@ -7,6 +7,15 @@
         public string Operation { get; set; } = "";
         public bool IsError { get; set; } = false;
 
+        public TapeEntry()
+        {
+        }
+
+        public TapeEntry(string value)
+        {
+            FromString(value);
+        }
+
         public TapeEntry Copy()
         {
             return new TapeEntry
