@@ -44,7 +44,7 @@
 
         public void Save(List<TapeEntry> data)
         {
-            using (var sw = new StreamWriter(_path))
+            using (var sw = new StreamWriter(_path, false))
             {
                 sw.WriteLine(VersionCode);
                 foreach (var entry in data)

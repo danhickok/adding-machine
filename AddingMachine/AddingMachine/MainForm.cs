@@ -10,7 +10,8 @@ namespace AddingMachine
         private const string TapeFileFilter = "Adding Machine Tape Files (*.amt)|*.amt|All files (*.*)|*.*";
         private const string TapeFileExtension = "amt";
 
-        private readonly string DefaultTapeFilePath = "";
+        private readonly string DefaultTapeFilePath =
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\AddingMachine\DefaultTape.amt";
         private readonly List<Label> TapeText = new();
         private readonly List<PictureBox> DigitBoxes = new();
         private readonly List<TapeEntry> TapeEntries = new();
@@ -185,131 +186,166 @@ namespace AddingMachine
 
         private void MainForm_LocationChanged(object sender, EventArgs e)
         {
-            Settings.Default.FormLeft = Location.X;
-            Settings.Default.FormTop = Location.Y;
-            Settings.Default.FormHeight = Size.Height;
-            Settings.Default.Save();
+            try
+            {
+                Settings.Default.FormLeft = Location.X;
+                Settings.Default.FormTop = Location.Y;
+                Settings.Default.FormHeight = Size.Height;
+                Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void MainForm_DpiChanged(object sender, DpiChangedEventArgs e)
         {
-            SetDigitImageSource();
-            RecalculateNumberOfVisibleTapeTextLines();
+            try
+            {
+                SetDigitImageSource();
+                RecalculateNumberOfVisibleTapeTextLines();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var eventArgs = new EventArgs();
-
-            switch (e.KeyChar)
+            try
             {
-                case '0':
-                    Key0_Click(sender, eventArgs);
-                    Key0.Focus();
-                    break;
+                var eventArgs = new EventArgs();
 
-                case '1':
-                    Key1_Click(sender, eventArgs);
-                    Key1.Focus();
-                    break;
+                switch (e.KeyChar)
+                {
+                    case '0':
+                        Key0_Click(sender, eventArgs);
+                        Key0.Focus();
+                        break;
 
-                case '2':
-                    Key2_Click(sender, eventArgs);
-                    Key2.Focus();
-                    break;
+                    case '1':
+                        Key1_Click(sender, eventArgs);
+                        Key1.Focus();
+                        break;
 
-                case '3':
-                    Key3_Click(sender, eventArgs);
-                    Key3.Focus();
-                    break;
+                    case '2':
+                        Key2_Click(sender, eventArgs);
+                        Key2.Focus();
+                        break;
 
-                case '4':
-                    Key4_Click(sender, eventArgs);
-                    Key4.Focus();
-                    break;
+                    case '3':
+                        Key3_Click(sender, eventArgs);
+                        Key3.Focus();
+                        break;
 
-                case '5':
-                    Key5_Click(sender, eventArgs);
-                    Key5.Focus();
-                    break;
+                    case '4':
+                        Key4_Click(sender, eventArgs);
+                        Key4.Focus();
+                        break;
 
-                case '6':
-                    Key6_Click(sender, eventArgs);
-                    Key6.Focus();
-                    break;
+                    case '5':
+                        Key5_Click(sender, eventArgs);
+                        Key5.Focus();
+                        break;
 
-                case '7':
-                    Key7_Click(sender, eventArgs);
-                    Key7.Focus();
-                    break;
+                    case '6':
+                        Key6_Click(sender, eventArgs);
+                        Key6.Focus();
+                        break;
 
-                case '8':
-                    Key8_Click(sender, eventArgs);
-                    Key8.Focus();
-                    break;
+                    case '7':
+                        Key7_Click(sender, eventArgs);
+                        Key7.Focus();
+                        break;
 
-                case '9':
-                    Key9_Click(sender, eventArgs);
-                    Key9.Focus();
-                    break;
+                    case '8':
+                        Key8_Click(sender, eventArgs);
+                        Key8.Focus();
+                        break;
 
-                case '.':
-                    if (e.KeyChar == Accumulator.DecimalChar)
-                    {
-                        KeyDecimal_Click(sender, eventArgs);
-                        KeyDecimal.Focus();
-                    }
-                    break;
+                    case '9':
+                        Key9_Click(sender, eventArgs);
+                        Key9.Focus();
+                        break;
 
-                case ',':
-                    if (e.KeyChar == Accumulator.DecimalChar)
-                    {
-                        KeyDecimal_Click(sender, eventArgs);
-                        KeyDecimal.Focus();
-                    }
-                    break;
+                    case '.':
+                        if (e.KeyChar == Accumulator.DecimalChar)
+                        {
+                            KeyDecimal_Click(sender, eventArgs);
+                            KeyDecimal.Focus();
+                        }
+                        break;
 
-                case '*':
-                    KeyMultiply_Click(sender, eventArgs);
-                    KeyMultiply.Focus();
-                    break;
+                    case ',':
+                        if (e.KeyChar == Accumulator.DecimalChar)
+                        {
+                            KeyDecimal_Click(sender, eventArgs);
+                            KeyDecimal.Focus();
+                        }
+                        break;
 
-                case '/':
-                    KeyDivide_Click(sender, eventArgs);
-                    KeyDivide.Focus();
-                    break;
+                    case '*':
+                        KeyMultiply_Click(sender, eventArgs);
+                        KeyMultiply.Focus();
+                        break;
 
-                case '-':
-                    KeyMinus_Click(sender, eventArgs);
-                    KeyMinus.Focus();
-                    break;
+                    case '/':
+                        KeyDivide_Click(sender, eventArgs);
+                        KeyDivide.Focus();
+                        break;
 
-                case '+':
-                    KeyPlusEquals_Click(sender, eventArgs);
-                    KeyPlusEquals.Focus();
-                    break;
+                    case '-':
+                        KeyMinus_Click(sender, eventArgs);
+                        KeyMinus.Focus();
+                        break;
+
+                    case '+':
+                        KeyPlusEquals_Click(sender, eventArgs);
+                        KeyPlusEquals.Focus();
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
             }
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == System.Windows.Forms.Keys.Escape)
+            try
             {
-                KeyCCE_Click(sender, new EventArgs());
-                KeyCCE.Focus();
+                if (e.KeyCode == System.Windows.Forms.Keys.Escape)
+                {
+                    KeyCCE_Click(sender, new EventArgs());
+                    KeyCCE.Focus();
+                }
+                else if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                {
+                    KeySTGT_Click(sender, new EventArgs());
+                    KeySTGT.Focus();
+                }
             }
-            else if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            catch (Exception)
             {
-                KeySTGT_Click(sender, new EventArgs());
-                KeySTGT.Focus();
+                ShowGenericErrorMessage();
             }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
-            Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
-            SaveDefaultTape();
+            try
+            {
+                Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
+                Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
+                SaveDefaultTape();
+            }
+            catch (Exception)
+            {
+                // ignore error messages on close
+            }
         }
 
         #endregion
@@ -318,155 +354,274 @@ namespace AddingMachine
 
         private void Key0_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("000000000000");
-            else
-                Accumulator.AddKey('0');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("000000000000");
+                else
+                    Accumulator.AddKey('0');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key1_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("111111111111");
-            else
-                Accumulator.AddKey('1');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("111111111111");
+                else
+                    Accumulator.AddKey('1');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key2_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("222222222222");
-            else
-                Accumulator.AddKey('2');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("222222222222");
+                else
+                    Accumulator.AddKey('2');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key3_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("333333333333");
-            else
-                Accumulator.AddKey('3');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("333333333333");
+                else
+                    Accumulator.AddKey('3');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key4_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("444444444444");
-            else
-                Accumulator.AddKey('4');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("444444444444");
+                else
+                    Accumulator.AddKey('4');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key5_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("555555555555");
-            else
-                Accumulator.AddKey('5');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("555555555555");
+                else
+                    Accumulator.AddKey('5');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key6_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("666666666666");
-            else
-                Accumulator.AddKey('6');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("666666666666");
+                else
+                    Accumulator.AddKey('6');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key7_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("777777777777");
-            else
-                Accumulator.AddKey('7');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("777777777777");
+                else
+                    Accumulator.AddKey('7');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key8_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("888888888888");
-            else
-                Accumulator.AddKey('8');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("888888888888");
+                else
+                    Accumulator.AddKey('8');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void Key9_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("999999999999");
-            else
-                Accumulator.AddKey('9');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("999999999999");
+                else
+                    Accumulator.AddKey('9');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyDecimal_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("0.0000");
-            else
-                Accumulator.AddKey('.');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("0.0000");
+                else
+                    Accumulator.AddKey('.');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyCCE_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("0.");
-            else
-                Accumulator.AddKey('C');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("0.");
+                else
+                    Accumulator.AddKey('C');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyMultiply_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay(Accumulator.ErrorDisplay);
-            else
-                Accumulator.AddKey('*');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay(Accumulator.ErrorDisplay);
+                else
+                    Accumulator.AddKey('*');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyDivide_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
-            else
-                Accumulator.AddKey('/');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("8,8,8,8,8,8,8,8,8,8,8,8,");
+                else
+                    Accumulator.AddKey('/');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyMinus_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("-1-1-1-1-1-1");
-            else
-                Accumulator.AddKey('-');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("-1-1-1-1-1-1");
+                else
+                    Accumulator.AddKey('-');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeyPlusEquals_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("-23,456,789.0123");
-            else
-                Accumulator.AddKey('+');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("-23,456,789.0123");
+                else
+                    Accumulator.AddKey('+');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void KeySTGT_Click(object sender, EventArgs e)
         {
-            if (TestMode)
-                SetNumericDisplay("9876543210.12");
-            else
-                Accumulator.AddKey('T');
-            StartKeyTimer();
+            try
+            {
+                if (TestMode)
+                    SetNumericDisplay("9876543210.12");
+                else
+                    Accumulator.AddKey('T');
+                StartKeyTimer();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         #endregion
@@ -475,32 +630,67 @@ namespace AddingMachine
 
         private void DecimalOptionF_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = DecimalOptions.Float;
-            SaveDecimalOption();
+            try
+            {
+                Accumulator.DecimalOption = DecimalOptions.Float;
+                SaveDecimalOption();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void DecimalOption0_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = DecimalOptions.Zero;
-            SaveDecimalOption();
+            try
+            {
+                Accumulator.DecimalOption = DecimalOptions.Zero;
+                SaveDecimalOption();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void DecimalOption2_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = DecimalOptions.Two;
-            SaveDecimalOption();
+            try
+            {
+                Accumulator.DecimalOption = DecimalOptions.Two;
+                SaveDecimalOption();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void DecimalOption4_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = DecimalOptions.Four;
-            SaveDecimalOption();
+            try
+            {
+                Accumulator.DecimalOption = DecimalOptions.Four;
+                SaveDecimalOption();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void DecimalOption6_Click(object sender, EventArgs e)
         {
-            Accumulator.DecimalOption = DecimalOptions.Six;
-            SaveDecimalOption();
+            try
+            {
+                Accumulator.DecimalOption = DecimalOptions.Six;
+                SaveDecimalOption();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void SaveDecimalOption()
@@ -515,28 +705,37 @@ namespace AddingMachine
 
         private void NewTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var messageResult = MessageBox.Show("Do you want to save the current tape?", "Adding Machine",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (messageResult == DialogResult.Yes)
+            try
             {
-                SaveTape();
-            }
-            else if (messageResult == DialogResult.Cancel)
-            {
-                return;
-            }
+                var messageResult = MessageBox.Show("Do you want to save the current tape?", "Adding Machine",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (messageResult == DialogResult.Yes)
+                {
+                    SaveTape();
+                }
+                else if (messageResult == DialogResult.Cancel)
+                {
+                    return;
+                }
 
-            InitializeTapeEntries();
+                InitializeTapeEntries();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void OpenTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                var dialog = new OpenFileDialog();
-                dialog.DefaultExt = TapeFileExtension;
-                dialog.Filter = TapeFileFilter;
-                dialog.Title = Text + " - Open Tape";
+                var dialog = new OpenFileDialog
+                {
+                    DefaultExt = TapeFileExtension,
+                    Filter = TapeFileFilter,
+                    Title = Text + " - Open Tape"
+                };
                 var dialogResult = dialog.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
@@ -562,7 +761,14 @@ namespace AddingMachine
 
         private void SaveTapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveTape();
+            try
+            {
+                SaveTape();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -598,14 +804,28 @@ namespace AddingMachine
 
         private void AboutAddingMachineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var about = new AboutForm();
-            about.ShowDialog();
+            try
+            {
+                var about = new AboutForm();
+                about.ShowDialog();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void AppPreferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var optionsDialog = new OptionsDialog();
-            optionsDialog.ShowDialog();
+            try
+            {
+                var optionsDialog = new OptionsDialog();
+                optionsDialog.ShowDialog();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         #endregion
@@ -686,27 +906,50 @@ namespace AddingMachine
 
         private void TapeText_DoubleClick(object? sender, EventArgs e)
         {
-            var entryIndex = (int?)(sender as Label)?.Tag;
-            if (entryIndex.HasValue && entryIndex.Value >= 0 && entryIndex.Value < TapeEntries.Count)
+            try
             {
-                Accumulator.Value = TapeEntries[entryIndex.Value].Value;
+                var entryIndex = (int?)(sender as Label)?.Tag;
+                if (entryIndex.HasValue && entryIndex.Value >= 0 && entryIndex.Value < TapeEntries.Count)
+                {
+                    Accumulator.Value = TapeEntries[entryIndex.Value].Value;
+                }
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
             }
         }
 
         private void TapeScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            if (!Loading)
+            try
             {
-                UpdateTapeControls();
+                if (!Loading)
+                {
+                    UpdateTapeControls();
+                }
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+                Loading = false;
             }
         }
 
         private void TapeScrollBar_SizeChanged(object sender, EventArgs e)
         {
-            if (!Loading)
+            try
             {
-                RecalculateNumberOfVisibleTapeTextLines();
-                UpdateTapeControls();
+                if (!Loading)
+                {
+                    RecalculateNumberOfVisibleTapeTextLines();
+                    UpdateTapeControls();
+                }
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+                Loading = false;
             }
         }
 
@@ -785,9 +1028,16 @@ namespace AddingMachine
 
         private void KeyFocusTimer_Tick(object sender, EventArgs e)
         {
-            KeyFocusTimer.Stop();
-            KeyFocusTimer.Enabled = false;
-            NumericDisplay.Focus();
+            try
+            {
+                KeyFocusTimer.Stop();
+                KeyFocusTimer.Enabled = false;
+                NumericDisplay.Focus();
+            }
+            catch (Exception)
+            {
+                ShowGenericErrorMessage();
+            }
         }
 
         private void StartKeyTimer()
@@ -829,6 +1079,10 @@ namespace AddingMachine
         {
             try
             {
+                var fi = new FileInfo(DefaultTapeFilePath);
+                if (!fi.Directory?.Exists ?? false)
+                    Directory.CreateDirectory(fi.DirectoryName ?? "");
+
                 var tp = new TapePersistence(DefaultTapeFilePath);
                 tp.Save(TapeEntries);
             }
@@ -842,10 +1096,12 @@ namespace AddingMachine
         {
             try
             {
-                var dialog = new SaveFileDialog();
-                dialog.DefaultExt = TapeFileExtension;
-                dialog.Filter = TapeFileFilter;
-                dialog.Title = Text + " - Save Tape";
+                var dialog = new SaveFileDialog
+                {
+                    DefaultExt = TapeFileExtension,
+                    Filter = TapeFileFilter,
+                    Title = Text + " - Save Tape"
+                };
                 var dialogResult = dialog.ShowDialog();
 
                 if (dialogResult == DialogResult.Cancel || dialog.FileName == "")
@@ -865,7 +1121,7 @@ namespace AddingMachine
 
         #region other private methods
 
-        private void ShowGenericErrorMessage()
+        private static void ShowGenericErrorMessage()
         {
             MessageBox.Show("An error occurred", "Adding Machine", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
