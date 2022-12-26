@@ -59,5 +59,15 @@ namespace AddingMachine.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AMiconSmall {
+            get {
+                object obj = ResourceManager.GetObject("AMiconSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

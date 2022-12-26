@@ -598,7 +598,8 @@ namespace AddingMachine
 
         private void AboutAddingMachineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: open an about form
+            var about = new AboutForm();
+            about.ShowDialog();
         }
 
         private void AppPreferencesToolStripMenuItem_Click(object sender, EventArgs e)
