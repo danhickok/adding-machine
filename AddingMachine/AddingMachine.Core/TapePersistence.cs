@@ -1,31 +1,50 @@
-﻿using System.Diagnostics;
-
-namespace AddingMachine.Core
+﻿namespace AddingMachine.Core
 {
     public class TapePersistence
     {
-        private readonly string _defaultTapePath;
+        private readonly string _path;
 
-        public TapePersistence() : this(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-            @"\AddingMachine\DefaultTape.amt")
+        public TapePersistence(string path)
         {
+            _path = path;
         }
 
-        public TapePersistence(string defaultTapePath)
+        public List<TapeEntry> Load()
         {
-            _defaultTapePath = defaultTapePath;
+            var data = new List<TapeEntry>();
+
+            try
+            {
+                using (var sr = new StreamReader(_path))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine();
+                        var entry = new TapeEntry();
+                        entry.FromString(line ?? "");
+                        data.Add(entry);
+                    }
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                // ignore file not found errors
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+
+            return data;
         }
 
-        public List<TapeEntry> Load(string? tapePath = null)
+        public void Save(List<TapeEntry> data)
         {
-            Debug.Print(_defaultTapePath);
-            throw new NotImplementedException();
-        }
-
-        public void Save(string? tapePath = null)
-        {
-            throw new NotImplementedException();
+            using (var sw = new StreamWriter(_path))
+            {
+                foreach (var entry in data)
+                    sw.WriteLine(entry.ToString());
+            }
         }
     }
 }
