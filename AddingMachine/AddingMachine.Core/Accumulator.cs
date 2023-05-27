@@ -15,6 +15,8 @@ namespace AddingMachine.Core
         protected virtual void OnDisplayChanged(DisplayChangedEventArgs e) => DisplayChanged?.Invoke(this, e);
         protected virtual void OnNewTapeEntryPublished(NewTapeEntryPublishedEventArgs e) => NewTapeEntryPublished?.Invoke(this, e);
 
+        private bool Loading { get; set; } = false;
+
         private string _display = "";
         public string Display
         {
@@ -25,8 +27,11 @@ namespace AddingMachine.Core
             private set
             {
                 _display = value;
-                _ = decimal.TryParse(_display, out _value);
-                OnDisplayChanged(new DisplayChangedEventArgs(_display));
+                if (!Loading)
+                {
+                    _ = decimal.TryParse(_display, out _value);
+                    OnDisplayChanged(new DisplayChangedEventArgs(_display));
+                }
             }
         }
 
@@ -40,9 +45,12 @@ namespace AddingMachine.Core
             set
             {
                 _value = value;
-                numberOfDigitsEntered = 0;
-                decimalEntered = false;
-                Reformat();
+                if (!Loading)
+                {
+                    numberOfDigitsEntered = 0;
+                    decimalEntered = false;
+                    Reformat();
+                }
             }
         }
 
@@ -56,8 +64,11 @@ namespace AddingMachine.Core
             set
             {
                 _decimalOption = value;
-                Value += 0;
-                Reformat();
+                if (!Loading)
+                {
+                    Value += 0;
+                    Reformat();
+                }
             }
         }
 
@@ -87,6 +98,46 @@ namespace AddingMachine.Core
             clearWasPreviousKey = false;
             totalWasPreviousKey = false;
             hasError = false;
+        }
+
+        public void Deserialize(string serializedState)
+        {
+            var dict = new Dictionary<string, string>();
+            dict.Deserialize(serializedState);
+            Loading = true;
+
+            _ = decimal.TryParse(dict["total"], out total);
+            _ = decimal.TryParse(dict["grandTotal"], out grandTotal);
+            _ = decimal.TryParse(dict["operand"], out operand);
+            _ = decimal.TryParse(dict["Value"], out _value);
+            _ = bool.TryParse(dict["multiplicationInitiated"], out multiplicationInitiated);
+            _ = bool.TryParse(dict["divisionInitiated"], out divisionInitiated);
+            _ = bool.TryParse(dict["clearWasPreviousKey"], out clearWasPreviousKey);
+            _ = bool.TryParse(dict["totalWasPreviousKey"], out totalWasPreviousKey);
+            _ = bool.TryParse(dict["hasError"], out hasError);
+            if (dict["Display"] != "")
+                _display = dict["Display"];
+
+            Loading = false;
+        }
+
+        public string Serialize()
+        {
+            var dict = new Dictionary<string, string>
+            {
+                ["total"] = total.ToString(),
+                ["grandTotal"] = grandTotal.ToString(),
+                ["operand"] = operand.ToString(),
+                ["Value"] = _value.ToString(),
+                ["multiplicationInitiated"] = multiplicationInitiated.ToString(),
+                ["divisionInitiated"] = divisionInitiated.ToString(),
+                ["clearWasPreviousKey"] = clearWasPreviousKey.ToString(),
+                ["totalWasPreviousKey"] = totalWasPreviousKey.ToString(),
+                ["hasError"] = hasError.ToString(),
+                ["Display"] = _display
+            };
+
+            return dict.Serialize();
         }
 
         private void Reformat()

@@ -43,6 +43,7 @@ namespace AddingMachine
             else
             {
                 LoadDefaultTape();
+                RestoreAccumulatorState();
             }
         }
 
@@ -341,6 +342,8 @@ namespace AddingMachine
                 Accumulator.DisplayChanged -= Accumulator_DisplayChanged;
                 Accumulator.NewTapeEntryPublished -= Accumulator_NewTapeEntryPublished;
                 SaveDefaultTape();
+
+                SaveAccumulatorState();
             }
             catch (Exception)
             {
@@ -1114,6 +1117,31 @@ namespace AddingMachine
             catch (Exception)
             {
                 ShowGenericErrorMessage();
+            }
+        }
+
+        private void RestoreAccumulatorState()
+        {
+            try
+            {
+                Accumulator.Deserialize(Settings.Default.AccumulatorState);
+            }
+            catch
+            {
+                // ignore this if it fails
+            }
+        }
+
+        private void SaveAccumulatorState()
+        {
+            try
+            {
+                Settings.Default.AccumulatorState = Accumulator.Serialize();
+                Settings.Default.Save();
+            }
+            catch
+            {
+                // ignore this if it fails
             }
         }
 

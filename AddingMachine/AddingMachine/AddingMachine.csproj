@@ -9,9 +9,10 @@
     <ApplicationIcon>AMicon.ico</ApplicationIcon>
     <StartupObject>AddingMachine.Program</StartupObject>
     <PackageIcon>AMicon.png</PackageIcon>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <AssemblyVersion>1.1.*</AssemblyVersion>
     <Description>An Adding Machine for Windows 10/11</Description>
-    <Copyright>Copyright (c) 2022 Dan Hickok</Copyright>
+    <Copyright>Copyright (c) 2023 Dan Hickok</Copyright>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

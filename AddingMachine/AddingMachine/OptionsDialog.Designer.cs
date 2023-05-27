@@ -29,141 +29,135 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
-            this.AppOptionsOKButton = new System.Windows.Forms.Button();
-            this.AppOptionsCancelButton = new System.Windows.Forms.Button();
-            this.TapeLinesOptionContainer = new System.Windows.Forms.Panel();
-            this.TapeLinesKeepNumber = new System.Windows.Forms.NumericUpDown();
-            this.TapeLinesKeepLabel = new System.Windows.Forms.Label();
-            this.TapeLinesNewOption = new System.Windows.Forms.RadioButton();
-            this.TapeLinesKeepOption = new System.Windows.Forms.RadioButton();
-            this.TapeLinesOptionLabel = new System.Windows.Forms.Label();
-            this.TapeLinesOptionContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TapeLinesKeepNumber)).BeginInit();
-            this.SuspendLayout();
+            AppOptionsOKButton = new Button();
+            AppOptionsCancelButton = new Button();
+            TapeLinesOptionContainer = new Panel();
+            TapeLinesKeepNumber = new NumericUpDown();
+            TapeLinesKeepLabel = new Label();
+            TapeLinesNewOption = new RadioButton();
+            TapeLinesKeepOption = new RadioButton();
+            TapeLinesOptionLabel = new Label();
+            IncludesValuesLabel = new Label();
+            TapeLinesOptionContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TapeLinesKeepNumber).BeginInit();
+            SuspendLayout();
             // 
             // AppOptionsOKButton
             // 
-            this.AppOptionsOKButton.Location = new System.Drawing.Point(235, 142);
-            this.AppOptionsOKButton.Name = "AppOptionsOKButton";
-            this.AppOptionsOKButton.Size = new System.Drawing.Size(75, 23);
-            this.AppOptionsOKButton.TabIndex = 2;
-            this.AppOptionsOKButton.Text = "OK";
-            this.AppOptionsOKButton.UseVisualStyleBackColor = true;
-            this.AppOptionsOKButton.Click += new System.EventHandler(this.AppOptionsOKButton_Click);
+            AppOptionsOKButton.Location = new Point(235, 170);
+            AppOptionsOKButton.Name = "AppOptionsOKButton";
+            AppOptionsOKButton.Size = new Size(75, 23);
+            AppOptionsOKButton.TabIndex = 2;
+            AppOptionsOKButton.Text = "OK";
+            AppOptionsOKButton.UseVisualStyleBackColor = true;
+            AppOptionsOKButton.Click += AppOptionsOKButton_Click;
             // 
             // AppOptionsCancelButton
             // 
-            this.AppOptionsCancelButton.Location = new System.Drawing.Point(316, 142);
-            this.AppOptionsCancelButton.Name = "AppOptionsCancelButton";
-            this.AppOptionsCancelButton.Size = new System.Drawing.Size(75, 23);
-            this.AppOptionsCancelButton.TabIndex = 3;
-            this.AppOptionsCancelButton.Text = "Cancel";
-            this.AppOptionsCancelButton.UseVisualStyleBackColor = true;
-            this.AppOptionsCancelButton.Click += new System.EventHandler(this.AppOptionsCancelButton_Click);
+            AppOptionsCancelButton.Location = new Point(316, 170);
+            AppOptionsCancelButton.Name = "AppOptionsCancelButton";
+            AppOptionsCancelButton.Size = new Size(75, 23);
+            AppOptionsCancelButton.TabIndex = 3;
+            AppOptionsCancelButton.Text = "Cancel";
+            AppOptionsCancelButton.UseVisualStyleBackColor = true;
+            AppOptionsCancelButton.Click += AppOptionsCancelButton_Click;
             // 
             // TapeLinesOptionContainer
             // 
-            this.TapeLinesOptionContainer.Controls.Add(this.TapeLinesKeepNumber);
-            this.TapeLinesOptionContainer.Controls.Add(this.TapeLinesKeepLabel);
-            this.TapeLinesOptionContainer.Controls.Add(this.TapeLinesNewOption);
-            this.TapeLinesOptionContainer.Controls.Add(this.TapeLinesKeepOption);
-            this.TapeLinesOptionContainer.Location = new System.Drawing.Point(12, 34);
-            this.TapeLinesOptionContainer.Name = "TapeLinesOptionContainer";
-            this.TapeLinesOptionContainer.Size = new System.Drawing.Size(379, 102);
-            this.TapeLinesOptionContainer.TabIndex = 1;
+            TapeLinesOptionContainer.Controls.Add(IncludesValuesLabel);
+            TapeLinesOptionContainer.Controls.Add(TapeLinesKeepNumber);
+            TapeLinesOptionContainer.Controls.Add(TapeLinesKeepLabel);
+            TapeLinesOptionContainer.Controls.Add(TapeLinesNewOption);
+            TapeLinesOptionContainer.Controls.Add(TapeLinesKeepOption);
+            TapeLinesOptionContainer.Location = new Point(12, 34);
+            TapeLinesOptionContainer.Name = "TapeLinesOptionContainer";
+            TapeLinesOptionContainer.Size = new Size(379, 130);
+            TapeLinesOptionContainer.TabIndex = 1;
             // 
             // TapeLinesKeepNumber
             // 
-            this.TapeLinesKeepNumber.Increment = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.TapeLinesKeepNumber.Location = new System.Drawing.Point(133, 18);
-            this.TapeLinesKeepNumber.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.TapeLinesKeepNumber.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.TapeLinesKeepNumber.Name = "TapeLinesKeepNumber";
-            this.TapeLinesKeepNumber.Size = new System.Drawing.Size(85, 23);
-            this.TapeLinesKeepNumber.TabIndex = 1;
-            this.TapeLinesKeepNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TapeLinesKeepNumber.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
+            TapeLinesKeepNumber.Increment = new decimal(new int[] { 500, 0, 0, 0 });
+            TapeLinesKeepNumber.Location = new Point(133, 18);
+            TapeLinesKeepNumber.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+            TapeLinesKeepNumber.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
+            TapeLinesKeepNumber.Name = "TapeLinesKeepNumber";
+            TapeLinesKeepNumber.Size = new Size(85, 23);
+            TapeLinesKeepNumber.TabIndex = 1;
+            TapeLinesKeepNumber.TextAlign = HorizontalAlignment.Right;
+            TapeLinesKeepNumber.Value = new decimal(new int[] { 500, 0, 0, 0 });
             // 
             // TapeLinesKeepLabel
             // 
-            this.TapeLinesKeepLabel.Location = new System.Drawing.Point(224, 20);
-            this.TapeLinesKeepLabel.Name = "TapeLinesKeepLabel";
-            this.TapeLinesKeepLabel.Size = new System.Drawing.Size(146, 36);
-            this.TapeLinesKeepLabel.TabIndex = 2;
-            this.TapeLinesKeepLabel.Text = "lines of the tape (including blank lines)";
+            TapeLinesKeepLabel.Location = new Point(224, 20);
+            TapeLinesKeepLabel.Name = "TapeLinesKeepLabel";
+            TapeLinesKeepLabel.Size = new Size(146, 36);
+            TapeLinesKeepLabel.TabIndex = 2;
+            TapeLinesKeepLabel.Text = "lines of the tape (including blank lines)";
             // 
             // TapeLinesNewOption
             // 
-            this.TapeLinesNewOption.AutoSize = true;
-            this.TapeLinesNewOption.Location = new System.Drawing.Point(3, 63);
-            this.TapeLinesNewOption.Name = "TapeLinesNewOption";
-            this.TapeLinesNewOption.Size = new System.Drawing.Size(135, 19);
-            this.TapeLinesNewOption.TabIndex = 3;
-            this.TapeLinesNewOption.TabStop = true;
-            this.TapeLinesNewOption.Text = "Start with a new tape";
-            this.TapeLinesNewOption.UseVisualStyleBackColor = true;
-            this.TapeLinesNewOption.CheckedChanged += new System.EventHandler(this.TapeLinesNewOption_CheckedChanged);
+            TapeLinesNewOption.AutoSize = true;
+            TapeLinesNewOption.Location = new Point(3, 97);
+            TapeLinesNewOption.Name = "TapeLinesNewOption";
+            TapeLinesNewOption.Size = new Size(135, 19);
+            TapeLinesNewOption.TabIndex = 3;
+            TapeLinesNewOption.TabStop = true;
+            TapeLinesNewOption.Text = "Start with a new tape";
+            TapeLinesNewOption.UseVisualStyleBackColor = true;
+            TapeLinesNewOption.CheckedChanged += TapeLinesNewOption_CheckedChanged;
             // 
             // TapeLinesKeepOption
             // 
-            this.TapeLinesKeepOption.AutoSize = true;
-            this.TapeLinesKeepOption.Location = new System.Drawing.Point(3, 18);
-            this.TapeLinesKeepOption.Name = "TapeLinesKeepOption";
-            this.TapeLinesKeepOption.Size = new System.Drawing.Size(124, 19);
-            this.TapeLinesKeepOption.TabIndex = 0;
-            this.TapeLinesKeepOption.TabStop = true;
-            this.TapeLinesKeepOption.Text = "Remember the last";
-            this.TapeLinesKeepOption.UseVisualStyleBackColor = true;
-            this.TapeLinesKeepOption.CheckedChanged += new System.EventHandler(this.TapeLinesKeepOption_CheckedChanged);
+            TapeLinesKeepOption.AutoSize = true;
+            TapeLinesKeepOption.Location = new Point(3, 18);
+            TapeLinesKeepOption.Name = "TapeLinesKeepOption";
+            TapeLinesKeepOption.Size = new Size(124, 19);
+            TapeLinesKeepOption.TabIndex = 0;
+            TapeLinesKeepOption.TabStop = true;
+            TapeLinesKeepOption.Text = "Remember the last";
+            TapeLinesKeepOption.UseVisualStyleBackColor = true;
+            TapeLinesKeepOption.CheckedChanged += TapeLinesKeepOption_CheckedChanged;
             // 
             // TapeLinesOptionLabel
             // 
-            this.TapeLinesOptionLabel.AutoSize = true;
-            this.TapeLinesOptionLabel.Location = new System.Drawing.Point(15, 16);
-            this.TapeLinesOptionLabel.Name = "TapeLinesOptionLabel";
-            this.TapeLinesOptionLabel.Size = new System.Drawing.Size(163, 15);
-            this.TapeLinesOptionLabel.TabIndex = 0;
-            this.TapeLinesOptionLabel.Text = "When Adding Machine starts:";
+            TapeLinesOptionLabel.AutoSize = true;
+            TapeLinesOptionLabel.Location = new Point(15, 16);
+            TapeLinesOptionLabel.Name = "TapeLinesOptionLabel";
+            TapeLinesOptionLabel.Size = new Size(163, 15);
+            TapeLinesOptionLabel.TabIndex = 0;
+            TapeLinesOptionLabel.Text = "When Adding Machine starts:";
+            // 
+            // IncludesValuesLabel
+            // 
+            IncludesValuesLabel.AutoSize = true;
+            IncludesValuesLabel.Location = new Point(133, 56);
+            IncludesValuesLabel.Name = "IncludesValuesLabel";
+            IncludesValuesLabel.Size = new Size(184, 15);
+            IncludesValuesLabel.TabIndex = 4;
+            IncludesValuesLabel.Text = "Also remembers calculator values";
             // 
             // OptionsDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 177);
-            this.Controls.Add(this.TapeLinesOptionLabel);
-            this.Controls.Add(this.TapeLinesOptionContainer);
-            this.Controls.Add(this.AppOptionsCancelButton);
-            this.Controls.Add(this.AppOptionsOKButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "OptionsDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Adding Machine - Options";
-            this.Load += new System.EventHandler(this.OptionsDialog_Load);
-            this.TapeLinesOptionContainer.ResumeLayout(false);
-            this.TapeLinesOptionContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TapeLinesKeepNumber)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(404, 203);
+            Controls.Add(TapeLinesOptionLabel);
+            Controls.Add(TapeLinesOptionContainer);
+            Controls.Add(AppOptionsCancelButton);
+            Controls.Add(AppOptionsOKButton);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "OptionsDialog";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Adding Machine - Options";
+            Load += OptionsDialog_Load;
+            TapeLinesOptionContainer.ResumeLayout(false);
+            TapeLinesOptionContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TapeLinesKeepNumber).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -176,5 +170,6 @@
         private NumericUpDown TapeLinesKeepNumber;
         private Label TapeLinesKeepLabel;
         private Label TapeLinesOptionLabel;
+        private Label IncludesValuesLabel;
     }
 }
