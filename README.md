@@ -59,5 +59,3 @@ a column of numbers, you might find this to be a quicker and more efficient tool
 for the job.
 
 
-
-
